@@ -1,0 +1,110 @@
+body
+{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: black;
+}
+
+/* Dark Mode Styles */
+body.dark-mode
+{
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text color */
+}
+
+.top-nav
+{
+    display: flex; /* Use Flexbox to align child elements horizontally */
+    justify-content: flex-end; /* Align the button to the right side */
+    background-color: rgb(184, 184, 184);
+    padding: 20px; /* Add padding around the content of the navigation bar */
+    gap: 10px; /* Adds space between the children */
+}
+
+.main-nav
+{
+    display: flex; /* Use Flexbox to align child elements horizontally */
+    align-items: center;
+    background-color: white;
+    padding: 30px; /* Add padding around the content of the navigation bar */
+    gap: 50px; /* Adds space between the children */
+}
+
+.logo
+{
+    width: 80px;
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative; /* Position the dropdown menu relative to the link */
+}
+
+.dropdown-link {
+    cursor: pointer; /* Change cursor to pointer */
+    font-weight: bold; /* Make text bold */
+    font-size: 16px; /* Font size */
+    color: black; /* Text color for the dropdown link */
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+    display: none; /* Hide the dropdown menu by default */
+    position: absolute; /* Position the dropdown menu absolutely */
+    top: 100%; /* Position below the dropdown link */
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure dropdown is above other content */
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+}
+
+/* Show the dropdown menu when the parent link is hovered */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+/* General button styles for all buttons */
+button
+{
+    background-color: black; /* Initial background color */
+    color: white; /* Initial text color */
+    border: none;
+    font-weight: bold; /* Make button text bold */
+    font-size: 16px; /* Set the font size to 16px (adjust as needed) */
+    height: 35px;
+    width: 100px;
+    cursor: pointer; /* Change cursor to pointer on hover for better UX */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+body.dark-mode button
+{
+    background-color: #333; /* Dark button background color */
+    color: #e0e0e0; /* Dark mode button text color */
+}
+
+/* Button hover state for all buttons */
+button:hover
+{
+    color: rgb(120, 180, 215); /* Text color on hover */
+}
+
+/* Icon styles */
+.top-nav i
+{
+    color: black; /* Default icon color */
+    font-size: 35px; /* Adjust icon size */
+    cursor: pointer; /* Change cursor to pointer */
+}
