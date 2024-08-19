@@ -1,110 +1,214 @@
-body
+/* 
+  Base Styles:
+  Defines the root variables for colors used throughout the document. These variables
+  make it easy to manage themes like light and dark modes.
+*/
+:root
 {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: white;
-    color: black;
-}
-
-/* Dark Mode Styles */
-body.dark-mode
-{
-    background-color: #121212; /* Dark background */
-    color: #e0e0e0; /* Light text color */
-}
-
-.top-nav
-{
-    display: flex; /* Use Flexbox to align child elements horizontally */
-    justify-content: flex-end; /* Align the button to the right side */
-    background-color: rgb(184, 184, 184);
-    padding: 20px; /* Add padding around the content of the navigation bar */
-    gap: 10px; /* Adds space between the children */
-}
-
-.main-nav
-{
-    display: flex; /* Use Flexbox to align child elements horizontally */
-    align-items: center;
-    background-color: white;
-    padding: 30px; /* Add padding around the content of the navigation bar */
-    gap: 50px; /* Adds space between the children */
-}
-
-.logo
-{
-    width: 80px;
-    height: auto; /* Maintain aspect ratio */
-}
-
-/* Dropdown styles */
-.dropdown {
-    position: relative; /* Position the dropdown menu relative to the link */
-}
-
-.dropdown-link {
-    cursor: pointer; /* Change cursor to pointer */
-    font-weight: bold; /* Make text bold */
-    font-size: 16px; /* Font size */
-    color: black; /* Text color for the dropdown link */
-}
-
-/* Dropdown menu styles */
-.dropdown-menu {
-    display: none; /* Hide the dropdown menu by default */
-    position: absolute; /* Position the dropdown menu absolutely */
-    top: 100%; /* Position below the dropdown link */
-    left: 0;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Ensure dropdown is above other content */
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: black;
-}
-
-/* Show the dropdown menu when the parent link is hovered */
-.dropdown:hover .dropdown-menu {
-    display: block;
+    --primary-bg-color: white; /* Background color for the main content */
+    --primary-text-color: black; /* Primary text color */
+    --secondary-bg-color: rgb(184, 184, 184); /* Background color for secondary elements (e.g., top navigation) */
+    --link-hover-color: rgb(120, 180, 215); /* Text color on hover for links and buttons */
+    --button-bg-color: black; /* Background color for buttons */
+    --button-text-color: white; /* Text color for buttons */
+    --button-hover-text-color: var(--link-hover-color); /* Text color for buttons on hover */
 }
 
 
-/* General button styles for all buttons */
+/* 
+  General Button Styles:
+  Styles all buttons on the page, including their hover state.
+*/
 button
 {
-    background-color: black; /* Initial background color */
-    color: white; /* Initial text color */
-    border: none;
-    font-weight: bold; /* Make button text bold */
-    font-size: 16px; /* Set the font size to 16px (adjust as needed) */
-    height: 35px;
-    width: 100px;
-    cursor: pointer; /* Change cursor to pointer on hover for better UX */
-    transition: color 0.3s ease; /* Smooth transition for color change */
+    background-color: var(--button-bg-color); /* Sets the background color for buttons */
+    color: var(--button-text-color); /* Sets the text color for buttons */
+    border: none; /* Removes default border */
+    font-weight: bold; /* Makes the button text bold */
+    font-size: 16px; /* Sets the font size */
+    height: 35px; /* Sets the height of the button */
+    width: 100px; /* Sets the width of the button */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    transition: color 0.3s ease; /* Adds a smooth transition for text color change on hover */
 }
 
-body.dark-mode button
-{
-    background-color: #333; /* Dark button background color */
-    color: #e0e0e0; /* Dark mode button text color */
-}
 
-/* Button hover state for all buttons */
+/* 
+  Button Hover State:
+  Changes the text color of buttons when hovered over.
+*/
 button:hover
 {
-    color: rgb(120, 180, 215); /* Text color on hover */
+    color: var(--button-hover-text-color); /* Changes the text color on hover */
 }
 
-/* Icon styles */
-.top-nav i
+
+/* 
+  Global Styles for the Body:
+  Applies base styling to the body element, using the root variables for colors.
+*/
+body
 {
-    color: black; /* Default icon color */
-    font-size: 35px; /* Adjust icon size */
-    cursor: pointer; /* Change cursor to pointer */
+    font-family: Arial, Helvetica, sans-serif; /* Sets the font family for the document */
+    margin: 0; /* Removes default margin from the body */
+    padding: 0; /* Removes default padding from the body */
+    background-color: var(--primary-bg-color); /* Applies the primary background color */
+    color: var(--primary-text-color); /* Applies the primary text color */
+}
+
+
+/* 
+  Dark Mode Styles:
+  Overrides the root variables when dark mode is active. 
+  These styles are applied when the body has the class "dark-mode".
+*/
+body.dark-mode
+{
+    --primary-bg-color: #121212; /* Dark background color */
+    --primary-text-color: #e0e0e0; /* Light text color for dark mode */
+    --secondary-bg-color: #333; /* Dark background for secondary elements in dark mode */
+    --button-bg-color: #333; /* Dark background color for buttons in dark mode */
+    --button-text-color: #e0e0e0; /* Light text color for buttons in dark mode */
+}
+
+
+/* 
+  Top Navigation Bar Styles:
+  Styles the top navigation bar, which includes the login button and dark mode toggle.
+*/
+.top-nav
+{
+    display: flex; /* Uses Flexbox to align child elements horizontally */
+    justify-content: flex-end; /* Aligns the content to the right */
+    align-items: center; /* Vertically centers the items */
+    background-color: var(--secondary-bg-color); /* Background color for the top navigation */
+    padding: 20px; /* Adds padding around the content */
+    gap: 10px; /* Adds space between the elements */
+}
+
+
+/* 
+  Main Navigation Bar Styles:
+  Styles the main navigation bar, including the logo and dropdown menu.
+*/
+.main-nav
+{
+    display: flex; /* Uses Flexbox to align child elements horizontally */
+    align-items: center; /* Vertically centers the items */
+    background-color: var(--primary-bg-color); /* Background color for the main navigation */
+    padding: 30px; /* Adds padding around the content */
+    gap: 50px; /* Adds space between the elements */
+}
+
+
+/* 
+  Logo Styles:
+  Sets the size of the logo while maintaining its aspect ratio.
+*/
+.logo
+{
+    width: 80px; /* Sets the width of the logo */
+    height: auto; /* Maintains the aspect ratio */
+}
+
+
+/* 
+  Dropdown Menu Styles:
+  Styles the dropdown link and the dropdown menu that appears on hover.
+*/
+.dropdown
+{
+    position: relative; /* Positions the dropdown relative to its parent */
+}
+
+
+/* 
+  Dropdown Link Styles:
+  Styles the link that triggers the dropdown menu.
+*/
+.dropdown-link
+{
+    background: none; /* Removes default background */
+    border: none; /* Removes default border */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    font-weight: bold; /* Makes the text bold */
+    font-size: 16px; /* Sets the font size */
+    color: var(--primary-text-color); /* Applies the primary text color */
+    transition: color 0.3s ease; /* Adds a smooth transition for color change on hover */
+}
+
+
+/* 
+  Dropdown Menu Display:
+  Styles the dropdown menu itself, initially hidden until triggered.
+*/
+.dropdown-menu
+{
+    display: none; /* Hides the dropdown menu by default */
+    position: absolute; /* Positions the dropdown menu below the link */
+    top: 100%; /* Positions the menu directly below the dropdown link */
+    left: 0; /* Aligns the menu to the left */
+    background-color: var(--primary-bg-color); /* Background color for the menu */
+    border: 1px solid #ddd; /* Adds a light border around the menu */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    z-index: 1000; /* Ensures the dropdown appears above other content */
+}
+
+
+/* 
+  Dropdown Menu Link Styles:
+  Styles the individual links within the dropdown menu.
+*/
+.dropdown-menu a
+{
+    display: block; /* Displays the links as block elements */
+    padding: 10px 20px; /* Adds padding inside the links */
+    text-decoration: none; /* Removes underline from the links */
+    color: var(--primary-text-color); /* Applies the primary text color */
+    transition: background-color 0.3s ease; /* Adds a smooth transition for background color change on hover */
+}
+
+
+/* 
+  Dropdown Menu Link Hover State:
+  Styles the dropdown menu links when hovered over.
+*/
+.dropdown-menu a:hover
+{
+    background-color: var(--secondary-bg-color); /* Changes the background color on hover */
+}
+
+
+/* 
+  Dropdown Menu Visibility:
+  Displays the dropdown menu when the parent link is hovered, focused, or expanded.
+*/
+.dropdown:hover .dropdown-menu,
+/*.dropdown-link:focus + .dropdown-menu,*/
+.dropdown-link[aria-expanded="true"] + .dropdown-menu
+{
+    display: block; /* Shows the dropdown menu */
+}
+
+
+/* 
+  Dark Mode Toggle Icon Styles:
+  Styles the icon used to toggle dark mode.
+*/
+.dark-mode-toggle
+{
+    color: var(--primary-text-color); /* Sets the color of the icon */
+    font-size: 35px; /* Sets the size of the icon */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    transition: color 0.3s ease; /* Adds a smooth transition for color change on hover */
+}
+
+
+/* 
+  Dark Mode Toggle Icon Hover State:
+  Changes the color of the dark mode toggle icon when hovered over.
+*/
+.dark-mode-toggle:hover
+{
+    color: var(--link-hover-color); /* Changes the icon color on hover */
 }

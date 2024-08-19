@@ -1,33 +1,76 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trade Hub</title>
     <link rel="stylesheet" href="style-sheets/styles.css">
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <!-- Top Navigation -->
-    <div class="top-nav">
-        <i class="fa-solid fa-circle-half-stroke"></i>
-        <button class="btn">LOGIN</button>
-    </div>
+    <header class="top-nav">
+        <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode"></i>
+        <button class="btn">Login</button>
+    </header>
+
     <!-- Main Navigation -->
-     <div class="main-nav">
-        <img class="logo" src="images/logo.jpg" alt="Logo">
+    <nav class="main-nav">
+        <a href="#" aria-label="Trade Hub Home">
+            <img class="logo" src="images/logo.jpg" alt="Trade Hub Logo">
+        </a>
         <div class="dropdown">
-            <span class="dropdown-link">About</span>
-            <div class="dropdown-menu">
+            <button class="dropdown-link" aria-haspopup="true" aria-expanded="false">About</button>
+            <div class="dropdown-menu" aria-label="About Menu">
                 <a href="#">Company</a>
                 <a href="#">Team</a>
                 <a href="#">Contact</a>
             </div>
         </div>
-     </div>
+    </nav>
 
-     <script src="scripts/index.js"></script>
+    <script src="scripts/index.js"></script>
+
+    <!-- Legend Section -->
+    <footer>
+        <section class="legend">
+            <h2>Legend: Explanation of HTML Tags Used</h2>
+            <ul>
+                <li><strong>&lt;!DOCTYPE html&gt;</strong>: Declares the document type and version of HTML being used (HTML5 in this case).</li>
+                <li><strong>&lt;html&gt;</strong>: The root element that wraps all content of the web page.</li>
+                <li><strong>&lt;head&gt;</strong>: Contains metadata, links to stylesheets, and the page title. It's not visible on the page itself.</li>
+                <li><strong>&lt;meta charset="UTF-8"&gt;</strong>: Specifies the character encoding for the document, ensuring correct display of text.</li>
+                <li><strong>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</strong>: Ensures the page is responsive, scaling properly on different devices by setting the viewport width and initial zoom level.</li>
+                <li><strong>&lt;title&gt;</strong>: Sets the title of the web page, which appears in the browser tab.</li>
+                <li><strong>&lt;link rel="stylesheet" href="style-sheets/styles.css"&gt;</strong>: Links an external CSS stylesheet for styling the page.</li>
+                <li><strong>&lt;header&gt;</strong>: Represents a group of introductory or navigational aids, such as the site's header.</li>
+                <li><strong>&lt;nav&gt;</strong>: Represents a section of the page intended for navigation links, such as the main navigation bar.</li>
+                <li><strong>&lt;a&gt;</strong>: Defines a hyperlink, which can be used to link to other web pages or resources. It can also wrap elements to make them clickable (like the logo in this case).</li>
+                <li><strong>&lt;img&gt;</strong>: Embeds an image into the page. The <strong>alt</strong> attribute provides alternative text for screen readers or when the image fails to load.</li>
+                <li><strong>&lt;div&gt;</strong>: A generic container element used to group content, primarily for styling and layout purposes.</li>
+                <li><strong>&lt;button&gt;</strong>: Represents a clickable button used for various actions (e.g., form submission, toggling features).</li>
+                <li><strong>&lt;i&gt;</strong>: Used for icons or italicized text. Here, it embeds a Font Awesome icon.</li>
+                <li><strong>&lt;script&gt;</strong>: Links to an external JavaScript file that adds interactivity or other functionality to the page.</li>
+                <li><strong>&lt;footer&gt;</strong>: Represents the footer of the page, typically containing information about the document or site, like copyright details or additional navigation links. In this case, it's used to house the legend that explains the HTML tags and attributes used in the document.</li>
+                <li><strong>&lt;section&gt;</strong>: Represents a standalone section of content within the document, usually with its own heading. Here, it is used to group the legend content within the footer.</li>
+                <li><strong>&lt;h2&gt;</strong>: Defines a second-level heading, used to introduce the legend section. Headings help structure content hierarchically.</li>
+                <li><strong>&lt;ul&gt;</strong>: Defines an unordered list, which is a collection of list items (<strong>&lt;li&gt;</strong>) presented with bullet points.</li>
+                <li><strong>&lt;li&gt;</strong>: Represents a list item within an ordered (<strong>&lt;ol&gt;</strong>) or unordered (<strong>&lt;ul&gt;</strong>) list. Each tag or concept explained in the legend is a separate list item.</li>
+                <li><strong>&lt;p&gt;</strong>: Defines a paragraph of text. In this case, it introduces the section about ARIA attributes, providing a brief description before listing them.</li>
+            </ul>
+            <p><strong>ARIA (Accessible Rich Internet Applications) attributes:</strong></p>
+            <ul>
+                <li><strong>aria-label</strong>: Provides an accessible label for an element, typically used by screen readers. It helps describe the function or purpose of an element when there isn't visible text that provides this information (e.g., an icon button).</li>
+                <li><strong>aria-haspopup</strong>: Indicates that the element has a popup menu or dialog associated with it.</li>
+                <li><strong>aria-expanded</strong>: Used to indicate whether a collapsible element (like a dropdown menu) is currently expanded or collapsed.</li>
+            </ul>
+        </section>
+    </footer>
+
 </body>
+
 </html>
