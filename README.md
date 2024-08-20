@@ -2,6 +2,8 @@
 
 The project aims to develop a simulation platform for stock portfolios. The platform allows users to conduct purchases and sales of securities using virtual capital. The user's total capital is calculated and adjusted in real-time based on current stock market prices. Additionally, the simulation is designed to replicate the dynamics of real-world trading, providing users with a practical and educational understanding of stock market operations.
 
+----------------------------------------------------------------------------------------------------
+
 Das Projektziel besteht in der Entwicklung einer Simulationsplattform für Wertpapierdepots. Die Plattform ermöglicht es den Benutzern, mithilfe von virtuellem Kapital Käufe und Verkäufe von Wertpapieren durchzuführen. Das Gesamtkapital des Benutzers wird in Echtzeit basierend auf den aktuellen Börsenkursen berechnet und angepasst. Darüber hinaus soll die Simulation die Dynamiken des echten Börsenhandels abbilden und den Benutzern ein praxisnahes und lehrreiches Verständnis für den Handel mit Wertpapieren vermitteln.
 
 ## Table of Contents
@@ -18,7 +20,7 @@ Das Projektziel besteht in der Entwicklung einer Simulationsplattform für Wertp
 
 ## Project Overview
 
-Trade Hub is a robust web application designed to facilitate trade exchanges between users. It ensures cross-browser compatibility and responsive design to deliver a consistent experience across smartphones, tablets, and PCs. Developed to meet the IT-Project 2024 requirements, Trade Hub features a modular architecture and incorporates advanced functionalities for an intuitive user experience.
+Trade Hub is a robust web application designed to facilitate stock portfolios. It ensures cross-browser compatibility and responsive design to deliver a consistent experience across smartphones, tablets, and PCs. Developed to meet the IT-Project 2024 requirements, Trade Hub features a modular architecture and incorporates advanced functionalities for an intuitive user experience.
 
 ## Requirements
 
@@ -76,7 +78,7 @@ Trade Hub is a robust web application designed to facilitate trade exchanges bet
 - Admins can calculate the total value of all portfolios.
 - Admins can delete accounts upon request.
 
-
+----------------------------------------------------------------------------------------------------
 
 ### 1. Benutzerverwaltung
 
