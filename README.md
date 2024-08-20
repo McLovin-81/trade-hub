@@ -11,12 +11,7 @@ Das Projektziel besteht in der Entwicklung einer Simulationsplattform für Wertp
 1. [Project Overview](#project-overview)
 2. [Requirements](#requirements)
 3. [Features](#features)
-4. [Installation](#installation)
-5. [Usage](#usage)
-6. [Testing](#testing)
-7. [Contributing](#contributing)
-8. [License](#license)
-9. [Contact](#contact)
+4. [Testing](#testing)
 
 ## Project Overview
 
