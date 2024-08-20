@@ -1,6 +1,8 @@
 # Trade Hub
 
-Welcome to **Trade Hub**, your go-to web application for seamless trade exchanges. Designed for efficiency, security, and a great user experience, Trade Hub is a cutting-edge platform that enables users to trade goods and services easily across various devices.
+The project aims to develop a simulation platform for stock portfolios. The platform allows users to conduct purchases and sales of securities using virtual capital. The user's total capital is calculated and adjusted in real-time based on current stock market prices. Additionally, the simulation is designed to replicate the dynamics of real-world trading, providing users with a practical and educational understanding of stock market operations.
+
+Das Projektziel besteht in der Entwicklung einer Simulationsplattform für Wertpapierdepots. Die Plattform ermöglicht es den Benutzern, mithilfe von virtuellem Kapital Käufe und Verkäufe von Wertpapieren durchzuführen. Das Gesamtkapital des Benutzers wird in Echtzeit basierend auf den aktuellen Börsenkursen berechnet und angepasst. Darüber hinaus soll die Simulation die Dynamiken des echten Börsenhandels abbilden und den Benutzern ein praxisnahes und lehrreiches Verständnis für den Handel mit Wertpapieren vermitteln.
 
 ## Table of Contents
 
@@ -40,11 +42,76 @@ Trade Hub is a robust web application designed to facilitate trade exchanges bet
 
 ## Features
 
-- **User Registration & Management:** Users can register, log in, and manage their profiles. Admins can approve, deactivate, and manage users.
-- **Secure Data Handling:** Encrypts all sensitive information and ensures secure data transmission.
-- **Responsive UI:** Adapts to different screen sizes for an optimal user experience.
-- **Help & Support:** Features an integrated help section for user assistance.
-- **Testing:** Comprehensive test coverage to ensure reliability and functionality.
+### 1. User Management
+
+#### Account Creation
+- Users can create an account by providing the following information:
+  - First Name
+  - Last Name
+  - Email Address
+- Each new user receives a predefined starting capital.
+
+#### Account Management
+- Users can reset their password.
+- Users can request to reset their account.
+- Admins can reactivate suspended accounts.
+- Admins can delete accounts upon request.
+
+### 2. Portfolio Management
+
+#### Order Management
+- Users can place orders to buy and sell stocks.
+- Users can view the current value of their own portfolio.
+
+#### Capital and Value Calculation
+- Each new user is assigned a starting capital.
+- Users can view the current market value of specific stocks.
+- Admins can calculate the total value of all portfolios.
+
+### 3. Admin Functions
+
+#### Admin Responsibilities
+- Admins can view all user accounts.
+- Admins can reactivate suspended accounts.
+- Admins can calculate the total value of all portfolios.
+- Admins can delete accounts upon request.
+
+
+
+### 1. Benutzerverwaltung
+
+#### Kontoerstellung
+- Benutzer können ein Konto einrichten, indem sie folgende Informationen angeben:
+  - Vorname
+  - Nachname
+  - E-Mail-Adresse
+- Jeder neue Benutzer erhält ein festgelegtes Startkapital.
+
+#### Kontoverwaltung
+- Benutzer können ihr Passwort zurücksetzen.
+- Benutzer können ihr Konto auf Wunsch zurücksetzen lassen.
+- Administratoren können gesperrte Konten wieder freigeben.
+- Administratoren können Konten auf Anfrage löschen.
+
+### 2. Depotverwaltung
+
+#### Order-Management
+- Benutzer können Orders zum Kauf und Verkauf von Aktien erstellen.
+- Benutzer können den aktuellen Wert ihres eigenen Depots anzeigen lassen.
+
+#### Kapital- und Wertberechnung
+- Das Startkapital wird jedem neuen Benutzer zugewiesen.
+- Benutzer können den aktuellen Marktwert bestimmter Aktien anzeigen lassen.
+- Administratoren können den Gesamtwert aller Depots berechnen.
+
+### 3. Admin-Funktionen
+
+#### Aufgaben der Administratoren
+- Administratoren können alle Benutzerkonten einsehen.
+- Administratoren können gesperrte Konten wieder freigeben.
+- Administratoren können den Gesamtwert aller Depots berechnen.
+- Administratoren können Konten auf Anfrage löschen.
+
 
 ## Testing
 
