@@ -5,7 +5,7 @@ Das Projektziel besteht in der Entwicklung einer Simulationsplattform für Wertp
 ## Table of Contents
 
 1. [Requirements](#requirements)
-2. [Project-related Requirements](#features)
+2. [Project-related Requirements](#project-related-requirements)
 3. [Testing](#testing)
 
 ## Requirements
