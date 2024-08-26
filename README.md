@@ -1,9 +1,5 @@
 # Trade Hub
 
-The project aims to develop a simulation platform for stock portfolios. The platform allows users to conduct purchases and sales of securities using virtual capital. The user's total capital is calculated and adjusted in real-time based on current stock market prices. Additionally, the simulation is designed to replicate the dynamics of real-world trading, providing users with a practical and educational understanding of stock market operations.
-
-----------------------------------------------------------------------------------------------------
-
 Das Projektziel besteht in der Entwicklung einer Simulationsplattform für Wertpapierdepots. Die Plattform ermöglicht es den Benutzern, mithilfe von virtuellem Kapital Käufe und Verkäufe von Wertpapieren durchzuführen. Das Gesamtkapital des Benutzers wird in Echtzeit basierend auf den aktuellen Börsenkursen berechnet und angepasst. Darüber hinaus soll die Simulation die Dynamiken des echten Börsenhandels abbilden und den Benutzern ein praxisnahes und lehrreiches Verständnis für den Handel mit Wertpapieren vermitteln.
 
 ## Table of Contents
@@ -13,67 +9,66 @@ Das Projektziel besteht in der Entwicklung einer Simulationsplattform für Wertp
 3. [Features](#features)
 4. [Testing](#testing)
 
-## Project Overview
-
-Trade Hub is a robust web application designed to facilitate stock portfolios. It ensures cross-browser compatibility and responsive design to deliver a consistent experience across smartphones, tablets, and PCs. Developed to meet the IT-Project 2024 requirements, Trade Hub features a modular architecture and incorporates advanced functionalities for an intuitive user experience.
-
 ## Requirements
 
 ### General Requirements
 
-- **Cross-Platform Compatibility:** The application is designed to be browser-independent, working seamlessly across all modern web browsers.
-- **MVC Architecture:** Adheres to the Model-View-Controller (MVC) design pattern, enabling modular code with a separable view layer.
-- **Responsive Design:** Features a responsive design that adapts to various screen sizes and devices.
-- **Help Section:** Includes a comprehensive help section explaining the application’s functionality and usage.
-- **Creative Branding:** The platform features the name **Trade Hub** and a unique logo that is prominently displayed.
-- **Test Management:** Includes test management with meaningful tests based on a test concept throughout different development stages.
-- **Repository & Kanban Board:** Uses a version-controlled repository and a Kanban board for task management.
-- **User & Admin Management:** 
-  - Users and administrators have distinct roles.
-  - Admins can also act as users.
-  - User registration requires admin approval, with the ability for admins to activate or deactivate accounts.
-  - User data is encrypted and securely stored in the database.
-- **Data Security:** Ensures secure data transmission between server and client with encryption, using formats like JSON or XML for data transfer.
-- **Accessibility:** Designed with accessibility in mind, including input validation with regular expressions for ease of use.
-- **User Documentation:** Provides user manuals and installation guides in English.
+# Projektanforderungen
+
+**Hinweis:** Alle Anforderungen sind Mindestanforderungen. Kreative und sinnvolle Erweiterungen sind willkommen!
+
+## Allgemeine Anforderungen
+- **Plattformunabhängigkeit:** 
+  - Alle Programme müssen betriebssystem-unabhängig compilierbar und ausführbar sein (bei stand-alone-Lösungen).
+  - Web-Applikationen müssen browser-unabhängig aufrufbar sein.
+
+- **Modularisierung:** 
+  - Model und View müssen bei allen Programmen getrennt sein, sodass die View austauschbar ist.
+
+- **Responsives Design:** 
+  - Web-Applikationen müssen über ein responsive Design verfügen, das für Smartphones, Tablets und PCs optimiert ist.
+
+- **Hilfebereich:** 
+  - Alle Programme müssen einen Hilfe-Bereich enthalten, in dem die Funktionalität und Bedienung des Programms erklärt werden.
+
+- **Kreativer Name und Logo:** 
+  - Das Programm muss einen kreativen Namen und ein Logo haben, das stets sichtbar ist.
+
+## Testmanagement
+- **Testkonzept:** 
+  - Für alle Projekte ist ein Testmanagement mit sinnvollen Tests durchzuführen, basierend auf einem Testkonzept, das verschiedene Entwicklungsstufen abdeckt.
+
+## Versionskontrolle und Projektmanagement
+- **Repository:** 
+  - Für alle Dateien ist ein Repository zu verwenden.
+  
+- **Kanban-Board:** 
+  - Für alle Aufgaben ist ein Kanban-Board zu verwenden.
+
+## Dokumentation
+- **Bedienungs- und Installationsanleitung:** 
+  - Für alle Programme sind eine Bedienungsanleitung (für User) und eine Installationsanleitung (für Administratoren) zu erstellen.
+
+## User-Verwaltung
+- **User-Rollen:** 
+  - Es gibt User und Administratoren. Ein Admin kann auch als User das Programm verwenden.
+  
+- **Registrierung und Freischaltung:** 
+  - User können sich selbst registrieren, müssen aber von Admins freigeschaltet werden. Admins können User auch sperren.
+
+- **Sicherheitsanforderungen:** 
+  - User-Daten (Login-Name als E-Mail-Adresse und Passwort) werden in Datenbanken verschlüsselt gespeichert.
+  - Datenübertragungen zwischen Server und Client (oder Front-End) sind zu verschlüsseln.
+  - Daten sollen in einem definierten Format (z.B. JSON, XML) übertragen werden.
+
+## Benutzerfreundlichkeit
+- **Barrierefreiheit:** 
+  - Alle Oberflächen sind barrierefrei zu implementieren.
+  
+- **Eingabesicherheit:** 
+  - Alle Eingabemöglichkeiten sind möglichst DAU-sicher zu gestalten und, wenn möglich, mit regulären Ausdrücken zu prüfen.
 
 ## Features
-
-### 1. User Management
-
-#### Account Creation
-- Users can create an account by providing the following information:
-  - First Name
-  - Last Name
-  - Email Address
-- Each new user receives a predefined starting capital.
-
-#### Account Management
-- Users can reset their password.
-- Users can request to reset their account.
-- Admins can reactivate suspended accounts.
-- Admins can delete accounts upon request.
-
-### 2. Portfolio Management
-
-#### Order Management
-- Users can place orders to buy and sell stocks.
-- Users can view the current value of their own portfolio.
-
-#### Capital and Value Calculation
-- Each new user is assigned a starting capital.
-- Users can view the current market value of specific stocks.
-- Admins can calculate the total value of all portfolios.
-
-### 3. Admin Functions
-
-#### Admin Responsibilities
-- Admins can view all user accounts.
-- Admins can reactivate suspended accounts.
-- Admins can calculate the total value of all portfolios.
-- Admins can delete accounts upon request.
-
-----------------------------------------------------------------------------------------------------
 
 ### 1. Benutzerverwaltung
 
@@ -112,10 +107,10 @@ Trade Hub is a robust web application designed to facilitate stock portfolios. I
 
 ## Testing
 
-Testing is a key component of Trade Hub. We employ the following strategies:
+Tests sind ein wesentlicher Bestandteil von Trade Hub. Wir setzen die folgenden Strategien ein:
 
-- **Unit Testing:** Test individual components to ensure they work as expected.
-- **Integration Testing:** Verify that different parts of the application function together correctly.
-- **End-to-End Testing:** Validate complete user workflows from interaction to data handling.
+- **Unit Testing:** Testen einzelner Komponenten, um sicherzustellen, dass sie wie erwartet funktionieren.
+- **Integration Testing:** Überprüfung, ob verschiedene Teile der Anwendung zusammen korrekt arbeiten.
+- **End-to-End Testing:** Validierung kompletter Benutzerabläufe, von der Interaktion bis zur Datenverarbeitung.
 
-For detailed test cases and procedures, see the [TESTING.md](TESTING.md) file.
+Für detaillierte Testfälle und -verfahren siehe die Datei [TESTING.md](TESTING.md).
