@@ -4,20 +4,14 @@ Das Projektziel besteht in der Entwicklung einer Simulationsplattform für Wertp
 
 ## Table of Contents
 
-1. [Project Overview](#project-overview)
-2. [Requirements](#requirements)
-3. [Features](#features)
-4. [Testing](#testing)
+1. [Requirements](#requirements)
+2. [Project-related Requirements](#features)
+3. [Testing](#testing)
 
 ## Requirements
 
 ### General Requirements
 
-# Projektanforderungen
-
-**Hinweis:** Alle Anforderungen sind Mindestanforderungen. Kreative und sinnvolle Erweiterungen sind willkommen!
-
-## Allgemeine Anforderungen
 - **Plattformunabhängigkeit:** 
   - Alle Programme müssen betriebssystem-unabhängig compilierbar und ausführbar sein (bei stand-alone-Lösungen).
   - Web-Applikationen müssen browser-unabhängig aufrufbar sein.
@@ -68,7 +62,7 @@ Das Projektziel besteht in der Entwicklung einer Simulationsplattform für Wertp
 - **Eingabesicherheit:** 
   - Alle Eingabemöglichkeiten sind möglichst DAU-sicher zu gestalten und, wenn möglich, mit regulären Ausdrücken zu prüfen.
 
-## Features
+## Project-related Requirements
 
 ### 1. Benutzerverwaltung
 
