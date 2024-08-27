@@ -94,11 +94,11 @@ body.dark-mode
   align-items: center; /* Vertically center the items */
   background-color: var(--primary-bg-color); /* Background color for the main navigation */
   padding: 30px; /* Padding around the content */
-  gap: 50px; /* Space between elements */
+  gap: 80px; /* Space between elements */
 }
 
 
-.nav-links a
+.main-nav a
 {
   text-decoration: none; /* Remove default underline */
   color: var(--primary-text-color); /* Set the text color */
@@ -109,8 +109,10 @@ body.dark-mode
   transition: color 0.3s ease; /* Smooth transition for text color on hover */
 }
 
+
 /* Underline effect using pseudo-element */
-.nav-links a::after {
+.main-nav a::after
+{
   content: ''; /* Empty content for pseudo-element */
   position: absolute; /* Position absolutely within the parent element */
   width: 0; /* Initially set underline width to 0 */
@@ -121,15 +123,20 @@ body.dark-mode
   transition: width 0.3s ease; /* Smooth transition for the underline width */
 }
 
+
 /* On hover, expand the underline */
-.nav-links a:hover::after {
+.main-nav a:hover::after
+{
   width: 100%; /* Expand underline to full width */
 }
 
+
 /* Change text color on hover */
-.nav-links a:hover {
+.main-nav a:hover
+{
   color: var(--link-hover-color); /* Change text color on hover */
 }
+
 
 /* 
   Logo Styles:
