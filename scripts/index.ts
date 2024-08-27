@@ -19,28 +19,7 @@ type CSSVariables = {
       document.body.classList.add('dark-mode');
     }
   }
-  
-/*   // Function to handle dropdown toggle
-  function handleDropdownClick(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    const dropdownMenu = target.nextElementSibling as HTMLElement;
-  
-    // Toggle 'aria-expanded' attribute
-    const isExpanded = target.getAttribute('aria-expanded') === 'true';
-    target.setAttribute('aria-expanded', (!isExpanded).toString());
-  
-    // Toggle dropdown menu visibility
-    dropdownMenu.style.display = isExpanded ? 'none' : 'block';
-  }
-  
-  // Function to initialize dropdowns
-  function initDropdowns(): void {
-    const dropdownLinks = document.querySelectorAll('.dropdown-link');
-    dropdownLinks.forEach(link => {
-      link.addEventListener('click', handleDropdownClick);
-    });
-  } */
-  
+
   // Function to handle login button click
   function handleLoginClick(): void {
     alert('Login button clicked! Implement your login logic here.');
