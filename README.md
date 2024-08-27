@@ -1,10 +1,11 @@
 # Trade Hub
 
-Das Projektziel besteht in der Entwicklung einer Simulationsplattform für Wertpapierdepots. Die Plattform ermöglicht es den Benutzern, mithilfe von virtuellem Kapital Käufe und Verkäufe von Wertpapieren durchzuführen. Das Gesamtkapital des Benutzers wird in Echtzeit basierend auf den aktuellen Börsenkursen berechnet und angepasst. Darüber hinaus soll die Simulation die Dynamiken des echten Börsenhandels abbilden und den Benutzern ein praxisnahes und lehrreiches Verständnis für den Handel mit Wertpapieren vermitteln.
+Das Projektziel besteht in der Entwicklung einer Simulationsplatform zum spielerischen Erlernen von praxisnahem und lehrreichen Verständnis für den Handel mit Wertpapieren. Die Plattform ermöglicht es den Benutzern, mithilfe von virtuellem Kapital, Käufe und Verkäufe von Wertpapieren durchzuführen. Das Gesamtkapital des Benutzers wird in Echtzeit basierend auf den aktuellen Börsenkursen berechnet und angepasst. Darüber hinaus soll die Simulation die Dynamiken des echten Börsenhandels visuell abbilden. 
+Das Projekt ist erfolgreich abgeschlossen nach bestandenen Tests, Inbetriebnahme und Übergabe an den Kunden.
 
 ## Table of Contents
 
-1. [Requirements](#requirements)
+1. [General Requirements](#general-requirements)
 2. [Project-related Requirements](#project-related-requirements)
 3. [Testing](#testing)
 
