@@ -63,41 +63,43 @@ Das Projekt ist erfolgreich abgeschlossen nach bestandenen Tests, Inbetriebnahme
 - **Eingabesicherheit:** 
   - Alle Eingabemöglichkeiten sind möglichst DAU-sicher zu gestalten und, wenn möglich, mit regulären Ausdrücken zu prüfen.
 
+
 ## Project-related Requirements
 
-### 1. Benutzerverwaltung
+## Kontoverwaltung
 
-#### Kontoerstellung
-- Benutzer können ein Konto einrichten, indem sie folgende Informationen angeben:
-  - Vorname
-  - Nachname
-  - E-Mail-Adresse
-- Jeder neue Benutzer erhält ein festgelegtes Startkapital.
+- **Kontoerstellung:**
+  - Benutzer müssen einen Usernamen und ein Passwort angeben.
+  - Nach erfolgreicher Registrierung wird jedem neuen Benutzer ein festgelegtes Startkapital gutgeschrieben.
 
-#### Kontoverwaltung
-- Benutzer können ihr Passwort zurücksetzen.
-- Benutzer können ihr Konto auf Wunsch zurücksetzen lassen.
-- Administratoren können gesperrte Konten wieder freigeben.
-- Administratoren können Konten auf Anfrage löschen.
+- **Passwortverwaltung:**
+  - Benutzer können ihr Passwort bei Bedarf zurücksetzen.
 
-### 2. Depotverwaltung
+- **Kontolöschung:**
+  - Benutzer können eine Anfrage auf Löschung ihres Kontos stellen.
+  - Administratoren sind befugt, Konten auf Anfrage zu resetten oder vollständig zu löschen.
 
-#### Order-Management
-- Benutzer können Orders zum Kauf und Verkauf von Aktien erstellen.
-- Benutzer können den aktuellen Wert ihres eigenen Depots anzeigen lassen.
+## Depotverwaltung
 
-#### Kapital- und Wertberechnung
-- Das Startkapital wird jedem neuen Benutzer zugewiesen.
-- Benutzer können den aktuellen Marktwert bestimmter Aktien anzeigen lassen.
-- Administratoren können den Gesamtwert aller Depots berechnen.
+- **Order-Erstellung:**
+  - Benutzer können Orders zum Kauf und Verkauf von Aktien erstellen.
 
-### 3. Admin-Funktionen
+- **Depotübersicht:**
+  - Benutzer können den aktuellen Wert ihres Depots jederzeit einsehen.
 
-#### Aufgaben der Administratoren
-- Administratoren können alle Benutzerkonten einsehen.
-- Administratoren können gesperrte Konten wieder freigeben.
-- Administratoren können den Gesamtwert aller Depots berechnen.
-- Administratoren können Konten auf Anfrage löschen.
+- **Marktanalyse:**
+  - Benutzer können den aktuellen Marktwert bestimmter Aktien abrufen, um fundierte Entscheidungen zu treffen.
+
+## Bestenliste
+
+- **Wöchentliche Bestenliste:**
+  - Zeigt die Benutzer mit den meisten Gewinnen der aktuellen Woche in absteigender Reihenfolge an.
+
+- **Gesamt-Bestenliste:**
+  - Zeigt die Benutzer mit den meisten Gewinnen über die gesamte Zeit in absteigender Reihenfolge an.
+
+- **Auswirkungen eines Resets:**
+  - Bei einem Reset des Kontos wird der Benutzer aus den Bestenlisten entfernt, bis er erneut mit dem Handel beginnt.
 
 
 ## Testing
