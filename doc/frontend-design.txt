@@ -1,0 +1,30 @@
+1. HTML (HyperText Markup Language)
+
+Begründung:
+HTML ist das Grundgerüst jeder Website und sorgt für die Strukturierung der Inhalte.
+Es legt fest, wie Texte, Bilder und andere Medien auf der Seite dargestellt werden,
+und ist somit unverzichtbar für die Erstellung von Webinhalten.
+
+CSS (Cascading Style Sheets)
+
+Begründung:
+CSS ist für das Design und die optische Gestaltung einer Website verantwortlich.
+Es trennt das Layout und die Darstellung der Webseite von ihrer Struktur (HTML).
+Mit CSS kann man Farben, Schriftarten, Layouts und Animationen definieren,
+was zu einer ansprechenden und benutzerfreundlichen Benutzeroberfläche führt.
+CSS sorgt dafür, dass die Website auf verschiedenen Geräten und Bildschirmgrößen (Responsive Design) gut aussieht.
+
+JavaScript
+
+Begründung:
+JavaScript ist eine Programmiersprache, die Interaktivität und dynamische Funktionen in eine Website bringt.
+Mit JavaScript kann man beispielsweise Formulare validieren, Inhalte dynamisch aktualisieren oder interaktive Elemente wie Dropdown-Menüs und Bildergalerien erstellen.
+Es ist die am weitesten verbreitete Sprache für die Webentwicklung und wird von allen modernen Browsern unterstützt.
+
+TypeScript
+
+Begründung:
+TypeScript ist eine Erweiterung von JavaScript, die statische Typisierung hinzufügt.
+Dies bedeutet, dass Fehler während der Entwicklungszeit leichter erkannt werden können,
+was zu robusterem und wartbarerem Code führt. TypeScript verbessert die Produktivität, indem es bessere Werkzeuge wie Code-Vervollständigung und Refactoring bietet.
+Es ist besonders nützlich für größere Projekte, da es die Lesbarkeit und Wartbarkeit des Codes verbessert und das Risiko von Laufzeitfehlern reduziert.
