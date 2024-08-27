@@ -29,6 +29,44 @@
             <a href="#">About</a>
     </nav>
 
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+        <div id="tradingview_ticker"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {
+        "symbols": [
+            {
+            "proName": "NASDAQ:AAPL",
+            "title": "Apple"
+            },
+            {
+            "proName": "NASDAQ:GOOGL",
+            "title": "Google"
+            },
+            {
+            "proName": "NASDAQ:AMZN",
+            "title": "Amazon"
+            },
+
+            {
+            "proName": "NASDAQ:NVDA",
+            "title": "Nvidia"
+            },
+
+            {
+            "proName": "XETR:BMW",
+            "title": "BMW"
+            }
+        ],
+        "colorTheme": "dark",
+        "isTransparent": false,
+        "displayMode": "adaptive",
+        "locale": "en"
+        }
+        </script>
+    </div>
+    <!-- TradingView Widget END -->
+
     <script src="scripts/index.js"></script>
 
     <!-- Footer Section -->
