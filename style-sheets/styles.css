@@ -87,19 +87,49 @@ body.dark-mode
 }
 
 
-/* 
-  Main Navigation Bar Styles:
-  Styles the main navigation bar, including the logo and dropdown menu.
-*/
+/* Main Navigation Bar Styles */
 .main-nav
 {
-    display: flex; /* Uses Flexbox to align child elements horizontally */
-    align-items: center; /* Vertically centers the items */
-    background-color: var(--primary-bg-color); /* Background color for the main navigation */
-    padding: 30px; /* Adds padding around the content */
-    gap: 50px; /* Adds space between the elements */
+  display: flex; /* Align child elements horizontally */
+  align-items: center; /* Vertically center the items */
+  background-color: var(--primary-bg-color); /* Background color for the main navigation */
+  padding: 30px; /* Padding around the content */
+  gap: 50px; /* Space between elements */
 }
 
+
+.nav-links a
+{
+  text-decoration: none; /* Remove default underline */
+  color: var(--primary-text-color); /* Set the text color */
+  font-size: 18px; /* Set font size */
+  font-weight: bold; /* Make the text bold */
+  padding-bottom: 5px; /* Add space at the bottom for the underline */
+  position: relative; /* Position element relative to the parent */
+  transition: color 0.3s ease; /* Smooth transition for text color on hover */
+}
+
+/* Underline effect using pseudo-element */
+.nav-links a::after {
+  content: ''; /* Empty content for pseudo-element */
+  position: absolute; /* Position absolutely within the parent element */
+  width: 0; /* Initially set underline width to 0 */
+  height: 2px; /* Set underline thickness */
+  bottom: 0; /* Position the underline at the bottom */
+  left: 0; /* Start from the left */
+  background-color: var(--link-hover-color); /* Color of the underline */
+  transition: width 0.3s ease; /* Smooth transition for the underline width */
+}
+
+/* On hover, expand the underline */
+.nav-links a:hover::after {
+  width: 100%; /* Expand underline to full width */
+}
+
+/* Change text color on hover */
+.nav-links a:hover {
+  color: var(--link-hover-color); /* Change text color on hover */
+}
 
 /* 
   Logo Styles:
@@ -109,85 +139,6 @@ body.dark-mode
 {
     width: 80px; /* Sets the width of the logo */
     height: auto; /* Maintains the aspect ratio */
-}
-
-
-/* 
-  Dropdown Menu Styles:
-  Styles the dropdown link and the dropdown menu that appears on hover.
-*/
-.dropdown
-{
-    position: relative; /* Positions the dropdown relative to its parent */
-}
-
-
-/* 
-  Dropdown Link Styles:
-  Styles the link that triggers the dropdown menu.
-*/
-.dropdown-link
-{
-    background: none; /* Removes default background */
-    border: none; /* Removes default border */
-    cursor: pointer; /* Changes cursor to pointer on hover */
-    font-weight: bold; /* Makes the text bold */
-    font-size: 16px; /* Sets the font size */
-    color: var(--primary-text-color); /* Applies the primary text color */
-    transition: color 0.3s ease; /* Adds a smooth transition for color change on hover */
-}
-
-
-/* 
-  Dropdown Menu Display:
-  Styles the dropdown menu itself, initially hidden until triggered.
-*/
-.dropdown-menu
-{
-    display: none; /* Hides the dropdown menu by default */
-    position: absolute; /* Positions the dropdown menu below the link */
-    top: 100%; /* Positions the menu directly below the dropdown link */
-    left: 0; /* Aligns the menu to the left */
-    background-color: var(--primary-bg-color); /* Background color for the menu */
-    border: 1px solid #ddd; /* Adds a light border around the menu */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-    z-index: 1000; /* Ensures the dropdown appears above other content */
-}
-
-
-/* 
-  Dropdown Menu Link Styles:
-  Styles the individual links within the dropdown menu.
-*/
-.dropdown-menu a
-{
-    display: block; /* Displays the links as block elements */
-    padding: 10px 20px; /* Adds padding inside the links */
-    text-decoration: none; /* Removes underline from the links */
-    color: var(--primary-text-color); /* Applies the primary text color */
-    transition: background-color 0.3s ease; /* Adds a smooth transition for background color change on hover */
-}
-
-
-/* 
-  Dropdown Menu Link Hover State:
-  Styles the dropdown menu links when hovered over.
-*/
-.dropdown-menu a:hover
-{
-    background-color: var(--secondary-bg-color); /* Changes the background color on hover */
-}
-
-
-/* 
-  Dropdown Menu Visibility:
-  Displays the dropdown menu when the parent link is hovered, focused, or expanded.
-*/
-.dropdown:hover .dropdown-menu,
-/*.dropdown-link:focus + .dropdown-menu,*/
-.dropdown-link[aria-expanded="true"] + .dropdown-menu
-{
-    display: block; /* Shows the dropdown menu */
 }
 
 
