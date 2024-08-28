@@ -6,3 +6,55 @@ Traider API
 
 Seite:
 https://algotrading101.com/learn/google-finance-api-guide/
+
+Gerne helfe ich dir dabei, die passende API für deine Börsensimulation zu finden. Hier sind die Vor- und Nachteile der von dir genannten APIs:
+
+### Yahoo Finance API
+**Vorteile:**
+- **Kostenlos**: Die API ist kostenlos nutzbar.
+- **Umfangreiche Daten**: Bietet historische und Echtzeitdaten für Aktien, Währungen und andere Finanzprodukte.
+- **Einfache Integration**: Viele Bibliotheken und Tools unterstützen die Yahoo Finance API, was die Integration erleichtert
+.
+
+**Nachteile:**
+- **Verzögerte Echtzeitdaten**: Echtzeitdaten sind oft um 10-15 Minuten verzögert.
+- **Eingeschränkte Verfügbarkeit**: Die offizielle API wurde 2017 eingestellt, und die inoffiziellen APIs können unzuverlässig sein.
+
+### Alpha Vantage
+**Vorteile:**
+- **Kostenloser Zugang**: Bietet einen kostenlosen API-Schlüssel für bis zu 25 Anfragen pro Tag.
+- **Umfangreiche Daten**: Bietet Echtzeit- und historische Kursdaten sowie zusätzliche Informationen wie Hoch, Tief und Volumen.
+- **Batch-Anfragen**: Unterstützt Batch-Anfragen, was die Datenabfrage effizienter macht.
+
+**Nachteile:**
+- **Begrenzte Anfragen**: Die kostenlose Version ist auf 5 Anfragen pro Minute begrenzt.
+- **Verfügbarkeit**: Echtzeitdaten sind nur während der US-Markthandelszeiten verfügbar.
+
+### IEX Cloud
+**Vorteile:**
+- **Umfangreiche Daten**: Bietet eine Vielzahl von Finanzdaten, einschließlich Zeitreihendaten und Echtzeitdaten.
+- **Zuverlässigkeit**: Die API ist gut dokumentiert und zuverlässig.
+
+**Nachteile:**
+- **Kosten**: Die kostenlose Version ist begrenzt, und für umfangreichere Nutzung fallen Gebühren an.
+- **Komplexität**: Die API kann für Anfänger komplex sein.
+
+### Currencylayer API
+**Vorteile:**
+- **Kostenloser Zugang**: Bietet einen kostenlosen Plan für grundlegende Nutzung.
+- **Umfangreiche Daten**: Bietet Echtzeit- und historische Wechselkurse für 168 Währungen.
+- **Einfache Integration**: JSON-basierte API, die leicht in verschiedene Anwendungen integriert werden kann.
+
+**Nachteile:**
+- **Begrenzte Anfragen**: Die kostenlose Version ist auf tägliche Anfragen begrenzt.
+- **Nur Währungsdaten**: Bietet keine Aktien- oder anderen Finanzdaten.
+
+### Traider API
+**Vorteile:**
+- **Echtzeit-Marktdaten**: Bietet Zugang zu Echtzeit-Marktdaten.
+- **Automatisierung**: Unterstützt die Automatisierung von Handelsstrategien.
+
+**Nachteile:**
+- **Komplexität**: Erfordert technisches und fachliches Know-how, was für Anfänger eine Hürde sein kann.
+- **Abhängigkeit von Drittanbietern**: Hohe Abhängigkeit von Drittanbietern und mögliche Programmierfehler können zu Verlusten führen.
+
