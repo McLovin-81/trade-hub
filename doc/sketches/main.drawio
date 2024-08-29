@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" version="24.7.8" pages="2">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" version="24.7.8" pages="6">
   <diagram name="Startseite" id="Qu83OPLYzom5KY9xDE5v">
-    <mxGraphModel dx="975" dy="524" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="993" dy="525" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -81,88 +81,151 @@
         <mxCell id="GCKEpxp_i0NIajuhk333-26" value="Gast" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
           <mxGeometry x="50" y="430" width="30" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="_vzrLwkHWKV0frIkG1WK-2" value="Künftig wird die Navigation in der Startseite als &quot;Navigationsleiste klicken&quot; dargestellt." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="170" y="910" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hOnvdndAC7j94rjZofhh-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="770" y="390" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="hOnvdndAC7j94rjZofhh-2" value="Server" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="765" y="440" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hOnvdndAC7j94rjZofhh-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="hOnvdndAC7j94rjZofhh-3" target="hOnvdndAC7j94rjZofhh-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hOnvdndAC7j94rjZofhh-3" value="Newsticker aktualisieren" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="450" width="120" height="80" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="mUGcuQUjExdOhtQ7daju" name="Login">
-    <mxGraphModel dx="1418" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="934" dy="494" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="cJ8Hhr5Xt1QnBzLwFyxF-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="140" y="30" width="600" height="860" as="geometry" />
+          <mxGeometry x="140" y="30" width="600" height="520" as="geometry" />
         </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-1" value="Logo klicken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="180" y="100" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=none;endFill=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="byLP96Xy1Q6gP16gddDt-3">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="80" y="450" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-3" value="Wiki oeffnen" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="320" y="300" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=none;endFill=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="byLP96Xy1Q6gP16gddDt-5">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="80" y="450" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-5" value="News oeffnen" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="240" y="590" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-6" value="Registrieren druecken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="230" y="740" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-7" value="Login druecken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="500" y="570" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-8" value="Team klicken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="480" y="350" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-9" value="Newsticker klicken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="370" y="450" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-10" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=none;endFill=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="byLP96Xy1Q6gP16gddDt-11">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="80" y="450" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-11" value="Aktie suchen" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="305" y="180" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-12" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="byLP96Xy1Q6gP16gddDt-1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="80" y="450" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-13" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="byLP96Xy1Q6gP16gddDt-6" target="byLP96Xy1Q6gP16gddDt-18">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-14" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endArrow=none;endFill=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="byLP96Xy1Q6gP16gddDt-7" target="byLP96Xy1Q6gP16gddDt-18">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="110" y="600" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-15" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="byLP96Xy1Q6gP16gddDt-8">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="80" y="450" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-16" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="byLP96Xy1Q6gP16gddDt-18">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="80" y="450" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="byLP96Xy1Q6gP16gddDt-17" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="byLP96Xy1Q6gP16gddDt-9" target="byLP96Xy1Q6gP16gddDt-18">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="370" y="490" as="sourcePoint" />
-            <mxPoint x="80" y="450" as="targetPoint" />
-          </mxGeometry>
+        <mxCell id="byLP96Xy1Q6gP16gddDt-1" value="Navigationsleiste klicken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="180" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="byLP96Xy1Q6gP16gddDt-18" value="Gast" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="50" y="430" width="30" height="60" as="geometry" />
+          <mxGeometry x="70" y="380" width="30" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="lWwwhyTXgDmfgn3zMBdT-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="byLP96Xy1Q6gP16gddDt-1" target="byLP96Xy1Q6gP16gddDt-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lWwwhyTXgDmfgn3zMBdT-3" value="Einloggen druecken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="290" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="lWwwhyTXgDmfgn3zMBdT-4" value="Passwort vergessen druecken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="420" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="lWwwhyTXgDmfgn3zMBdT-5" value="Login" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="30" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lWwwhyTXgDmfgn3zMBdT-6" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="lWwwhyTXgDmfgn3zMBdT-3" target="byLP96Xy1Q6gP16gddDt-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lWwwhyTXgDmfgn3zMBdT-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="lWwwhyTXgDmfgn3zMBdT-4" target="byLP96Xy1Q6gP16gddDt-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="O-wG_mEdTmpPKOUQOVxC" name="Registrieren">
+    <mxGraphModel dx="1134" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MY8_lS_uD-tuDSosUlma-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="30" width="300" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="MY8_lS_uD-tuDSosUlma-2" value="Navigationsleiste klicken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="180" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="MY8_lS_uD-tuDSosUlma-3" value="Gast" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="290" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MY8_lS_uD-tuDSosUlma-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="MY8_lS_uD-tuDSosUlma-2" target="MY8_lS_uD-tuDSosUlma-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MY8_lS_uD-tuDSosUlma-5" value="Registrieren druecken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="290" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="MY8_lS_uD-tuDSosUlma-7" value="Registrieren" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="30" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MY8_lS_uD-tuDSosUlma-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="MY8_lS_uD-tuDSosUlma-5" target="MY8_lS_uD-tuDSosUlma-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="F_j5hgvjPVz5ROln9Uyq" name="Passwort Vergessen">
+    <mxGraphModel dx="1059" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_wxRn1g_Zq6SD6r3rq9d-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="30" width="600" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="_wxRn1g_Zq6SD6r3rq9d-2" value="Navigationsleiste klicken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="180" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_wxRn1g_Zq6SD6r3rq9d-3" value="Gast" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="380" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_wxRn1g_Zq6SD6r3rq9d-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="_wxRn1g_Zq6SD6r3rq9d-2" target="_wxRn1g_Zq6SD6r3rq9d-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_wxRn1g_Zq6SD6r3rq9d-6" value="Passwort reset druecken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="320" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_wxRn1g_Zq6SD6r3rq9d-7" value="Passwort Vergessen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="30" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_wxRn1g_Zq6SD6r3rq9d-9" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="_wxRn1g_Zq6SD6r3rq9d-6" target="_wxRn1g_Zq6SD6r3rq9d-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="zOOkBZwDgLKix59_99G5" name="Admin Verwaltung">
+    <mxGraphModel dx="794" dy="420" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pcKNbhJlTeTA1ld11QO3-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="30" width="600" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="pcKNbhJlTeTA1ld11QO3-2" value="Navigationsleiste klicken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="180" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pcKNbhJlTeTA1ld11QO3-3" value="Gast" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="380" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pcKNbhJlTeTA1ld11QO3-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="pcKNbhJlTeTA1ld11QO3-2" target="pcKNbhJlTeTA1ld11QO3-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pcKNbhJlTeTA1ld11QO3-6" value="Passwort vergessen druecken" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="420" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pcKNbhJlTeTA1ld11QO3-7" value="Admin Verwaltung" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="30" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="pcKNbhJlTeTA1ld11QO3-9" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="pcKNbhJlTeTA1ld11QO3-6" target="pcKNbhJlTeTA1ld11QO3-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="FyKwhlELqTR53H4jMw3Z" name="User Konto Zuruecksetzen">
+    <mxGraphModel dx="794" dy="420" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
       </root>
     </mxGraphModel>
   </diagram>
