@@ -7,7 +7,8 @@ Das Projekt ist erfolgreich abgeschlossen nach bestandenen Tests, Inbetriebnahme
 
 1. [General Requirements](#general-requirements)
 2. [Project-related Requirements](#project-related-requirements)
-3. [Testing](#testing)
+3. [Virtual Environment Setup](#virtual-env-setup)
+4. [Testing](#testing)
 
 ## Requirements
 
@@ -101,6 +102,26 @@ Das Projekt ist erfolgreich abgeschlossen nach bestandenen Tests, Inbetriebnahme
 - **Auswirkungen eines Resets:**
   - Bei einem Reset des Kontos wird der Benutzer aus den Bestenlisten entfernt, bis er erneut mit dem Handel beginnt.
 
+
+## Virtual Environment Setup
+
+This project uses a Python virtual environment to manage dependencies.
+
+### Creating a Virtual Environment
+Activating the Virtual Environment
+
+macOS and Linux:
+```bash
+ ``` source myenv/bin/activate ``` 
+```
+On Windows:
+```bash
+ ``` myenv\Scripts\activate ``` 
+```
+Deactivating the Virtual Environment:
+```bash
+ ``` deactivate ``` 
+```
 
 ## Testing
 
