@@ -1,39 +1,22 @@
 
-from flask import Flask, jsonify, request, render_template
+from flask import Flask
+from .routes import *
+from .api import *
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
 
+    # Register routes for HTML pages
+    app.add_url_rule('/', 'index', index)
+    app.add_url_rule('/legend', 'legend', legend)
 
+    # Register API endpoints
+    app.add_url_rule('/api/data', 'get_data', get_data, methods=['GET'])
+    app.add_url_rule('/api/data', 'receive_data', receive_data, methods=['POST'])
 
-# A simple REST API endpoint returning JSON data
-@app.route("/api/data", methods=["GET"])
-def get_data():
-    data = {
-        "message": "Hello, World!",
-        "status": "succes"
-    }
-    return jsonify(data)
-
-@app.route("/api/data", methods=["POST"])
-def receive_data():
-    received_data = request.json
-    print(f"Recieved data: {received_data}")
-    response = {
-        "status": "received",
-        "received_data": receive_data
-    }
-    return jsonify(response)
-
-
-
-# Render the index.html template
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/legend')
-def legend():
-    return render_template('legend.html')
+    return app
 
 if __name__ == '__main__':
+    app = create_app()
     app.run(debug=True)
+    
