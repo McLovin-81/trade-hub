@@ -1,22 +1,23 @@
+"""
+This module serves as the entry point for running the Flask application.
 
-from flask import Flask
-from .routes import *
-from .api import *
+It imports the `create_app` function from the `app` package's `__init__.py` file, 
+initializes the Flask application, and starts the development server if the script 
+is executed directly.
 
-def create_app():
-    app = Flask(__name__)
+Modules:
+    app (module): Contains the `create_app` function used to create the Flask app instance.
+"""
 
-    # Register routes for HTML pages
-    app.add_url_rule('/', 'index', index)
-    app.add_url_rule('/legend', 'legend', legend)
+from app import create_app
 
-    # Register API endpoints
-    app.add_url_rule('/api/data', 'get_data', get_data, methods=['GET'])
-    app.add_url_rule('/api/data', 'receive_data', receive_data, methods=['POST'])
-
-    return app
+app = create_app()
 
 if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=True)
+    """
+    If this script is executed directly, this block will run the Flask application.
     
+    The app will be started in debug mode, which is useful for development, as it provides 
+    interactive debugging and reloading on code changes.
+    """
+    app.run(debug=True)

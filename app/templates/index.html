@@ -22,7 +22,7 @@
     <!-- Main Navigation -->
     <nav class="main-nav">
         <a href="{{ url_for('index') }}" aria-label="Trade Hub Home">
-            <img class="logo" src="/static/images/logo.jpg" alt="Trade Hub Logo">
+            <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
             <a href="#">Team</a>
             <a href="#">Wiki</a>
@@ -67,7 +67,7 @@
     </div>
     <!-- TradingView Widget END -->
 
-    <script src="/static/js/index.js"></script>
+     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
     <!-- Footer Section -->
     <footer>
