@@ -1,4 +1,11 @@
 
+"""
+This module contains the API endpoints for the application.
+
+Endpoints:
+
+"""
+
 from flask import jsonify, request
 
 def get_data():

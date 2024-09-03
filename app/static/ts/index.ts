@@ -43,4 +43,42 @@ function init(): void
 document.addEventListener('DOMContentLoaded', init);
 
 
+// registration button
+const form = document.getElementById('registrationFrom') as HTMLFormElement;
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const nameInput = (document.getElementById('name') as HTMLInputElement).value;
+
+  if (nameInput)
+  {
+    try
+    {
+      const response = await fetch('/save-name', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: nameInput }),
+      });
+
+      if (response.ok) 
+      {
+        alert('Name saved successfully!');
+      }
+      else
+      {
+        alert('Failed to save name.');
+      }
+    }
+    catch (error)
+    {
+      console.error('Error:', error);
+      alert('An error occured while saving the name.');
+    }
+  }
+});
+
+
 // RUN -> tsc index.ts
