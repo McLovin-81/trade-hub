@@ -23,3 +23,13 @@ def receive_data():
         "received_data": received_data
     }
     return jsonify(response)
+
+
+def save_name():
+    received_data = request.json
+    print(f"Received data: {received_data}")
+    response = {
+        "status": "received",
+        "received_data": received_data
+    }
+    return jsonify(response)

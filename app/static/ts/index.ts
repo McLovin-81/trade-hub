@@ -55,7 +55,7 @@ form.addEventListener('submit', async (event) => {
   {
     try
     {
-      const response = await fetch('/save-name', {
+      const response = await fetch('/register/save_name', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,4 +81,4 @@ form.addEventListener('submit', async (event) => {
 });
 
 
-// RUN -> tsc index.ts
+// RUN -> tsc --project tsconfig.json

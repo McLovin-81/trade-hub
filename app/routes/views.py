@@ -27,3 +27,6 @@ def legend():
         Response: Rendered HTML template for the legend page.
     """
     return render_template('legend.html')
+
+def register():
+    return render_template('register.html')
