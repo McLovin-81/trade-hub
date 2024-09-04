@@ -32,10 +32,10 @@ def create_app():
     # Register routes for HTML pages
     app.add_url_rule('/', 'index', index)
     app.add_url_rule('/legend', 'legend', legend)
+    app.add_url_rule('/register', 'register', register)
 
     # Register API endpoints
-    app.add_url_rule('/api/data', 'get_data', get_data, methods=['GET'])
-    app.add_url_rule('/api/data', 'receive_data', receive_data, methods=['POST'])
+    app.add_url_rule('/register/save_name', 'save_name', save_name, methods=['POST'])
 
     # Set up the database
     setup_database(app)
