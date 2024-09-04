@@ -1,3 +1,4 @@
+
 """
 This module initializes the Flask application and registers all the routes and APIs.
 
@@ -10,8 +11,9 @@ Modules:
 """
 
 from flask import Flask
-from app.routes import *
-from app.api import *
+from app.routes.views import *
+from app.api.endpoints import *
+from app.database.db import *
 
 def create_app():
     """
@@ -25,14 +27,20 @@ def create_app():
     Returns:
         Flask: The Flask application instance configured with routes and APIs.
     """
-    app = Flask(__name__)
+    app = Flask(__name__) # -> thats my WSGI
 
     # Register routes for HTML pages
     app.add_url_rule('/', 'index', index)
     app.add_url_rule('/legend', 'legend', legend)
+    app.add_url_rule('/register', 'register', register)
 
     # Register API endpoints
-    app.add_url_rule('/api/data', 'get_data', get_data, methods=['GET'])
-    app.add_url_rule('/api/data', 'receive_data', receive_data, methods=['POST'])
+    app.add_url_rule('/register/save_name', 'save_name', save_name, methods=['POST'])
+
+    # Set up the database
+    setup_database(app)
+
+    # Register database functions
+    app.teardown_appcontext(close_db)
 
     return app
