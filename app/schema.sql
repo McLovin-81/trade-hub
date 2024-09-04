@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS product
 );
 
 
-CREATE TABLE IF NOT EXISTS transaction
+CREATE TABLE IF NOT EXISTS transactionHistory
 (
   id INTEGER PRIMARY KEY,
   user_id INTEGER NOT NULL,
@@ -33,6 +33,6 @@ CREATE TABLE IF NOT EXISTS transaction
   amount DECIMAL NOT NULL,
   price DECIMAL NOT NULL,
   t_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES user(id)
+  FOREIGN KEY (user_id) REFERENCES user(id),
   FOREIGN KEY (symbol) REFERENCES product(symbol)
 );
