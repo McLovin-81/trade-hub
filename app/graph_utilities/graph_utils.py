@@ -8,6 +8,7 @@ def get_graph_info(symbol):
     start_date = (datetime.today() - timedelta(days=365)).strftime('%Y-%m-%d')
     return symbol, start_date, end_date
 
+
 def create_stock_graph(symbol, start_date, end_date):
     stock = symbol
     start_date = start_date
@@ -17,3 +18,18 @@ def create_stock_graph(symbol, start_date, end_date):
     
     fig = go.Figure(data=[go.Scatter(x=stock_data.index, y=stock_data['Close'], mode='lines', name=symbol)])
     return fig.to_html(full_html=False)
+
+def get_stock_info(symbol):
+     #HIER ANFANGEN
+    symbol=symbol
+    ticker = yf.Ticker(symbol)
+    info = ticker.info
+    name = info.get("longName")
+    currency = info.get("currency")
+    currentPrice = info.get("currentPrice")
+    previousClose = info.get("previousClose")
+
+    return info, name, currency, currentPrice, previousClose
+        
+
+

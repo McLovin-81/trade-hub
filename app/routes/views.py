@@ -37,9 +37,8 @@ def main():
 
 def detailPage():
     symbol = request.form.get('symbol')
-    
-    graph_info = get_graph_info(symbol)
-    print(get_graph_info(symbol))   
+    print(get_stock_info(symbol))
+    graph_info = get_graph_info(symbol) 
     graph_html = create_stock_graph(*graph_info)
     
     return render_template('stockWindow.html', symbol=symbol, graph_html=graph_html)

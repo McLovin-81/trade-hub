@@ -9,10 +9,7 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-        <script src="searchAutocomplete.js"></script>
+       
 </head>
 
 <body>
@@ -30,7 +27,7 @@
         <a href="{{ url_for('index') }}" aria-label="Trade Hub Home">
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
-        <!-- Suchfeld -->
+        
         <form id="searchForm" action="/detailPage" method="POST">
             <input type="text" id="searchInput" name="symbol" placeholder="Suchbegriff eingeben...">
         </form>
