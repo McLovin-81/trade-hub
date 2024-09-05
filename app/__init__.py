@@ -5,17 +5,18 @@ This module initializes the Flask application and registers all the routes and A
 It contains the factory function `create_app` which sets up the Flask application instance,
 configures it, and registers the necessary routes and API endpoints.
 
-Modules:
-    routes (module): Contains the route handlers for HTML pages.
-    api (module): Contains the API endpoint handlers.
+The __init__.py serves double duty:
+it will contain the application factory, and it tells Python that
+the flaskr directory should be treated as a package.
 """
-
+import os
 from flask import Flask
+
 from app.routes.views import *
 from app.api.endpoints import *
 from app.database.db import *
 
-def create_app():
+def create_app(test_config=None):
     """
     Factory function to create and configure the Flask application.
 
@@ -24,10 +25,41 @@ def create_app():
     allows for better organization and flexibility, particularly useful for larger
     applications or when testing.
 
+    Note:
+        Any configuration, registration, and other setup the application
+        needs will happen inside the function.
+
     Returns:
         Flask: The Flask application instance configured with routes and APIs.
     """
-    app = Flask(__name__) # -> thats my WSGI
+    app = Flask(__name__, instance_relative_config=True) # -> Flask instance. Thats my WSGI.
+
+    """
+    app.config.from_mapping() sets some default configuration that
+    the app will use:
+        SECRET_KEY is used by Flask and extensions to keep data safe.
+        Its set to 'dev' to provide a convenient value during development,
+        but it should be overridden with a random value when deploying.
+    """
+    app.config.from_mapping(
+        SECRET_KEY='dev',
+        DATABASE=os.path.join(app.instance_path, 'trade_hub_database.sqlite'),
+        )
+    
+    if test_config is None:
+        # load the instance config, if it exists, when not testing
+        app.config.from_pyfile('config.py')
+    else:
+        # Load the test config if passed in
+        app.config.from_mapping(test_config)
+    
+    # Ensure the instance folder exists
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
+
+
 
     # Register routes for HTML pages
     app.add_url_rule('/', 'index', index)
@@ -36,11 +68,8 @@ def create_app():
 
     # Register API endpoints
     app.add_url_rule('/register/save_name', 'save_name', save_name, methods=['POST'])
-
-    # Set up the database
-    setup_database(app)
-
     # Register database functions
     app.teardown_appcontext(close_db)
+    app.cli.add_command(init_db_command)
 
     return app
