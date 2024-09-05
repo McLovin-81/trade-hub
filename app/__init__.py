@@ -33,9 +33,12 @@ def create_app():
     app.add_url_rule('/', 'index', index)
     app.add_url_rule('/legend', 'legend', legend)
     app.add_url_rule('/register', 'register', register)
+    app.add_url_rule('/main', 'main', main)
+
 
     # Register API endpoints
     app.add_url_rule('/register/save_name', 'save_name', save_name, methods=['POST'])
+    app.add_url_rule('/detailPage', 'details', detailPage, methods = ['GET','POST'])
 
     # Set up the database
     setup_database(app)

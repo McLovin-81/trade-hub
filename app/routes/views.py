@@ -7,7 +7,8 @@ Routes:
     - GET /legend: Renders the legend.html template.
 """
 
-from flask import render_template
+from flask import render_template, request, redirect, url_for
+from app.graph_utilities.graph_utils import *
 
 
 def index():
@@ -30,3 +31,15 @@ def legend():
 
 def register():
     return render_template('register.html')
+
+def main():
+    return render_template('main.html')
+
+def detailPage():
+    symbol = request.form.get('symbol')
+    
+    graph_info = get_graph_info(symbol)
+    print(get_graph_info(symbol))   
+    graph_html = create_stock_graph(*graph_info)
+    
+    return render_template('stockWindow.html', symbol=symbol, graph_html=graph_html)
