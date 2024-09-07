@@ -87,57 +87,6 @@ body.dark-mode
 }
 
 
-/* Main Navigation Bar Styles */
-.main-nav
-{
-  display: flex; /* Align child elements horizontally */
-  align-items: center; /* Vertically center the items */
-  background-color: var(--primary-bg-color); /* Background color for the main navigation */
-  padding: 30px; /* Padding around the content */
-  gap: 80px; /* Space between elements */
-}
-
-
-.main-nav a
-{
-  text-decoration: none; /* Remove default underline */
-  color: var(--primary-text-color); /* Set the text color */
-  font-size: 18px; /* Set font size */
-  font-weight: bold; /* Make the text bold */
-  padding-bottom: 5px; /* Add space at the bottom for the underline */
-  position: relative; /* Position element relative to the parent */
-  transition: color 0.3s ease; /* Smooth transition for text color on hover */
-}
-
-
-/* Underline effect using pseudo-element */
-.main-nav a::after
-{
-  content: ''; /* Empty content for pseudo-element */
-  position: absolute; /* Position absolutely within the parent element */
-  width: 0; /* Initially set underline width to 0 */
-  height: 2px; /* Set underline thickness */
-  bottom: 0; /* Position the underline at the bottom */
-  left: 0; /* Start from the left */
-  background-color: var(--link-hover-color); /* Color of the underline */
-  transition: width 0.3s ease; /* Smooth transition for the underline width */
-}
-
-
-/* On hover, expand the underline */
-.main-nav a:hover::after
-{
-  width: 100%; /* Expand underline to full width */
-}
-
-
-/* Change text color on hover */
-.main-nav a:hover
-{
-  color: var(--link-hover-color); /* Change text color on hover */
-}
-
-
 /* 
   Logo Styles:
   Sets the size of the logo while maintaining its aspect ratio.
