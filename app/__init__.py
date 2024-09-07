@@ -13,8 +13,10 @@ import os
 from flask import Flask
 
 from app.routes.views import *
-from app.api.endpoints import *
-from app.database.db import *
+
+from .database import db
+from .routes import auth
+from .routes import views
 
 def create_app(test_config=None):
     """
@@ -34,6 +36,7 @@ def create_app(test_config=None):
     """
     app = Flask(__name__, instance_relative_config=True) # -> Flask instance. Thats my WSGI.
 
+
     """
     app.config.from_mapping() sets some default configuration that
     the app will use:
@@ -47,8 +50,11 @@ def create_app(test_config=None):
         )
     
     if test_config is None:
-        # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py')
+        # Load the instance config, if it exists, when not testing
+        try:
+            app.config.from_pyfile('config.py')
+        except FileNotFoundError:
+            print("Warning: 'config.py' not found. Using default settings.")
     else:
         # Load the test config if passed in
         app.config.from_mapping(test_config)
@@ -59,17 +65,18 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-
+###################################################
 
     # Register routes for HTML pages
-    app.add_url_rule('/', 'index', index)
-    app.add_url_rule('/legend', 'legend', legend)
-    app.add_url_rule('/register', 'register', register)
+    app.register_blueprint(views.bp)
+    
+    # app.add_url_rule('/legend', 'legend', legend)
 
-    # Register API endpoints
-    app.add_url_rule('/register/save_name', 'save_name', save_name, methods=['POST'])
-    # Register database functions
-    app.teardown_appcontext(close_db)
-    app.cli.add_command(init_db_command)
+    
+    """ Call the registration from db.py """
+    db.init_app(app)
+
+    """Register auth blueprint"""
+    app.register_blueprint(auth.bp)
 
     return app

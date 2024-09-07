@@ -8,9 +8,11 @@
 </head>
 <body>
     <h1>Registration</h1>
-    <form id="registrationFrom">
-        <input tpye="text" id="name" name="iName">
-        <button type="sunmit">Submit</button>
+    <form id="registrationForm">
+        <input type="text" id="username" name="iName" required>
+        <input type="email" id="email" name="iEmail" required>
+        <input type="password" id="password" name="iPassword" required>
+        <button type="submit">Submit</button>
     </form>
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>

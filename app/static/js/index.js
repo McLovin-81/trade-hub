@@ -40,30 +40,41 @@ function init() {
 // Run the initialization function after DOM content is loaded
 document.addEventListener('DOMContentLoaded', init);
 // registration button
-const form = document.getElementById('registrationFrom');
+const form = document.getElementById('registrationForm');
 form.addEventListener('submit', (event) => __awaiter(void 0, void 0, void 0, function* () {
     event.preventDefault();
+    // Get input values
     const nameInput = document.getElementById('name').value;
-    if (nameInput) {
+    const emailInput = document.getElementById('email').value;
+    const passwordInput = document.getElementById('password').value;
+    // Check if all fields are filled
+    if (nameInput && emailInput && passwordInput) {
         try {
-            const response = yield fetch('/register/save_name', {
+            const response = yield fetch('/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name: nameInput }),
+                body: JSON.stringify({
+                    name: nameInput,
+                    email: emailInput,
+                    password: passwordInput
+                }),
             });
             if (response.ok) {
-                alert('Name saved successfully!');
+                alert('Registration successful!');
             }
             else {
-                alert('Failed to save name.');
+                alert('Failed to register.');
             }
         }
         catch (error) {
             console.error('Error:', error);
-            alert('An error occured while saving the name.');
+            alert('An error occurred while registering.');
         }
+    }
+    else {
+        alert('Please fill out all fields.');
     }
 }));
 // RUN -> tsc --project tsconfig.json
