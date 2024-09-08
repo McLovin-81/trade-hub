@@ -10,7 +10,7 @@ CREATE TABLE user
   username TEXT UNIQUE NOT NULL,
   email TEXT NOT NULL,
   password TEXT NOT NULL,
-  isAdmin BOOLEAN
+  isAdmin BOOLEAN DEFAULT 0
 );
 
 
