@@ -22,3 +22,6 @@ How to run the application for the first time
 
 in trade-hub
     bash -> flask --app app init-db
+
+How the certificates was created:
+    openssl req -x509 -newkey rsa:4096 -keyout instance/certs/key.pem -out instance/certs/cert.pem -days 365
