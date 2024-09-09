@@ -52,7 +52,7 @@ async function handleRegistration(event: Event): Promise<void>
 
       // Await the parsing of the response as JSON
       const result = await response.json();
-
+      alert(response);
       if (response.ok)
       {
         alert('Registration successful!');

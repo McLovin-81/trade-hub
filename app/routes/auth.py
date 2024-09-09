@@ -5,7 +5,7 @@
 import functools
 from flask import (
     Blueprint, flash, g, redirect, render_template,
-    request, session, url_for
+    request, session, url_for, jsonify
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..database.db import get_db
@@ -13,40 +13,16 @@ from ..database.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-"""
-@bp.route('/register', methods=('GET', 'POST'))
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
 
-        db = get_db()
-        error = None
-
-        # Make checks
-
-        if error is None:
-            try:
-                db.execute(
-                    "INSERT INTO user (username, email,  password) VALUES (?, ?, ?)",
-                    (username, email, generate_password_hash(password)),
-                )
-                db.commit()
-            except db.IntegrityError:
-                error = f"User {username} is already registered."
-            else:
-                return redirect(url_for('auth.login'))
-        
-        flash(error)
-            
-    return render_template('auth/register.html')
-"""
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
         data = request.json  # Access the JSON payload
+        if not data:
+            return jsonify({'error: Invalid JSON format'}, 400)
+        
         print(f"Received data: {data}")  # Debugging
+
         username = data.get('name')
         email = data.get('email')
         password = data.get('password')
@@ -57,24 +33,24 @@ def register():
         # Perform checks
         if not username or not email or not password:
             error = 'All fields are required.'
+            return jsonify({'error' : error}), 400
 
-        if error is None:
-            try:
-                db.execute(
-                    "INSERT INTO user (username, email, password) VALUES (?, ?, ?)",
-                    (username, email, generate_password_hash(password)),
-                )
-                db.commit()
+        try:
+            db.execute(
+                "INSERT INTO user (username, email, password) VALUES (?, ?, ?)",
+                (username, email, generate_password_hash(password)),
+            )
+            db.commit()
 
-                # Log the user data for confirmation
-                print(f"User {username} registered with email {email}")
+            # Log the user data for confirmation
+            print(f"User {username} registered with email {email}")
 
-            except db.IntegrityError as e:
-                error = f"User {username} is already registered."
-                print(f"Database error: {e}")
-            else:
-                # send ok before redirect
-                return redirect(url_for('auth.login'))
+        except db.IntegrityError as e:
+            error = f"User {username} is already registered."
+            print(f"Database error: {e}")
+        else:
+            # send ok before redirect
+            return redirect(url_for('auth.login'))
         
         flash(error)
 

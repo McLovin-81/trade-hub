@@ -17,6 +17,7 @@ from app.routes.views import *
 from .database import db
 from .routes import auth
 from .routes import views
+from ..instance import configure_logging
 
 def create_app(test_config=None):
     """
@@ -75,5 +76,8 @@ def create_app(test_config=None):
 
     """Register auth blueprint"""
     app.register_blueprint(auth.bp)
+
+    # Configure logging
+    configure_logging(app)
 
     return app
