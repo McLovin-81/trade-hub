@@ -11,6 +11,7 @@ Trade Hub is a simulation platform designed to provide a hands-on, educational e
 
 Trade Hub aims to teach users about stock trading in a practical and engaging manner. The platform allows users to simulate trading activities, providing real-time feedback on their investments and portfolio value.
 
+
 Note:
     Open the SQLite Database
         sqlite3 trade_hub_database.sqlite

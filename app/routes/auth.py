@@ -49,8 +49,9 @@ def register():
             error = f"User {username} is already registered."
             print(f"Database error: {e}")
         else:
-            # send ok before redirect
-            return redirect(url_for('auth.login'))
+
+            # Return a success message as JSON
+            return jsonify({'message': 'Registration successful!'}), 200
         
         flash(error)
 

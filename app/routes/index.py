@@ -9,7 +9,7 @@ from flask import (
 )
 
 
-bp = Blueprint('home_page', __name__,)
+bp = Blueprint('home_page', __name__)
 
 
 @bp.route('/', endpoint='index')

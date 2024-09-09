@@ -48,6 +48,7 @@ function handleRegistration(event) {
                 const result = yield response.json();
                 if (response.ok) {
                     alert('Registration successful!');
+                    window.location.href = '/auth/login'; // Redirect to login page
                 }
                 else {
                     alert('Failed to register.');

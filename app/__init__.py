@@ -12,12 +12,9 @@ the flaskr directory should be treated as a package.
 import os
 from flask import Flask
 
-from app.routes.views import *
-
 from .database import db
-from .routes import auth
-from .routes import views
-from ..instance import configure_logging
+from .routes import auth, index
+
 
 def create_app(test_config=None):
     """
@@ -68,16 +65,12 @@ def create_app(test_config=None):
 
 ###################################################
 
-    # Register routes for HTML pages
-    app.register_blueprint(views.bp)
+    """ Register routes bp's """
+    app.register_blueprint(index.bp)
+    app.register_blueprint(auth.bp)
     
     """ Call the registration from db.py """
     db.init_app(app)
 
-    """Register auth blueprint"""
-    app.register_blueprint(auth.bp)
-
-    # Configure logging
-    configure_logging(app)
 
     return app
