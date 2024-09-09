@@ -35,10 +35,10 @@ def register():
 def main():
     return render_template('main.html')
 
-def detailPage():
+def detailPage(): 
     symbol = request.form.get('symbol')
-    print(get_stock_info(symbol))
     graph_info = get_graph_info(symbol) 
     graph_html = create_stock_graph(*graph_info)
-    
-    return render_template('stockWindow.html', symbol=symbol, graph_html=graph_html)
+    stock_info = get_stock_info(symbol)
+    return render_template('stockWindow.html', symbol=symbol, graph_html=graph_html, stock_info=stock_info)
+   

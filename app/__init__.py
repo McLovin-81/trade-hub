@@ -14,6 +14,7 @@ from flask import Flask
 from app.routes.views import *
 from app.api.endpoints import *
 from app.database.db import *
+from app.graph_utilities import *
 
 def create_app():
     """

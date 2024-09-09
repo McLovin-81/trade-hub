@@ -1,6 +1,7 @@
 import yfinance as yf
 import plotly.graph_objs as go
 from datetime import datetime, timedelta
+import jsonify
 
 def get_graph_info(symbol):
     symbol = symbol
@@ -20,16 +21,24 @@ def create_stock_graph(symbol, start_date, end_date):
     return fig.to_html(full_html=False)
 
 def get_stock_info(symbol):
-     #HIER ANFANGEN
     symbol=symbol
     ticker = yf.Ticker(symbol)
     info = ticker.info
+
     name = info.get("longName")
+    sector = info.get("sector")
     currency = info.get("currency")
     currentPrice = info.get("currentPrice")
     previousClose = info.get("previousClose")
 
-    return info, name, currency, currentPrice, previousClose
-        
+    return {
+        "name": name,
+        "sector": sector,
+        "currency": currency,
+        "currentPrice": currentPrice,
+        "previousClose": previousClose
+    }
+
+
 
 

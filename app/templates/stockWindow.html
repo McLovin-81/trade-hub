@@ -38,12 +38,12 @@
     <!-- API GRAPH TEST -->
     <div class="container">
         <div class="info-block">
-            <h2 id="stock-name"></h2>
-            <p id="stock-sector"></p>
+            <h2 id="stock-name">{{ stock_info.name }}</h2>
+            <p id="stock-sector">Sector: {{ stock_info.sector }}</p>
         </div>
-        <div class="value-block">
-            <h2 id="last-value"></h2>
-            <p id="value-change"></p>
+        <div class="graph-value-block">
+            <h2 id="last-value">Letzter Preis: {{ stock_info.currentPrice }} {{ stock_info.currency }}</h2>
+            <p id="value-change" class="value-change"></p>
         </div>
     </div>
     <div class="graph-container">
@@ -51,6 +51,7 @@
     </div>
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="{{ url_for('static', filename='js/stockDetails.js') }}"></script>
 
     <!-- Footer Section -->
     <footer></footer>
