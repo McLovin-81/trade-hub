@@ -28,7 +28,7 @@ def create_app():
         Flask: The Flask application instance configured with routes and APIs.
     """
     app = Flask(__name__) # -> thats my WSGI
-    app.config['DEBUG'] = True
+    app.debug = True
     # Register routes for HTML pages
     app.add_url_rule('/', 'index', index)
     app.add_url_rule('/legend', 'legend', legend)
