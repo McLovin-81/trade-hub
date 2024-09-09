@@ -70,9 +70,6 @@ def create_app(test_config=None):
     # Register routes for HTML pages
     app.register_blueprint(views.bp)
     
-    # app.add_url_rule('/legend', 'legend', legend)
-
-    
     """ Call the registration from db.py """
     db.init_app(app)
 

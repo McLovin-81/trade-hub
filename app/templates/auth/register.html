@@ -9,12 +9,13 @@
 <body>
     <h1>Registration</h1>
     <form id="registrationForm">
-        <input type="text" id="username" name="iName" required>
-        <input type="email" id="email" name="iEmail" required>
-        <input type="password" id="password" name="iPassword" required>
-        <button type="submit">Submit</button>
+        <input type="text" id="username" name="iName" required> <!-- TODO: Check here or in ts? -->
+        <input type="email" id="email" name="iEmail" required> <!-- TODO: Check here or in ts? -->
+        <input type="password" id="password" name="iPassword" required> <!-- TODO: Check here or in ts? -->
+        <button class="submit">Submit</button>
     </form>
 
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 </body>
 </html>

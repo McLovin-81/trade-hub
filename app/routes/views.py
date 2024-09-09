@@ -12,7 +12,7 @@ from flask import (
 bp = Blueprint('home_page', __name__,)
 
 
-@bp.route('/')
+@bp.route('/', endpoint='index')
 def index():
     """
     Handle GET requests to / and render the index.html template.
