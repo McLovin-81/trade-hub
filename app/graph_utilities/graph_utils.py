@@ -3,6 +3,10 @@ import plotly.graph_objs as go
 from datetime import datetime, timedelta
 import jsonify
 
+def get_start_date(date):
+
+    return start_date
+
 def get_graph_info(symbol):
     symbol = symbol
     end_date = datetime.today().strftime('%Y-%m-%d')
@@ -39,6 +43,12 @@ def get_stock_info(symbol):
         "previousClose": previousClose
     }
 
+def calculate_stock_changes(stock_info):
+    change = stock_info['currentPrice'] - stock_info['previousClose']
+    percentage_change = (change / stock_info['previousClose']) * 100
+    stock_info['change'] = f"{change:.2f}"
+    stock_info['percentage_change'] = f"{percentage_change:.2f}"
+    return stock_info
 
 
 

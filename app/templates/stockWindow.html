@@ -43,7 +43,9 @@
         </div>
         <div class="graph-value-block">
             <h2 id="last-value">Letzter Preis: {{ stock_info.currentPrice }} {{ stock_info.currency }}</h2>
-            <p id="value-change" class="value-change"></p>
+            <p id="value-change" class="value-change">
+                {{ stock_info.change }} {{ stock_info.currency }} ({{ stock_info.percentage_change }}%)
+            </p>
         </div>
     </div>
     <div class="graph-container">

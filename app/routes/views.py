@@ -40,5 +40,6 @@ def detailPage():
     graph_info = get_graph_info(symbol) 
     graph_html = create_stock_graph(*graph_info)
     stock_info = get_stock_info(symbol)
-    return render_template('stockWindow.html', symbol=symbol, graph_html=graph_html, stock_info=stock_info)
+    stock_info_calculated = calculate_stock_changes(stock_info)
+    return render_template('stockWindow.html', symbol=symbol, graph_html=graph_html, stock_info=stock_info_calculated)
    
