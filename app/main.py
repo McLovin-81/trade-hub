@@ -10,9 +10,11 @@ Modules:
     app (module): Contains the `create_app` function used to create the Flask app instance.
 """
 
-from app import create_app
-
+from __init__ import create_app
 app = create_app()
+
+
+
 
 if __name__ == '__main__':
     """
@@ -21,4 +23,7 @@ if __name__ == '__main__':
     The app will be started in debug mode, which is useful for development, as it provides 
     interactive debugging and reloading on code changes.
     """
-    app.run(debug=True)
+    if app.debug:
+        app.run(ssl_context="adhoc")
+    else:
+        app.run(ssl_context=("instance/certs/certs.pem","instance/certs/key.pem"))

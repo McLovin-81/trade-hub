@@ -11,9 +11,9 @@ Modules:
 """
 
 from flask import Flask
-from app.routes.views import *
-from app.api.endpoints import *
-from app.database.db import *
+from routes.views import *
+from api.endpoints import *
+from database.db import *
 
 def create_app():
     """
@@ -28,7 +28,7 @@ def create_app():
         Flask: The Flask application instance configured with routes and APIs.
     """
     app = Flask(__name__) # -> thats my WSGI
-
+    app.config['DEBUG'] = True
     # Register routes for HTML pages
     app.add_url_rule('/', 'index', index)
     app.add_url_rule('/legend', 'legend', legend)
