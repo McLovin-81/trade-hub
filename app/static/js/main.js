@@ -26,6 +26,44 @@ function initDarkMode() {
         document.body.classList.add('dark-mode');
     }
 }
+function handleRegistration(event) {
+    return __awaiter(this, void 0, void 0, function* () {
+        event.preventDefault();
+        const nameInput = document.getElementById('username').value;
+        const emailInput = document.getElementById('email').value;
+        const passwordInput = document.getElementById('password').value;
+        if (nameInput && emailInput && passwordInput) {
+            try {
+                // The `fetch` function is asynchronous and returns a Promise
+                const response = yield fetch('/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: nameInput,
+                        email: emailInput,
+                        password: passwordInput
+                    }),
+                });
+                // Await the parsing of the response as JSON
+                const result = yield response.json();
+                if (response.ok) {
+                    alert('Registration successful!');
+                    window.location.href = '/auth/login'; // Redirect to login page
+                }
+                else {
+                    alert('Failed to register.');
+                }
+            }
+            catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while registering.');
+            }
+        }
+        else {
+            alert('Please fill out all fields.');
+        }
+    });
+}
 // Function to initialize the page
 function init() {
     // Initialize dark mode based on user preference
@@ -36,34 +74,10 @@ function init() {
     // Attach event listener to login button
     const loginButton = document.querySelector('.btn');
     loginButton === null || loginButton === void 0 ? void 0 : loginButton.addEventListener('click', handleLoginClick);
+    // Attach event listener to the registration form
+    const form = document.getElementById('registrationForm');
+    form === null || form === void 0 ? void 0 : form.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
 }
 // Run the initialization function after DOM content is loaded
 document.addEventListener('DOMContentLoaded', init);
-// registration button
-const form = document.getElementById('registrationFrom');
-form.addEventListener('submit', (event) => __awaiter(void 0, void 0, void 0, function* () {
-    event.preventDefault();
-    const nameInput = document.getElementById('name').value;
-    if (nameInput) {
-        try {
-            const response = yield fetch('/register/save_name', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name: nameInput }),
-            });
-            if (response.ok) {
-                alert('Name saved successfully!');
-            }
-            else {
-                alert('Failed to save name.');
-            }
-        }
-        catch (error) {
-            console.error('Error:', error);
-            alert('An error occured while saving the name.');
-        }
-    }
-}));
 // RUN -> tsc --project tsconfig.json

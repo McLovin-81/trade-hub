@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trade Hub</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Global styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> <!-- Index-specific styles -->
+
     <!-- Font Awesome CDN -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -14,21 +17,21 @@
 <body>
     <!-- Top Navigation -->
     <header class="top-nav">
-        <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode"></i>
+        <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
         <button class="btn">Login</button>
-        <a href="{{ url_for('register') }}" aria-label="Trade Hub Home">
+        <a href="{{ url_for('auth.register') }}" aria-label="Trade Hub Home">
             <button class="btn">Register</button>
         </a>
     </header>
 
     <!-- Main Navigation -->
     <nav class="main-nav">
-        <a href="{{ url_for('index') }}" aria-label="Trade Hub Home">
+        <a href="{{ url_for('home_page.index') }}" aria-label="Trade Hub Home">
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
-            <a href="#">Team</a>
-            <a href="#">Wiki</a>
-            <a href="#">About</a>
+            <a href="#" aria-label="View Team">Team</a>
+            <a href="#" aria-label="View Wiki">Wiki</a>
+            <a href="#" aria-label="About Trade Hub">About</a>
     </nav>
 
     <!-- TradingView Widget BEGIN -->
@@ -36,46 +39,30 @@
         <div id="tradingview_ticker"></div>
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
         {
-        "symbols": [
-            {
-            "proName": "NASDAQ:AAPL",
-            "title": "Apple"
-            },
-            {
-            "proName": "NASDAQ:GOOGL",
-            "title": "Google"
-            },
-            {
-            "proName": "NASDAQ:AMZN",
-            "title": "Amazon"
-            },
-
-            {
-            "proName": "NASDAQ:NVDA",
-            "title": "Nvidia"
-            },
-
-            {
-            "proName": "XETR:BMW",
-            "title": "BMW"
-            }
-        ],
-        "colorTheme": "dark",
-        "isTransparent": false,
-        "displayMode": "adaptive",
-        "locale": "en"
+            "symbols": [
+                { "proName": "NASDAQ:AAPL", "title": "Apple" },
+                { "proName": "NASDAQ:GOOGL", "title": "Google" },
+                { "proName": "NASDAQ:AMZN", "title": "Amazon" },
+                { "proName": "NASDAQ:NVDA", "title": "Nvidia" },
+                { "proName": "XETR:BMW", "title": "BMW" }
+            ],
+            "colorTheme": "dark",
+            "isTransparent": false,
+            "displayMode": "adaptive",
+            "locale": "en"
         }
         </script>
     </div>
     <!-- TradingView Widget END -->
 
-     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-
     <!-- Footer Section -->
     <footer>
-        <a href="/legend">Legend</a>
+        <a href="{{ url_for('home_page.legend') }}" aria-label="Legend Page">Legend</a>
     </footer>
 
-</body>
+    <!-- scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
+
+</body>
 </html>

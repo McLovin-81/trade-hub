@@ -9,7 +9,6 @@ Functions:
     - setup_database: Sets up the database configuration and initializes it if necessary.
 """
 
-import os
 import sqlite3
 import click
 from flask import current_app, g
@@ -47,30 +46,37 @@ def close_db(e=None):
 
 def init_db():
     """
-    Initialize the database.
+    Initialize the database by executing the schema file.
+
+    This function retrieves the current database connection using the `get_db()` 
+    function, then reads and executes the SQL schema from the file `schema.sql`. 
+    The schema file defines the structure of the database, such as tables, 
+    indexes, and any initial setup required.
+
+    The SQL schema file is located in the 'database' directory within the 
+    current application's context. The file is opened using the `open_resource()` 
+    method provided by Flask's `current_app`, ensuring the file is read 
+    as part of the application's package.
+
+    The SQL script is executed using `db.executescript()`, which runs multiple 
+    SQL commands in a single execution. The contents of the schema file are 
+    decoded from UTF-8 to ensure proper handling of special characters.
+
+    This function is typically called when setting up or resetting the 
+    application's database.
     """
     db = get_db()
-    with current_app.open_resource('schema.sql') as f:
+    with current_app.open_resource('database/schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
 
-def setup_database(app):
-    """
-    Set up the database configuration and initialize it if necessary.
+@click.command('init-db')
+def init_db_command():
+    #Clear the existing data and create new tables.
+    init_db()
+    click.echo('Initialized the database.')
 
-    Args:
-        app (Flask): The Flask application instance.
-    """
-    app.config['DATABASE'] = os.path.join(app.instance_path, 'trade_hub_database.sqlite')
-    
-    # Ensure the instance folder exists
-    os.makedirs(app.instance_path, exist_ok=True)
-    
-    # Initialize the database if it does not exist
-    if not os.path.exists(app.config['DATABASE']):
-        with app.app_context():
-            print("Database does not exist, initializing...")
-            init_db()
-            print("Database initialized.")
-    else:
-        print("Database already exists.")
+
+def init_app(app):
+    app.teardown_appcontext(close_db)
+    app.cli.add_command(init_db_command)
