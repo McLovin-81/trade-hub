@@ -28,8 +28,9 @@ async function handleRegistration(event: Event): Promise<void>
   const nameInput = (document.getElementById('username') as HTMLInputElement).value;
   const emailInput = (document.getElementById('email') as HTMLInputElement).value;
   const passwordInput = (document.getElementById('password') as HTMLInputElement).value;
+  const passwordConfirmInput = (document.getElementById('confirmPassword') as HTMLInputElement).value;
 
-  if (nameInput && emailInput && passwordInput)
+  if (passwordInput == passwordConfirmInput)
   {
     try
     {
@@ -67,7 +68,7 @@ async function handleRegistration(event: Event): Promise<void>
   }
   else
   {
-    alert('Please fill out all fields.');
+    alert('passwords do not match');
   }
 }
 
