@@ -28,7 +28,8 @@ function handleRegistration(event) {
         const nameInput = document.getElementById('username').value;
         const emailInput = document.getElementById('email').value;
         const passwordInput = document.getElementById('password').value;
-        if (nameInput && emailInput && passwordInput) {
+        const passwordConfirmInput = document.getElementById('confirmPassword').value;
+        if (passwordInput == passwordConfirmInput) {
             try {
                 // The `fetch` function is asynchronous and returns a Promise
                 const response = yield fetch('/auth/register', {
@@ -56,7 +57,7 @@ function handleRegistration(event) {
             }
         }
         else {
-            alert('Please fill out all fields.');
+            alert('passwords do not match');
         }
     });
 }
