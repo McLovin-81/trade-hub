@@ -12,7 +12,6 @@ the flaskr directory should be treated as a package.
 import os
 from flask import Flask
 from app.routes.views import *
-from app.api.endpoints import *
 from app.database.db import *
 from app.graph_utilities import *
 
@@ -41,11 +40,9 @@ def create_app(test_config=None):
     app.add_url_rule('/main', 'main', main)
 
     # Register API endpoints
-    app.add_url_rule('/register/save_name', 'save_name', save_name, methods=['POST'])
     app.add_url_rule('/detailPage', 'details', detailPage, methods = ['GET','POST'])
-    
+
     # Set up the database
-    setup_database(app)
 
     # Register database functions
     app.teardown_appcontext(close_db)
