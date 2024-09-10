@@ -43,6 +43,7 @@ def create_app(test_config=None):
     # Register API endpoints
     app.add_url_rule('/register/save_name', 'save_name', save_name, methods=['POST'])
     app.add_url_rule('/detailPage', 'details', detailPage, methods = ['GET','POST'])
+    
     # Set up the database
     setup_database(app)
 
