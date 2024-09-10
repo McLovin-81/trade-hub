@@ -49,11 +49,21 @@
         </div>
     </div>
     <div class="graph-container">
+        <form action="" method="POST">
+            <button type="submit" name="startTime" value="1y">1 Jahr</button>
+        </form>
+        
+        <form action="" method="POST">
+            <button type="submit" name="startTime" value="1m">1 Monat</button>
+        </form>
+
+        <form action="" method="POST">
+            <button type="submit" name="startTime" value="1d">Heute</button>
+        </form>
         <div id="graph">{{ graph_html|safe }}</div>
     </div>
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="{{ url_for('static', filename='js/stockDetails.js') }}"></script>
 
     <!-- Footer Section -->
     <footer></footer>
