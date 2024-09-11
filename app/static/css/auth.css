@@ -1,39 +1,52 @@
-/* Authentication Form Styles */
-.auth-form
+
+
+/* Form Heading */
+h1
 {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: var(--primary-bg-color);
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-size: 35px;
+  margin-bottom: 30px;
+  color: #202124; /* Dark gray text */
+  font-weight: 400;
+  text-align: center; /* Ensures the text is centered */
+  margin-top: 0; /* Optional: remove any default margin from the top */
 }
 
-/* Input Fields for Authentication Forms */
+
+/* Form Container */
+.auth-form {
+  background-color: white;
+  padding: 40px;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 0 auto; /* Centers the form */
+}
+
+
+/* Input Fields */
 .auth-form input
 {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #fff;
+  transition: border-color 0.2s;
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
 
-/* Submit Button for Authentication Forms */
-.auth-form button
+
+/* Focused Input Field */
+.auth-form input:focus
 {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  outline: none;
+  border-color: #1ae8b5; /* Google blue for focus */
 }
 
-.auth-form button:hover
+
+.auth-form input::placeholder
 {
-    background-color: var(--link-hover-color);
+  color: #80868b; /* Subtle gray placeholder text */
 }

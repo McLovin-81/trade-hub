@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade Hub - Register</title>
+    <title>Sign up</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
 
     <!-- Font Awesome CDN -->
@@ -18,10 +19,10 @@
     <!-- Top Navigation -->
     <header class="top-nav">
         <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
-        <button class="btn">Login</button>
-        <a href="{{ url_for('auth.register') }}" aria-label="Trade Hub Home">
-            <button class="btn">Register</button>
+        <a href="{{ url_for('auth.login') }}" aria-label="Trade Hub Home">
+            <button class="btn" tabindex="1">Login</button>
         </a>
+            <button class="btn">Register</button>
     </header>
 
     <!-- Main Navigation -->
@@ -35,41 +36,16 @@
     </nav>
 
     <!-- Registration Form Section -->
-    <h1>Register for Trade Hub</h1>
-    <form id="registrationForm" class="registration-form">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
-        </div>
-
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-        </div>
-
-        <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
+    <h1>Sign up</h1>
+    <form id="registrationForm" class="auth-form">
+        <div>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
         </div>
 
-        <button type="submit" class="btn submit-btn">Register</button>
-    </form>
-    <!-- Footer Section -->
-
-
-
-    <!-- OOOLD!! -->
-    <h1>Registration</h1>
-    <form id="registrationForm">
-        <input type="text" id="username" name="iName" placeholder="Username" required> <!-- TODO: Check here or in ts? -->
-        <input type="email" id="email" name="iEmail" placeholder="Email" required> <!-- TODO: Check here or in ts? -->
-        <input type="password" id="password" name="iPassword" placeholder="Password" required> <!-- TODO: Check here or in ts? -->
-        <button class="submit">Submit</button>
+        <button type="submit" class="btn submit-btn">Sign up</button>
     </form>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
