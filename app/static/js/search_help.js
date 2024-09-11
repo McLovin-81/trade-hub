@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("searchInput");
     const suggestionsList = document.createElement("ul");
+    suggestionsList.setAttribute("id", "suggestions");
     searchInput.parentNode.appendChild(suggestionsList);
+    
+    const searchForm = document.getElementById("searchForm");
 
-    // Das Dictionary, das in der main.html als JSON eingebettet wird
+   
     const daxAktien = JSON.parse(document.getElementById("daxAktienData").textContent);
 
     searchInput.addEventListener("input", function () {
@@ -16,13 +19,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (name.toLowerCase().includes(query) || symbol.toLowerCase().includes(query)) {
                     const suggestionItem = document.createElement("li");
                     suggestionItem.textContent = `${name} (${symbol})`;
+
+                    // Send formular on click
                     suggestionItem.addEventListener("click", function () {
                         searchInput.value = symbol;
-                        suggestionsList.innerHTML = "";  // Vorschläge leeren
+                        searchForm.submit();  
                     });
+                    
                     suggestionsList.appendChild(suggestionItem);
                 }
             });
+        }
+    });
+
+    
+    document.addEventListener("click", function (e) {
+        if (!searchInput.contains(e.target)) {
+            suggestionsList.innerHTML = "";  
         }
     });
 });
