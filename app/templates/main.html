@@ -31,6 +31,10 @@
         <form id="searchForm" action="/detailPage" method="POST">
             <input type="text" id="searchInput" name="symbol" placeholder="Suchbegriff eingeben...">
         </form>
+        <script type="application/json" id="daxAktienData">
+            {{ dax_aktien | tojson }}
+        </script>
+        <script src="{{ url_for('static', filename='js/search_help.js') }}"></script>
         <a href="#">Team</a>
         <a href="#">Wiki</a>
         <a href="#">About</a>

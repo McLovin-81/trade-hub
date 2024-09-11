@@ -34,7 +34,7 @@ def register():
     return render_template('register.html')
 
 def main():
-    return render_template('main.html')
+    return render_template('main.html', dax_aktien=dax_aktien)
 
 def detailPage(): 
     symbol = request.form.get('symbol')
