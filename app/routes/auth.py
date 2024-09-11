@@ -2,8 +2,9 @@
 # User authentication routes
 # https://flask.palletsprojects.com/en/3.0.x/tutorial/views/
 
-import functools
-from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify
+from functools import wraps
+from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..database.db import get_db
@@ -93,11 +94,33 @@ def login():
             error = 'Incorrect password'
             return jsonify({'error': error}), 401
         
-        # If login is successful, return a success message
-        print(f"User {user['username']} logged")
-        return jsonify({'message': 'Login successful', 'redirect': '/'}), 200
+        # If login is successful, set session variables
+        session.clear()  # Clear any previous session data
+        session['user_id'] = user['id']
+        session['username'] = user['username']
+
+        print(f"User {user['username']} logged in")
+        return jsonify({'message': 'Login successful', 'redirect': '/user/depot'}), 200
 
     return render_template('auth/login.html')
+
+
+
+
+
+
+
+
+@bp.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html')
+
+
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('auth.login'))
 
 
 @bp.before_app_request
@@ -112,18 +135,11 @@ def load_logged_in_user():
         ).fetchone()
 
 
-@bp.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('index'))
-
 
 def login_required(view):
-    @functools.wraps(view)
+    @wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
             return redirect(url_for('auth.login'))
-
         return view(**kwargs)
-
     return wrapped_view

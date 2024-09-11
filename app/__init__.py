@@ -11,9 +11,10 @@ the flaskr directory should be treated as a package.
 """
 import os
 from flask import Flask
+from flask_login import LoginManager
 
 from .database import db
-from .routes import auth, index
+from .routes import auth, index, depot
 
 
 def create_app(test_config=None):
@@ -65,9 +66,23 @@ def create_app(test_config=None):
 
 ###################################################
 
+    # Initialize Flask-Login
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        # Implement this function to load a user from your database
+        pass
+
+
+###################################################
+
     """ Register routes bp's """
     app.register_blueprint(index.bp)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(depot.bp)
+
     
     """ Call the registration from db.py """
     db.init_app(app)
