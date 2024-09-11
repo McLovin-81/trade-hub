@@ -28,3 +28,7 @@ def index():
 @bp.route('/legend')
 def legend():
     return render_template('legend.html')
+
+
+
+

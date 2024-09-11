@@ -20,7 +20,7 @@
         <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
 <<<<<<< HEAD
         <button class="btn">Login</button>
-        <a href="{{ url_for('register') }}" aria-label="Trade Hub Home">
+        <a href="{{ url_for('auth.register') }}" aria-label="Trade Hub Home">
 =======
         <a href="{{ url_for('auth.login') }}" aria-label="Trade Hub Home">
             <button class="btn" tabindex="1">Login</button>
@@ -33,7 +33,7 @@
 
     <!-- Main Navigation -->
     <nav class="main-nav">
-        <a href="{{ url_for('index') }}" aria-label="Trade Hub Home">
+        <a href="{{ url_for('home_page.index') }}" aria-label="Trade Hub Home">
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
             <a href="#" aria-label="View Team">Team</a>
@@ -64,7 +64,7 @@
 
     <!-- Footer Section -->
     <footer>
-        <a href="{{ url_for('legend') }}" aria-label="Legend Page">Legend</a>
+        <a href="{{ url_for('home_page.legend') }}" aria-label="Legend Page">Legend</a>
     </footer>
 
     <!-- scripts -->

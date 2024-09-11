@@ -11,9 +11,10 @@ the flaskr directory should be treated as a package.
 """
 import os
 from flask import Flask
-from app.routes.views import *
-from app.database.db import *
-from app.graph_utilities import *
+
+from .database import db
+from .routes import auth, index, stock_details
+
 
 def create_app(test_config=None):
     """
@@ -31,20 +32,46 @@ def create_app(test_config=None):
     Returns:
         Flask: The Flask application instance configured with routes and APIs.
     """
-    app = Flask(__name__) # -> thats my WSGI
+    app = Flask(__name__, instance_relative_config=True) # -> Flask instance. Thats my WSGI.
 
-    # Register routes for HTML pages
-    app.add_url_rule('/', 'index', index)
-    app.add_url_rule('/legend', 'legend', legend)
-    app.add_url_rule('/register', 'register', register)
-    app.add_url_rule('/main', 'main', main)
 
-    # Register API endpoints
-    app.add_url_rule('/detailPage', 'details', detailPage, methods = ['GET','POST'])
+    """
+    app.config.from_mapping() sets some default configuration that
+    the app will use:
+        SECRET_KEY is used by Flask and extensions to keep data safe.
+        Its set to 'dev' to provide a convenient value during development,
+        but it should be overridden with a random value when deploying.
+    """
+    app.config.from_mapping(
+        SECRET_KEY='dev',
+        DATABASE=os.path.join(app.instance_path, 'trade_hub_database.sqlite'),
+        )
+    
+    if test_config is None:
+        # Load the instance config, if it exists, when not testing
+        try:
+            app.config.from_pyfile('config.py')
+        except FileNotFoundError:
+            print("Warning: 'config.py' not found. Using default settings.")
+    else:
+        # Load the test config if passed in
+        app.config.from_mapping(test_config)
+    
+    # Ensure the instance folder exists
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
 
-    # Set up the database
+###################################################
 
-    # Register database functions
-    app.teardown_appcontext(close_db)
+    """ Register routes bp's """
+    app.register_blueprint(index.bp)
+    app.register_blueprint(auth.bp)
+    app.register_blueprint(stock_details.bp)
+    
+    """ Call the registration from db.py """
+    db.init_app(app)
+
 
     return app
