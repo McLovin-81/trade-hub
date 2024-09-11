@@ -73,6 +73,14 @@ async function handleRegistration(event: Event): Promise<void>
 }
 
 
+async function handleLogin(event: Event): Promise<void>
+{
+  const nameInput = (document.getElementById('username') as HTMLInputElement).value;
+  const passwordInput = (document.getElementById('password') as HTMLInputElement).value;
+  alert(nameInput + passwordInput);
+}
+
+
 // Function to initialize the page
 function init(): void
 {
