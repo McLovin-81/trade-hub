@@ -1,3 +1,29 @@
+/* 
+  Top Navigation Bar Styles:
+  Styles the top navigation bar, which includes the login button and dark mode toggle.
+*/
+.top-nav
+{
+    display: flex; /* Uses Flexbox to align child elements horizontally */
+    justify-content: flex-end; /* Aligns the content to the right */
+    align-items: center; /* Vertically centers the items */
+    background-color: var(--secondary-bg-color); /* Background color for the top navigation */
+    padding: 20px; /* Adds padding around the content */
+    gap: 10px; /* Adds space between the elements */
+}
+
+
+/* 
+  Logo Styles:
+  Sets the size of the logo while maintaining its aspect ratio.
+*/
+.logo
+{
+    width: 80px; /* Sets the width of the logo */
+    height: auto; /* Maintains the aspect ratio */
+}
+
+
 /* Main Navigation Bar Styles */
 .main-nav
 {
@@ -47,4 +73,3 @@
 {
   color: var(--link-hover-color); /* Change text color on hover */
 }
-

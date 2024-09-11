@@ -7,7 +7,7 @@
     <title>Trade Hub</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Global styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> <!-- Index-specific styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}"> <!-- Index-specific styles -->
 
     <!-- Font Awesome CDN -->
     <link rel="stylesheet"
@@ -18,8 +18,15 @@
     <!-- Top Navigation -->
     <header class="top-nav">
         <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
+<<<<<<< HEAD
         <button class="btn">Login</button>
         <a href="{{ url_for('register') }}" aria-label="Trade Hub Home">
+=======
+        <a href="{{ url_for('auth.login') }}" aria-label="Trade Hub Home">
+            <button class="btn" tabindex="1">Login</button>
+        </a>
+        <a href="{{ url_for('auth.register') }}" aria-label="Trade Hub Home">
+>>>>>>> 25815b04b7f9581662b4ec55f72a3b9b0ae76b42
             <button class="btn">Register</button>
         </a>
     </header>
