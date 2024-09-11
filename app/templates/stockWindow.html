@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode"></i>
+        <button class="btn">Login</button>
+        <button class="btn">Register</button>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <a href="{{ url_for('index') }}" aria-label="Trade Hub Home">
+            <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
+        </a>
+        <!-- Suchfeld -->
+        <form id="searchForm">
+            <input type="text" id="searchInput" name = "searchInput" placeholder="Suchbegriff eingeben...">
+        </form>
+        <a href="#">Team</a>
+        <a href="#">Wiki</a>
+        <a href="#">About</a>
+    </nav>
+
+    
+
+    <!-- API GRAPH TEST -->
+    <div class="container">
+        <div class="info-block">
+            <h2 id="stock-name">{{ stock_info.name }}</h2>
+            <p id="stock-sector">Sector: {{ stock_info.sector }}</p>
+        </div>
+        <div class="graph-value-block">
+            <h2 id="last-value">Letzter Preis: {{ stock_info.currentPrice }} {{ stock_info.currency }}</h2>
+            <p id="value-change" class="value-change">
+                {{ stock_info.change }} {{ stock_info.currency }} ({{ stock_info.percentage_change }}%)
+            </p>
+        </div>
+    </div>
+    <div class="graph-container">
+        <form action="" method="POST">
+            <button type="submit" name="startTime" value="1y">1 Jahr</button>
+        </form>
+        
+        <form action="" method="POST">
+            <button type="submit" name="startTime" value="1m">1 Monat</button>
+        </form>
+
+        <form action="" method="POST">
+            <button type="submit" name="startTime" value="1d">Heute</button>
+        </form>
+        <div id="graph">{{ graph_html|safe }}</div>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Footer Section -->
+    <footer></footer>
+</body>
+
+</html>

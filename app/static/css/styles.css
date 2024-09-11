@@ -119,3 +119,21 @@ body.dark-mode
 {
     color: var(--link-hover-color); /* Changes the icon color on hover */
 }
+
+.graph-value-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.value-change {
+  font-size: 1.2em;
+}
+
+.value-change.positive {
+  color: green;
+}
+
+.value-change.negative {
+  color: red;
+}
