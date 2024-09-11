@@ -10,10 +10,12 @@ it will contain the application factory, and it tells Python that
 the flaskr directory should be treated as a package.
 """
 import os
-from flask import Flask
+from flask import Flask, g
 from flask_login import LoginManager
 
+from .models import User
 from .database import db
+from .database.db import get_db
 from .routes import auth, index, depot
 
 
@@ -72,8 +74,15 @@ def create_app(test_config=None):
 
     @login_manager.user_loader
     def load_user(user_id):
-        # Implement this function to load a user from your database
-        pass
+        db = get_db()
+        user_row = db.execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+        ).fetchone()
+        
+        if user_row:
+            # Create a User instance with the data from the database
+            return User(id=user_row['id'], username=user_row['username'])
+        return None
 
 
 ###################################################

@@ -4,11 +4,10 @@
 
 from functools import wraps
 from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user, UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..database.db import get_db
-import logging
+from ..models import User
 import re
 
 
@@ -50,8 +49,13 @@ def register():
             )
             db.commit()
 
-            # Log the user data for confirmation
-            print(f"User {username} registered with email {email}")
+            user_id = db.execute('SELECT id FROM user WHERE username = ?', (username,)).fetchone()['id']
+            # Create an account with an initial balance
+            db.execute(
+                "INSERT INTO account (user_id, balance) VALUES (?, ?)",
+                (user_id, 1000.0)  # You can set an initial balance of 0 or any other value
+            )
+            db.commit()
 
         except db.IntegrityError as e:
             error = f"User {username} is already registered."
@@ -94,18 +98,14 @@ def login():
             error = 'Incorrect password'
             return jsonify({'error': error}), 401
         
-        # If login is successful, set session variables
-        session.clear()  # Clear any previous session data
-        session['user_id'] = user['id']
-        session['username'] = user['username']
+
+        user_obj = User(user['id'], user['username'])
+        login_user(user_obj)
 
         print(f"User {user['username']} logged in")
-        return jsonify({'message': 'Login successful', 'redirect': '/user/depot'}), 200
+        return jsonify({'message': 'Login successful', 'redirect': f'/user/{username}/depot'}), 200
 
     return render_template('auth/login.html')
-
-
-
 
 
 
@@ -119,23 +119,25 @@ def profile():
 
 @bp.route('/logout')
 def logout():
-    session.clear()
+    logout_user()
     return redirect(url_for('auth.login'))
 
 
 @bp.before_app_request
 def load_logged_in_user():
-    user_id = session.get('user_id')
-
-    if user_id is None:
-        g.user = None
+    if current_user.is_authenticated:
+        g.user = current_user
     else:
-        g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
-        ).fetchone()
+        g.user = None
 
 
 
+
+
+
+
+
+# Not needed
 def login_required(view):
     @wraps(view)
     def wrapped_view(**kwargs):
