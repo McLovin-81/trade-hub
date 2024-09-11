@@ -32,38 +32,28 @@ async function handleRegistration(event: Event): Promise<void>
 
   if (passwordInput == passwordConfirmInput)
   {
-    try
+    // The `fetch` function is asynchronous and returns a Promise
+    const response = await fetch('/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: nameInput,
+        email: emailInput,
+        password: passwordInput
+      }),
+    });
+
+    // Await the parsing of the response as JSON
+    const result = await response.json();
+
+    if (response.ok)
     {
-      // The `fetch` function is asynchronous and returns a Promise
-      const response = await fetch('/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(
-        {
-          name: nameInput,
-          email: emailInput,
-          password: passwordInput
-        }
-        ),
-      });
-
-      // Await the parsing of the response as JSON
-      const result = await response.json();
-
-      if (response.ok)
-      {
-        alert('Registration successful!');
-        window.location.href = '/auth/login';  // Redirect to login page
-      }
-      else
-      {
-        alert('Failed to register.');
-      }
+      alert('Registration successful!');
+      window.location.href = '/auth/login';  // Redirect to login page
     }
-    catch (error)
+    else
     {
-      console.error('Error:', error);
-      alert('An error occurred while registering.');
+      alert(`Error: ${result.error}`);
     }
   }
   else
@@ -75,9 +65,23 @@ async function handleRegistration(event: Event): Promise<void>
 
 async function handleLogin(event: Event): Promise<void>
 {
+  event.preventDefault;
+
   const nameInput = (document.getElementById('username') as HTMLInputElement).value;
   const passwordInput = (document.getElementById('password') as HTMLInputElement).value;
-  alert(nameInput + passwordInput);
+
+  try
+  {
+    const response = await fetch('auth/login', {
+      method: 'GET',
+      headers: { ' Content-Type': 'application/json'},
+
+    })
+  }
+  catch
+  {
+
+  }
 }
 
 
@@ -94,6 +98,10 @@ function init(): void
   // Attach event listener to the registration form
   const form = document.getElementById('registrationForm') as HTMLFormElement;
   form?.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
+
+  // Attach event listener to the registration form
+  const LoginForm = document.getElementById('registrationForm') as HTMLFormElement;
+  LoginForm?.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
 }
 
 // Run the initialization function after DOM content is loaded

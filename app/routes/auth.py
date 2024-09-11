@@ -48,10 +48,11 @@ def register():
         except db.IntegrityError as e:
             error = f"User {username} is already registered."
             print(f"Database error: {e}")
-        else:
 
+            return jsonify({'error': error}), 409
+        else:
             # Return a success message as JSON
-            return jsonify({'message': 'Registration successful!'}), 200
+            return jsonify({}), 200
         
         flash(error)
 

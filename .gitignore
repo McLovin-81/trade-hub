@@ -3,5 +3,5 @@ env/
 *.pyc
 __pycache__/
 .DS*
-
+*.sqlite
 .pytest_cache/
