@@ -70,17 +70,29 @@ async function handleLogin(event: Event): Promise<void>
   const nameInput = (document.getElementById('username') as HTMLInputElement).value;
   const passwordInput = (document.getElementById('password') as HTMLInputElement).value;
 
-  try
-  {
-    const response = await fetch('auth/login', {
-      method: 'GET',
-      headers: { ' Content-Type': 'application/json'},
+  try {
+    const response = await fetch('/auth/login', {
+      method: 'POST',  // Use POST for login requests
+      headers: { 'Content-Type': 'application/json' },  // Correct the header
+      body: JSON.stringify({
+        name: nameInput,  // Match the backend field name (email)
+        password: passwordInput,
+      }),
+    });
 
-    })
-  }
-  catch
-  {
+    // Parse the response
+    const result = await response.json();
 
+    if (response.ok) {
+      alert('Login successful!');
+      window.location.href = '/index';  // Redirect on success
+    } else {
+      alert(`Error: ${result.error}`);
+    }
+  } catch (error) {
+    // Handle potential network errors
+    console.error('Error during login:', error);
+    alert('An error occurred while logging in. Please try again.');
   }
 }
 

@@ -47,7 +47,7 @@ function handleRegistration(event) {
                 window.location.href = '/auth/login'; // Redirect to login page
             }
             else {
-                alert(`Errorrrrrr: ${result.error}`);
+                alert(`Error: ${result.error}`);
             }
         }
         else {
@@ -61,12 +61,28 @@ function handleLogin(event) {
         const nameInput = document.getElementById('username').value;
         const passwordInput = document.getElementById('password').value;
         try {
-            const response = yield fetch('auth/login', {
-                method: 'GET',
-                headers: { ' Content-Type': 'application/json' },
+            const response = yield fetch('/auth/login', {
+                method: 'POST', // Use POST for login requests
+                headers: { 'Content-Type': 'application/json' }, // Correct the header
+                body: JSON.stringify({
+                    name: nameInput, // Match the backend field name (email)
+                    password: passwordInput,
+                }),
             });
+            // Parse the response
+            const result = yield response.json();
+            if (response.ok) {
+                alert('Login successful!');
+                window.location.href = '/index'; // Redirect on success
+            }
+            else {
+                alert(`Error: ${result.error}`);
+            }
         }
-        catch (_a) {
+        catch (error) {
+            // Handle potential network errors
+            console.error('Error during login:', error);
+            alert('An error occurred while logging in. Please try again.');
         }
     });
 }

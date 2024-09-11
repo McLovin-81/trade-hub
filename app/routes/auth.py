@@ -3,26 +3,33 @@
 # https://flask.palletsprojects.com/en/3.0.x/tutorial/views/
 
 import functools
-from flask import (
-    Blueprint, flash, g, redirect, render_template,
-    request, session, url_for, jsonify
-)
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify
+
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..database.db import get_db
+import logging
+import re
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
+def validate_user_registration_input(username, email, password):
+    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    if not re.match(email_regex, email):
+        return 'Invalid email format'
+    if len(password) < 8:
+        return 'Password must be at least 8 characters long'
+    return None
+
+
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
-        data = request.json  # Access the JSON payload
+        data = request.get_json()  # Access the JSON payload
         if not data:
             return jsonify({'error: Invalid JSON format'}, 400)
         
-        print(f"Received data: {data}")  # Debugging
-
         username = data.get('name')
         email = data.get('email')
         password = data.get('password')
@@ -30,10 +37,10 @@ def register():
         db = get_db()
         error = None
 
-        # Perform checks
-        if not username or not email or not password:
-            error = 'All fields are required.'
-            return jsonify({'error' : error}), 400
+        # Validate user input
+        error = validate_user_registration_input(username, email, password)
+        if error:
+            return jsonify({'error': error}), 400
 
         try:
             db.execute(
@@ -48,13 +55,11 @@ def register():
         except db.IntegrityError as e:
             error = f"User {username} is already registered."
             print(f"Database error: {e}")
-
             return jsonify({'error': error}), 409
+        
         else:
             # Return a success message as JSON
             return jsonify({}), 200
-        
-        flash(error)
 
     return render_template('auth/register.html')
 
@@ -62,26 +67,36 @@ def register():
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        data = request.get_json()  # Access the JSON payload
+        if not data:
+            return jsonify({'error': 'Invalid JSON format'}), 400
+    
+        username = data.get('name')
+        password = data.get('password')
+
+        print(username, password)
+
         db = get_db()
         error = None
 
+        # Query the user from the database by email
         user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
+            'SELECT * FROM user WHERE username = ?',
+            (username,)
         ).fetchone()
 
         if user is None:
-            error = 'Incorrect username.'
-        elif not check_password_hash(user['password'], password):
-            error = 'Incorrect password.'
-
-        if error is None:
-            session.clear()
-            session['user_id'] = user['id']
-            return redirect(url_for('index'))
-
-        flash(error)
+            error = 'User not found'
+            return jsonify({'error': error}), 401
+        
+        # Check if the password is correct
+        if not check_password_hash(user['password'], password):
+            error = 'Incorrect password'
+            return jsonify({'error': error}), 401
+        
+        # If login is successful, return a success message
+        print(f"User {user['username']} logged")
+        return jsonify({'message': 'Login successful'}), 200
 
     return render_template('auth/login.html')
 
