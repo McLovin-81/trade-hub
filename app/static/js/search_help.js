@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const suggestionsList = document.createElement("ul");
     suggestionsList.setAttribute("id", "suggestions");
     searchInput.parentNode.appendChild(suggestionsList);
-    
     const searchForm = document.getElementById("searchForm");
 
    
