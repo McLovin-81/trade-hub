@@ -73,32 +73,6 @@ body.dark-mode
 
 
 /* 
-  Top Navigation Bar Styles:
-  Styles the top navigation bar, which includes the login button and dark mode toggle.
-*/
-.top-nav
-{
-    display: flex; /* Uses Flexbox to align child elements horizontally */
-    justify-content: flex-end; /* Aligns the content to the right */
-    align-items: center; /* Vertically centers the items */
-    background-color: var(--secondary-bg-color); /* Background color for the top navigation */
-    padding: 20px; /* Adds padding around the content */
-    gap: 10px; /* Adds space between the elements */
-}
-
-
-/* 
-  Logo Styles:
-  Sets the size of the logo while maintaining its aspect ratio.
-*/
-.logo
-{
-    width: 80px; /* Sets the width of the logo */
-    height: auto; /* Maintains the aspect ratio */
-}
-
-
-/* 
   Dark Mode Toggle Icon Styles:
   Styles the icon used to toggle dark mode.
 */
@@ -136,4 +110,33 @@ body.dark-mode
 
 .value-change.negative {
   color: red;
+}
+
+#searchInput {
+  width: 300px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+
+#suggestions {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  width: 300px;
+  background-color: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+#suggestions li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+#suggestions li:hover {
+  background-color: #f0f0f0;
 }

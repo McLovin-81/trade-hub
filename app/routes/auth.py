@@ -50,8 +50,13 @@ def register():
             print(f"Database error: {e}")
         else:
 
+            db.execute(
+                "INSERT INTO account (user_id) VALUES( (SELECT id FROM user WHERE username = ?) )", (username,)
+            )
+            db.commit()
             # Return a success message as JSON
             return jsonify({'message': 'Registration successful!'}), 200
+
         
         flash(error)
 
@@ -60,6 +65,7 @@ def register():
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
+    
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -69,7 +75,6 @@ def login():
         user = db.execute(
             'SELECT * FROM user WHERE username = ?', (username,)
         ).fetchone()
-
         if user is None:
             error = 'Incorrect username.'
         elif not check_password_hash(user['password'], password):
@@ -81,7 +86,7 @@ def login():
             return redirect(url_for('index'))
 
         flash(error)
-
+   
     return render_template('auth/login.html')
 
 

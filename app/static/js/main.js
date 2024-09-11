@@ -8,10 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// Function to handle login button click
-function handleLoginClick() {
-    alert('Login button clicked! Implement your login logic here.');
-}
 // Utility function to toggle dark mode
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
@@ -32,7 +28,8 @@ function handleRegistration(event) {
         const nameInput = document.getElementById('username').value;
         const emailInput = document.getElementById('email').value;
         const passwordInput = document.getElementById('password').value;
-        if (nameInput && emailInput && passwordInput) {
+        const passwordConfirmInput = document.getElementById('confirmPassword').value;
+        if (passwordInput == passwordConfirmInput) {
             try {
                 // The `fetch` function is asynchronous and returns a Promise
                 const response = yield fetch('/auth/register', {
@@ -60,7 +57,7 @@ function handleRegistration(event) {
             }
         }
         else {
-            alert('Please fill out all fields.');
+            alert('passwords do not match');
         }
     });
 }
@@ -71,9 +68,6 @@ function init() {
     // Attach event listener to dark mode toggle
     const darkModeToggle = document.querySelector('.dark-mode-toggle');
     darkModeToggle === null || darkModeToggle === void 0 ? void 0 : darkModeToggle.addEventListener('click', toggleDarkMode); // <?> checks whether darkModeToggle is not null or undefined before attempting to call the addEventListener method on it.
-    // Attach event listener to login button
-    const loginButton = document.querySelector('.btn');
-    loginButton === null || loginButton === void 0 ? void 0 : loginButton.addEventListener('click', handleLoginClick);
     // Attach event listener to the registration form
     const form = document.getElementById('registrationForm');
     form === null || form === void 0 ? void 0 : form.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
