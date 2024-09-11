@@ -59,7 +59,7 @@ def register():
         
         else:
             # Return a success message as JSON
-            return jsonify({}), 200
+            return jsonify({'message': 'Registration successful', 'redirect': '/auth/login'}), 200
 
     return render_template('auth/register.html')
 
@@ -74,8 +74,6 @@ def login():
         username = data.get('name')
         password = data.get('password')
 
-        print(username, password)
-
         db = get_db()
         error = None
 
@@ -85,6 +83,7 @@ def login():
             (username,)
         ).fetchone()
 
+        # Check if user exists
         if user is None:
             error = 'User not found'
             return jsonify({'error': error}), 401
@@ -96,7 +95,7 @@ def login():
         
         # If login is successful, return a success message
         print(f"User {user['username']} logged")
-        return jsonify({'message': 'Login successful'}), 200
+        return jsonify({'message': 'Login successful', 'redirect': '/'}), 200
 
     return render_template('auth/login.html')
 

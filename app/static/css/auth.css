@@ -5,7 +5,7 @@ h1
 {
   font-size: 35px;
   margin-bottom: 30px;
-  color: #202124; /* Dark gray text */
+  color: var(--primary-text-color, #202124); /* Use CSS variable with fallback */
   font-weight: 400;
   text-align: center; /* Ensures the text is centered */
   margin-top: 0; /* Optional: remove any default margin from the top */
@@ -14,7 +14,8 @@ h1
 
 /* Form Container */
 .auth-form {
-  background-color: white;
+  background-color: var(--form-bg-color, white); /* Use CSS variable with fallback */
+  color: var(--form-text-color, black); /* Text color inside form */
   padding: 40px;
   width: 350px;
   max-width: 100%;
@@ -26,13 +27,14 @@ h1
 /* Input Fields */
 .auth-form input
 {
+  background-color: var(--form-bg-color, #fff); /* Background color for inputs */
+  color: var(--form-text-color, black); /* Text color for inputs */
   width: 100%;
   padding: 14px;
   margin: 12px 0;
   border: 1px solid #dadce0;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #fff;
   transition: border-color 0.2s;
   box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
@@ -48,5 +50,5 @@ h1
 
 .auth-form input::placeholder
 {
-  color: #80868b; /* Subtle gray placeholder text */
+  color: var(--form-text-color, #80868b); /* Placeholder color */
 }

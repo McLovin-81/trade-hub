@@ -44,7 +44,7 @@ function handleRegistration(event) {
             const result = yield response.json();
             if (response.ok) {
                 alert('Registration successful!');
-                window.location.href = '/auth/login'; // Redirect to login page
+                window.location.href = result.redirect; // Redirect to login page
             }
             else {
                 alert(`Error: ${result.error}`);
@@ -57,7 +57,7 @@ function handleRegistration(event) {
 }
 function handleLogin(event) {
     return __awaiter(this, void 0, void 0, function* () {
-        event.preventDefault;
+        event.preventDefault();
         const nameInput = document.getElementById('username').value;
         const passwordInput = document.getElementById('password').value;
         try {
@@ -65,15 +65,15 @@ function handleLogin(event) {
                 method: 'POST', // Use POST for login requests
                 headers: { 'Content-Type': 'application/json' }, // Correct the header
                 body: JSON.stringify({
-                    name: nameInput, // Match the backend field name (email)
+                    name: nameInput,
                     password: passwordInput,
                 }),
             });
             // Parse the response
             const result = yield response.json();
             if (response.ok) {
-                alert('Login successful!');
-                window.location.href = '/index'; // Redirect on success
+                alert(result.message);
+                window.location.href = result.redirect; // Redirect on success
             }
             else {
                 alert(`Error: ${result.error}`);
@@ -97,7 +97,7 @@ function init() {
     const form = document.getElementById('registrationForm');
     form === null || form === void 0 ? void 0 : form.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
     // Attach event listener to the registration form
-    const LoginForm = document.getElementById('registrationForm');
+    const LoginForm = document.getElementById('loginForm');
     LoginForm === null || LoginForm === void 0 ? void 0 : LoginForm.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
 }
 // Run the initialization function after DOM content is loaded
