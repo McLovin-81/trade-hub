@@ -71,6 +71,8 @@ def init_db():
     db = get_db()
     with current_app.open_resource('database/schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
+
+        
     populate_products(db) #NEEDED IN PROD AS WELL
     create_dummy_data(db) #ONLY FOR DEV
     #get_user_transactions("alice_wonder", db) #TESTING STATEMENTS
