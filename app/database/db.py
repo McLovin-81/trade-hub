@@ -12,6 +12,9 @@ Functions:
 import sqlite3
 import click
 from flask import current_app, g
+from app.database.product_init import populate_products
+from app.database.dummy_data import create_dummy_data
+from app.database.user_db_requests import get_user_balance, get_user_transactions
 
 
 def get_db():
@@ -68,6 +71,13 @@ def init_db():
     db = get_db()
     with current_app.open_resource('database/schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
+
+        
+    populate_products(db) #NEEDED IN PROD AS WELL
+    create_dummy_data(db) #ONLY FOR DEV
+    #get_user_transactions("alice_wonder", db) #TESTING STATEMENTS
+    #get_user_balance("alice_wonder", db)
+    
 
 
 @click.command('init-db')

@@ -10,10 +10,13 @@ it will contain the application factory, and it tells Python that
 the flaskr directory should be treated as a package.
 """
 import os
-from flask import Flask
+from flask import Flask, g
+from flask_login import LoginManager
 
+from .models import User
 from .database import db
-from .routes import auth, index, stock_details
+from .database.db import get_db
+from .routes import auth, index, stock_details, depot
 
 
 def create_app(test_config=None):
@@ -65,10 +68,31 @@ def create_app(test_config=None):
 
 ###################################################
 
+    # Initialize Flask-Login
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        db = get_db()
+        user_row = db.execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+        ).fetchone()
+        
+        if user_row:
+            # Create a User instance with the data from the database
+            return User(id=user_row['id'], username=user_row['username'])
+        return None
+
+
+###################################################
+
     """ Register routes bp's """
     app.register_blueprint(index.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(stock_details.bp)
+    app.register_blueprint(depot.bp)
+
     
     """ Call the registration from db.py """
     db.init_app(app)

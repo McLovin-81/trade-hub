@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ current_user.username }}'s Depot</title>
+</head>
+<body>
+    <h1>{{ current_user.username }}'s Depot</h1>
+    
+    <h2>Account Balance</h2>
+    <p>Balance: {{ depot['balance'] }}</p>
+
+    <h2>Your Stocks</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in depot['stocks'] %}
+            <tr>
+                <td>{{ stock['symbol'] }}</td>
+                <td>{{ stock['name'] }}</td>
+                <td>{{ stock['quantity'] }}</td>
+                <td>{{ stock['price'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

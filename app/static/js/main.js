@@ -30,34 +30,59 @@ function handleRegistration(event) {
         const passwordInput = document.getElementById('password').value;
         const passwordConfirmInput = document.getElementById('confirmPassword').value;
         if (passwordInput == passwordConfirmInput) {
-            try {
-                // The `fetch` function is asynchronous and returns a Promise
-                const response = yield fetch('/auth/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name: nameInput,
-                        email: emailInput,
-                        password: passwordInput
-                    }),
-                });
-                // Await the parsing of the response as JSON
-                const result = yield response.json();
-                if (response.ok) {
-                    alert('Registration successful!');
-                    window.location.href = '/auth/login'; // Redirect to login page
-                }
-                else {
-                    alert('Failed to register.');
-                }
+            // The `fetch` function is asynchronous and returns a Promise
+            const response = yield fetch('/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: nameInput,
+                    email: emailInput,
+                    password: passwordInput
+                }),
+            });
+            // Await the parsing of the response as JSON
+            const result = yield response.json();
+            if (response.ok) {
+                alert('Registration successful!');
+                window.location.href = result.redirect; // Redirect to login page
             }
-            catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred while registering.');
+            else {
+                alert(`Error: ${result.error}`);
             }
         }
         else {
             alert('passwords do not match');
+        }
+    });
+}
+function handleLogin(event) {
+    return __awaiter(this, void 0, void 0, function* () {
+        event.preventDefault();
+        const nameInput = document.getElementById('username').value;
+        const passwordInput = document.getElementById('password').value;
+        try {
+            const response = yield fetch('/auth/login', {
+                method: 'POST', // Use POST for login requests
+                headers: { 'Content-Type': 'application/json' }, // Correct the header
+                body: JSON.stringify({
+                    name: nameInput,
+                    password: passwordInput,
+                }),
+            });
+            // Parse the response
+            const result = yield response.json();
+            if (response.ok) {
+                alert(result.message);
+                window.location.href = result.redirect; // Redirect on success
+            }
+            else {
+                alert(`Error: ${result.error}`);
+            }
+        }
+        catch (error) {
+            // Handle potential network errors
+            console.error('Error during login:', error);
+            alert('An error occurred while logging in. Please try again.');
         }
     });
 }
@@ -71,6 +96,9 @@ function init() {
     // Attach event listener to the registration form
     const form = document.getElementById('registrationForm');
     form === null || form === void 0 ? void 0 : form.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
+    // Attach event listener to the registration form
+    const LoginForm = document.getElementById('loginForm');
+    LoginForm === null || LoginForm === void 0 ? void 0 : LoginForm.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
 }
 // Run the initialization function after DOM content is loaded
 document.addEventListener('DOMContentLoaded', init);
