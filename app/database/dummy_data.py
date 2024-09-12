@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from decimal import Decimal
 import random
 def create_dummy_data(db):
 
@@ -64,7 +65,7 @@ def create_dummy_data(db):
         for _ in range(5):  # 5 Transaktionen pro Benutzer
             symbol = random.choice(symbols)
             quantity = random.randint(1, 20)
-            price = random.uniform(100, 2000)  # Zufälliger Preis
+            price = Decimal(random.uniform(100, 2000)).quantize(Decimal('0.00')) # Zufälliger Preis
             amount = price * quantity
             timestamp = datetime.now() - timedelta(days=random.randint(1, 100)) # Zufällige vergangene Tage
             transactions.append((user_id, symbol, quantity, amount, price, timestamp))

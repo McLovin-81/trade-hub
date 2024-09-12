@@ -2,6 +2,7 @@
 from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
 from flask_login import login_required, current_user
 from ..database.db import get_db
+from ..database.user_db_requests import get_user_transactions, process_transactions
 
 
 bp = Blueprint('depot', __name__, url_prefix='/user')
@@ -42,5 +43,5 @@ def depot(username):
         'balance': account['balance'],
         'stocks': [{'symbol': row['symbol'], 'name': row['name'], 'quantity': row['total_quantity'], 'price': row['price']} for row in transactions]
     }
-
-    return render_template('depot/depot.html', depot=user_depot)
+    depot_stock_data = process_transactions(get_user_transactions(username, db))
+    return render_template('depot/depot.html', depot=user_depot, depot_info = depot_stock_data)
