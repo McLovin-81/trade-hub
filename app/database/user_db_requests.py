@@ -1,3 +1,4 @@
+from app.graph_utilities.graph_utils import get_stock_info
 
 
 def get_user_transactions(username, db):
@@ -11,7 +12,11 @@ def get_user_transactions(username, db):
         "HAVING total_quantity > 0"
     )
     #print( db.execute(query, (username,)).fetchall()[1][0]  ) #ITERATION OVER [0][0] to[x][y] TO get the name in 0:0, number in 0:1 Oterwise only pointer.
+<<<<<<< HEAD
      ''' stocks{  symbol:,
+=======
+    ''' stocks{  symbol:,
+>>>>>>> main
                 amount:,
                 price:,
                 total:,
@@ -23,7 +28,10 @@ def get_user_transactions(username, db):
             } 
         loop über symbole
     '''
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     return db.execute(query, (username,)).fetchall()
 
 def get_user_balance(username, db):
