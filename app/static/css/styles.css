@@ -69,6 +69,8 @@ body.dark-mode
     --secondary-bg-color: #333; /* Dark background for secondary elements in dark mode */
     --button-bg-color: #333; /* Dark background color for buttons in dark mode */
     --button-text-color: #e0e0e0; /* Light text color for buttons in dark mode */
+    --form-bg-color: #333; /* Dark background for forms */
+    --form-text-color: #e0e0e0; /* Light text color for form elements */
 }
 
 
