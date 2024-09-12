@@ -16,7 +16,7 @@ from flask_login import LoginManager
 from .models import User
 from .database import db
 from .database.db import get_db
-from .routes import auth, index, stock_details, depot
+from .routes import auth, index, depot #stock_details
 
 
 def create_app(test_config=None):
@@ -90,7 +90,7 @@ def create_app(test_config=None):
     """ Register routes bp's """
     app.register_blueprint(index.bp)
     app.register_blueprint(auth.bp)
-    app.register_blueprint(stock_details.bp)
+    #app.register_blueprint(stock_details.bp)
     app.register_blueprint(depot.bp)
 
     
