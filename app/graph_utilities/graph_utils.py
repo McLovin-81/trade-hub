@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import jsonify
 from localStoragePy import localStoragePy
 
+
 def set_symbol_localStorage(symbol):
     if symbol != None:
         localStorage = localStoragePy('app', 'json')  # or 'json', 'text'
