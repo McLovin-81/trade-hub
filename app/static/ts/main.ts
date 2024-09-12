@@ -108,8 +108,8 @@ function init(): void
   darkModeToggle?.addEventListener('click', toggleDarkMode); // <?> checks whether darkModeToggle is not null or undefined before attempting to call the addEventListener method on it.
 
   // Attach event listener to the registration form
-  const form = document.getElementById('registrationForm') as HTMLFormElement;
-  form?.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
+  const registerForm = document.getElementById('registrationForm') as HTMLFormElement;
+  registerForm?.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
 
   // Attach event listener to the registration form
   const LoginForm = document.getElementById('loginForm') as HTMLFormElement;
