@@ -146,3 +146,43 @@ def login_required(view):
             return redirect(url_for('auth.login'))
         return view(**kwargs)
     return wrapped_view
+
+
+"""
+1. Flask-Login Integration
+
+	•	Flask-Login is used to manage user sessions. This extension provides functions to log users in, track their session, and ensure that only authenticated users can access specific routes.
+	•	User Class:
+	•	You use a User class (which inherits from UserMixin provided by Flask-Login) that contains the user’s ID and username.
+	•	The UserMixin class provides default implementations for methods like is_authenticated and get_id().
+	•	Session Tracking:
+	•	Flask-Login keeps track of the logged-in user by storing their ID in the session cookie. This cookie is encrypted using the SECRET_KEY in your Flask app configuration.
+	•	When the user logs in, their user ID is stored in the session.
+
+2. Login Process
+
+	•	User Login:
+	•	In the /login route, you accept the user’s credentials (username and password),
+            verify them by querying the database,
+            and if the credentials are valid, Flask-Login logs the user in using: login_user(user_obj)
+	•	Once logged in, the user ID is stored in the session, allowing Flask-Login
+            to recognize the user across different requests.
+
+3. Session Retrieval
+
+	•	Session-Based User Retrieval:
+	    •	Each time a user accesses a route, Flask-Login retrieves the user from the session using the user_loader function:
+        •	Flask-Login automatically checks the session cookie and loads the corresponding user from the database if the user is logged in.
+
+    •	Current User Context!!!!!!!!:
+	    •	Flask provides a global object current_user which gives you access to
+            the user currently logged into the session. This is accessible throughout the application:
+
+
+Summary Flow
+
+	1.	User logs in → Flask-Login verifies credentials, creates a session by storing user ID in a cookie.
+	2.	User navigates the app → On each request, Flask-Login retrieves the user from the session cookie and loads the user context.
+	3.	User accesses protected routes → Routes requiring authentication are protected with @login_required.
+	4.	User logs out → Session is cleared, and the user is redirected to the login page.
+"""

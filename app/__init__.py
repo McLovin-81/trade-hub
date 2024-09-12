@@ -68,7 +68,7 @@ def create_app(test_config=None):
 
 ###################################################
 
-    # Initialize Flask-Login
+    """ Initialization of Flask extensions -> Flask-Login"""
     login_manager = LoginManager()
     login_manager.init_app(app)
 
