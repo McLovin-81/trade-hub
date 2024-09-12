@@ -44,10 +44,10 @@ function handleRegistration(event) {
             const result = yield response.json();
             if (response.ok) {
                 alert('Registration successful!');
-                window.location.href = '/auth/login'; // Redirect to login page
+                window.location.href = result.redirect; // Redirect to login page
             }
             else {
-                alert(`Errorrrrrr: ${result.error}`);
+                alert(`Error: ${result.error}`);
             }
         }
         else {
@@ -57,16 +57,32 @@ function handleRegistration(event) {
 }
 function handleLogin(event) {
     return __awaiter(this, void 0, void 0, function* () {
-        event.preventDefault;
+        event.preventDefault();
         const nameInput = document.getElementById('username').value;
         const passwordInput = document.getElementById('password').value;
         try {
-            const response = yield fetch('auth/login', {
-                method: 'GET',
-                headers: { ' Content-Type': 'application/json' },
+            const response = yield fetch('/auth/login', {
+                method: 'POST', // Use POST for login requests
+                headers: { 'Content-Type': 'application/json' }, // Correct the header
+                body: JSON.stringify({
+                    name: nameInput,
+                    password: passwordInput,
+                }),
             });
+            // Parse the response
+            const result = yield response.json();
+            if (response.ok) {
+                alert(result.message);
+                window.location.href = result.redirect; // Redirect on success
+            }
+            else {
+                alert(`Error: ${result.error}`);
+            }
         }
-        catch (_a) {
+        catch (error) {
+            // Handle potential network errors
+            console.error('Error during login:', error);
+            alert('An error occurred while logging in. Please try again.');
         }
     });
 }
@@ -81,7 +97,7 @@ function init() {
     const form = document.getElementById('registrationForm');
     form === null || form === void 0 ? void 0 : form.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
     // Attach event listener to the registration form
-    const LoginForm = document.getElementById('registrationForm');
+    const LoginForm = document.getElementById('loginForm');
     LoginForm === null || LoginForm === void 0 ? void 0 : LoginForm.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
 }
 // Run the initialization function after DOM content is loaded

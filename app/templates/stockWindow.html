@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trade Hub</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -21,7 +22,7 @@
 
     <!-- Main Navigation -->
     <nav class="main-nav">
-        <a href="{{ url_for('index') }}" aria-label="Trade Hub Home">
+        <a href="{{ url_for('home_page.index') }}" aria-label="Trade Hub Home">
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
         <!-- Suchfeld -->
@@ -50,14 +51,17 @@
     </div>
     <div class="graph-container">
         <form action="" method="POST">
+            <input type="hidden" name="symbol" value="{{ symbol }}">
             <button type="submit" name="startTime" value="1y">1 Jahr</button>
         </form>
         
         <form action="" method="POST">
+            <input type="hidden" name="symbol" value="{{ symbol }}">
             <button type="submit" name="startTime" value="1m">1 Monat</button>
         </form>
 
         <form action="" method="POST">
+            <input type="hidden" name="symbol" value="{{ symbol }}">
             <button type="submit" name="startTime" value="1d">Heute</button>
         </form>
         <div id="graph">{{ graph_html|safe }}</div>
