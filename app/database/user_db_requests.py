@@ -80,7 +80,7 @@ def process_transactions(transactions):
         # Füge das Dictionary der Liste hinzu
         stocks.append(stock_dict)
         jsonify(stocks)
-    print(stocks)
+    
     return stocks
 
 # Berechnung des Profits (Helferfunktion)

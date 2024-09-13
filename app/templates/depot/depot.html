@@ -10,9 +10,11 @@
     
     <h2>Account Balance</h2>
     <p>Balance: {{ depot['balance'] }}</p>
-    <p>Symbol: {{ depot_info.symbol }}</p>
-    <p>Amount: {{ depot_info.amount }}</p>
-    <p>Total: {{ depot_info.total }}</p>
+    
+    <div>
+        <!-- Other account details -->
+        {{ stocks_html | safe }}
+    </div>
 
     <h2>Your Stocks</h2>
     <table>

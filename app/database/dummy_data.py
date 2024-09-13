@@ -1,15 +1,16 @@
 from datetime import datetime, timedelta
 from decimal import Decimal
 import random
+from werkzeug.security import generate_password_hash
 def create_dummy_data(db):
 
 
     # Einfügen von mehr Dummy-Benutzern
     users = [
-        ('alice_wonder', 'alice.wonder@example.com', 'alicepass123', False),
-        ('bob_builder', 'bob.builder@example.com', 'bobpass123', False),
-        ('charlie_brown', 'charlie.brown@example.com', 'charliepass123', False),
-        ('daisy_duke', 'daisy.duke@example.com', 'daisypass123', False)
+        ('alice_wonder', 'alice.wonder@example.com', generate_password_hash('alicepass123'), False), #alicepass123
+        ('bob_builder', 'bob.builder@example.com', generate_password_hash('bobpass123'), False), #bobpass123
+        ('charlie_brown', 'charlie.brown@example.com', generate_password_hash('charliepass123'), False), #charliepass123
+        ('daisy_duke', 'daisy.duke@example.com', generate_password_hash('daisypass123'), False) #daisypass123
     ]
 
     for user in users:

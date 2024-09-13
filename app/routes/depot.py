@@ -43,5 +43,16 @@ def depot(username):
         'balance': account['balance'],
         'stocks': [{'symbol': row['symbol'], 'name': row['name'], 'quantity': row['total_quantity'], 'price': row['price']} for row in transactions]
     }
-    depot_stock_data = process_transactions(get_user_transactions(username, db))
-    return render_template('depot/depot.html', depot=user_depot, depot_info = depot_stock_data)
+    depot_data = process_transactions(get_user_transactions(username, db))
+    stocks_html = ""
+    for stock in depot_data:
+        stocks_html += f"""
+        <div>
+            <p>Symbol: {stock['symbol']}</p>
+            <p>Amount: {stock['amount']}</p>
+            <p>Price: {stock['price']}</p>
+            <p>Total: {stock['total']}</p>
+            <p>Profit: {stock['profit']}</p>
+        </div>
+        """
+    return render_template('depot/depot.html', depot=user_depot, depot_data = depot_data, stocks_html=stocks_html)
