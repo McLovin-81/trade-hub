@@ -4,6 +4,14 @@ from flask import jsonify
 
 #from ..database.db import get_db
 
+def get_user_id(username, db):
+    query = (
+        '''
+        SELECT id FROM user WHERE username = ?
+        '''
+     ) 
+    return db.execute(query, (username,)).fetchone()[0] 
+
 
 def get_user_transactions(username, db):
     #db = get_db()
@@ -24,6 +32,7 @@ def get_user_transactions(username, db):
         } 
     stocks ={ [
                 {   "symbol": "",
+                    "name"  : "",
                     "amount": "",
                     "price" : "",
                     "total" : "",
@@ -50,7 +59,7 @@ def get_user_balance(username, db):
     )
     result = str(db.execute(query_balance, (username,)).fetchone()[0] ) #NEEDS TO BE A STRING TO GET IT RETURNED PROPERLY
     
-    return result[0] if result else None
+    return result
 
 def process_transactions(transactions):
     stocks = [] 
@@ -71,9 +80,10 @@ def process_transactions(transactions):
         # Erstelle das Dictionary für diese Aktie
         stock_dict = {
             "symbol": symbol,
+            "name"  : stock_info["name"], 
             "amount": total_quantity,
-            "price": current_price,
-            "total": total_value,
+            "price" : current_price,
+            "total" : total_value,
             "profit": profit
         }
 
@@ -86,6 +96,54 @@ def process_transactions(transactions):
 # Berechnung des Profits (Helferfunktion)
 def calculate_profit(current_price, average_price):
     if average_price == 0:
-        return 0
-    return ((current_price - average_price) / average_price) * 100
-        
+        return 0  # Kein Durchschnittspreis vorhanden, daher kein Profit berechenbar.
+    
+    # Berechne das Verhältnis von current_price zu average_price
+    profit_ratio = current_price / average_price
+    
+    # Subtrahiere 1, um den Prozentsatz über oder unter dem Durchschnitt zu erhalten
+    profit_percentage = (profit_ratio - 1) * 100
+    print(profit_percentage)
+    return round(profit_percentage, 2)
+
+def check_balance(balance, cost):
+    if balance - cost > 0:
+        return True
+    else:
+        return False
+
+def update_balance(username, balance, db):
+    user_id = get_user_id(username, db)
+    db.execute(
+                "UPDATE account SET balance = ? WHERE user_id = ?",
+                (balance, user_id)
+            )
+    db.commit()
+    
+def insert_transaction(username,stock_symbol, quantity,total_cost, price_per_stock, db):
+    user_id = get_user_id(username, db)
+
+    db.execute(
+                "INSERT INTO transactionHistory (user_id, symbol, quantity, amount, price) VALUES (?, ?, ?, ?, ?)",
+                (user_id, stock_symbol, quantity, total_cost, price_per_stock)
+            )
+    db.commit()
+
+def buy_stock(username, stock_symbol, quantity, db):
+        """Führt eine Bestellung aus, bei der der Benutzer eine Aktie kauft."""
+        stock_info = get_stock_info(stock_symbol)
+        current_price = stock_info["currentPrice"]
+        total_cost = quantity * current_price  
+        balance = float(get_user_balance(username, db))
+        if check_balance(balance, total_cost):
+
+            # Guthaben aktualisieren
+            new_balance = balance - total_cost
+            update_balance(username, balance, db)
+
+            # Transaktion in die Historie einfügen
+            insert_transaction(username,stock_symbol, quantity, total_cost, current_price, db)
+            
+            return True
+        else:
+            return False

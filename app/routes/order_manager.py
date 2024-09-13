@@ -1,17 +1,11 @@
-
 from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
 from flask_login import login_required, current_user
 from ..database.db import get_db
-from ..database.user_db_requests import get_user_transactions, process_transactions, buy_stock
-from ..graph_utilities.graph_utils import get_stock_info
+from ..database.user_db_requests import get_user_transactions, process_transactions, get_user_balance
 
-
-bp = Blueprint('depot', __name__, url_prefix='/user')
-
-
-@bp.route('/<username>/depot')
+@bp.route('/<username>/ordermanagement')
 @login_required
-def depot(username):
+def ordermanagement(username):
     # Ensure the logged-in user can only view their own depot
     if username != current_user.username:
         return jsonify({'error': 'Unauthorized access'}), 403  # Unauthorized access
@@ -19,10 +13,7 @@ def depot(username):
     db = get_db()
 
     # Fetch user's account balance
-    account = db.execute(
-        'SELECT balance FROM account WHERE user_id = ?',
-        (current_user.id,)
-    ).fetchone()
+    account = get_user_balance(current_user.username)
 
     if account is None:
         return jsonify({'error': 'Account not found'}), 404
@@ -45,7 +36,4 @@ def depot(username):
         'stocks': [{'symbol': row['symbol'], 'name': row['name'], 'quantity': row['total_quantity'], 'price': row['price']} for row in transactions]
     }
     depot_data = process_transactions(get_user_transactions(username, db))
-    #username, stock_symbol, quantity, price_per_stock, db
-    print(get_stock_info("AAPL")["currentPrice"])
-    buy_stock(current_user.username, "AAPL", 2, db)
     return render_template('depot/depot.html', depot=user_depot, depot_data = depot_data)

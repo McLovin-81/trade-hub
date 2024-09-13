@@ -10,11 +10,6 @@
     
     <h2>Account Balance</h2>
     <p>Balance: {{ depot['balance'] }}</p>
-    
-    <div>
-        <!-- Other account details -->
-        {{ stocks_html | safe }}
-    </div>
 
     <h2>Your Stocks</h2>
     <table>
@@ -24,15 +19,18 @@
                 <th>Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
+                <th>Profit</th>
             </tr>
         </thead>
+        
         <tbody>
-            {% for stock in depot['stocks'] %}
+            {% for stock in depot_data %}
             <tr>
-                <td>{{ stock['symbol'] }}</td>
-                <td>{{ stock['name'] }}</td>
-                <td>{{ stock['quantity'] }}</td>
-                <td>{{ stock['price'] }}</td>
+                <td>{{ stock.symbol }}</td>
+                <td>{{ stock.name }}</td>
+                <td>{{ stock.amount }}</td>
+                <td>{{ stock.price }}</td>
+                <td>{{ stock.profit }}</td>
             </tr>
             {% endfor %}
         </tbody>
