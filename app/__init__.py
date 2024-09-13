@@ -11,12 +11,13 @@ the flaskr directory should be treated as a package.
 """
 import os
 from flask import Flask, g
-from flask_login import LoginManager
 
 from .models import User
 from .database import db
 from .database.db import get_db
 from .routes import auth, index, depot #stock_details
+
+from .routes.auth import init_login_manager
 
 
 def create_app(test_config=None):
@@ -69,20 +70,7 @@ def create_app(test_config=None):
 ###################################################
 
     """ Initialization of Flask extensions -> Flask-Login"""
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-
-    @login_manager.user_loader
-    def load_user(user_id):
-        db = get_db()
-        user_row = db.execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
-        ).fetchone()
-        
-        if user_row:
-            # Create a User instance with the data from the database
-            return User(id=user_row['id'], username=user_row['username'])
-        return None
+    init_login_manager(app)
 
 
 ###################################################
