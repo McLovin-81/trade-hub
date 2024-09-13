@@ -97,8 +97,8 @@ function init() {
     const registerForm = document.getElementById('registrationForm');
     registerForm === null || registerForm === void 0 ? void 0 : registerForm.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
     // Attach event listener to the registration form
-    const LoginForm = document.getElementById('loginForm');
-    LoginForm === null || LoginForm === void 0 ? void 0 : LoginForm.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
+    const loginForm = document.getElementById('loginForm');
+    loginForm === null || loginForm === void 0 ? void 0 : loginForm.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
 }
 // Run the initialization function after DOM content is loaded
 document.addEventListener('DOMContentLoaded', init);

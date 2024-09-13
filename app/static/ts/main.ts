@@ -112,8 +112,8 @@ function init(): void
   registerForm?.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
 
   // Attach event listener to the registration form
-  const LoginForm = document.getElementById('loginForm') as HTMLFormElement;
-  LoginForm?.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
+  const loginForm = document.getElementById('loginForm') as HTMLFormElement;
+  loginForm?.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
 }
 
 // Run the initialization function after DOM content is loaded
