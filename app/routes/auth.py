@@ -3,8 +3,8 @@
 # https://flask.palletsprojects.com/en/3.0.x/tutorial/views/
 
 from functools import wraps
-from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user, UserMixin
+from flask import Blueprint, g, redirect, render_template, request, url_for, jsonify
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..database.db import get_db
 from ..models import User
@@ -12,6 +12,31 @@ import re
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+
+
+# Initialize Flask-Login
+login_manager = LoginManager()
+
+
+# Attach login manager to the app during blueprint registration
+def init_login_manager(app):
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
+
+
+# User loader for Flask-Login
+@login_manager.user_loader
+def load_user(user_id):
+    db = get_db()
+    user_row = db.execute(
+        'SELECT * FROM user WHERE id = ?', (user_id,)
+    ).fetchone()
+
+    if user_row:
+        # Create a User instance with the data from the database
+        return User(id=user_row['id'], username=user_row['username'])
+    return None
 
 
 def validate_user_registration_input(username, email, password):
@@ -49,22 +74,21 @@ def register():
             )
             db.commit()
 
-            user_id = db.execute('SELECT id FROM user WHERE username = ?', (username,)).fetchone()['id']
-            # Create an account with an initial balance
-            db.execute(
-                "INSERT INTO account (user_id, balance) VALUES (?, ?)",
-                (user_id, 1000.0)  # You can set an initial balance of 0 or any other value
-            )
-            db.commit()
-
         except db.IntegrityError as e:
             error = f"User {username} is already registered."
             print(f"Database error: {e}")
             return jsonify({'error': error}), 409
-        
-        else:
-            # Return a success message as JSON
-            return jsonify({'message': 'Registration successful', 'redirect': '/auth/login'}), 200
+
+        user_id = db.execute('SELECT id FROM user WHERE username = ?', (username,)).fetchone()['id']
+        # Create an account with an initial balance
+        db.execute(
+            "INSERT INTO account (user_id) VALUES (?)",
+            (user_id,)
+        )
+        db.commit()
+
+        # Return a success message as JSON
+        return jsonify({'message': 'Registration successful', 'redirect': '/auth/login'}), 200
 
     return render_template('auth/register.html')
 
@@ -107,9 +131,6 @@ def login():
         return jsonify({'message': 'Login successful', 'redirect': f'/user/{username}/depot'}), 200
 
     return render_template('auth/login.html')
-
-
-
 
 
 @bp.route('/profile')
