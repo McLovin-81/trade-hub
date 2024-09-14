@@ -1,5 +1,8 @@
+/*********************
+ * Utility functions *
+ *********************/
 
-// Utility function to toggle dark mode
+// Function to toggle dark mode
 function toggleDarkMode(): void
 {
   document.body.classList.toggle('dark-mode');
@@ -21,6 +24,13 @@ function initDarkMode(): void
 }
 
 
+
+
+
+/***************************
+ * Authorization functions *
+ ***************************/
+
 async function handleRegistration(event: Event): Promise<void>
 {
   event.preventDefault();
@@ -30,35 +40,44 @@ async function handleRegistration(event: Event): Promise<void>
   const passwordInput = (document.getElementById('password') as HTMLInputElement).value;
   const passwordConfirmInput = (document.getElementById('confirmPassword') as HTMLInputElement).value;
 
-  if (passwordInput == passwordConfirmInput)
+  try
   {
-    // The `fetch` function is asynchronous and returns a Promise
-    const response = await fetch('/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: nameInput,
-        email: emailInput,
-        password: passwordInput
-      }),
-    });
-
-    // Await the parsing of the response as JSON
-    const result = await response.json();
-
-    if (response.ok)
+    if (passwordInput == passwordConfirmInput)
     {
-      alert('Registration successful!');
-      window.location.href = result.redirect;  // Redirect to login page
+      // The `fetch` function is asynchronous and returns a Promise
+      const response = await fetch('/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: nameInput,
+          email: emailInput,
+          password: passwordInput
+        }),
+      });
+
+      // Await the parsing of the response as JSON
+      const result = await response.json();
+
+      if (response.ok)
+      {
+        alert('Registration successful!');
+        window.location.href = result.redirect;  // Redirect to login page
+      }
+      else
+      {
+        alert(`Error: ${result.error}`);
+      }
     }
     else
     {
-      alert(`Error: ${result.error}`);
+      alert('passwords do not match');
     }
   }
-  else
+  catch (error)
   {
-    alert('passwords do not match');
+    // Handle potential network errors
+    console.error('Error during login:', error);
+    alert('An error occurred while logging in. Please try again.');
   }
 }
 
@@ -70,7 +89,8 @@ async function handleLogin(event: Event): Promise<void>
   const nameInput = (document.getElementById('username') as HTMLInputElement).value;
   const passwordInput = (document.getElementById('password') as HTMLInputElement).value;
 
-  try {
+  try
+  {
     const response = await fetch('/auth/login', {
       method: 'POST',  // Use POST for login requests
       headers: { 'Content-Type': 'application/json' },  // Correct the header
@@ -83,19 +103,31 @@ async function handleLogin(event: Event): Promise<void>
     // Parse the response
     const result = await response.json();
 
-    if (response.ok) {
+    if (response.ok)
+    {
       alert(result.message);
       window.location.href = result.redirect;  // Redirect on success
-    } else {
+    }
+    else
+    {
       alert(`Error: ${result.error}`);
     }
-  } catch (error) {
+  }
+  catch (error)
+  {
     // Handle potential network errors
     console.error('Error during login:', error);
     alert('An error occurred while logging in. Please try again.');
   }
 }
 
+
+
+
+
+/*****************
+ * Init function *
+ *****************/
 
 // Function to initialize the page
 function init(): void
@@ -120,4 +152,10 @@ function init(): void
 document.addEventListener('DOMContentLoaded', init);
 
 
-// RUN -> tsc --project tsconfig.json
+
+
+/*******************************
+ * How to run                  *
+ *                             *
+ * tsc --project tsconfig.json *
+ *******************************/

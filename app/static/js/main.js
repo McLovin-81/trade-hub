@@ -1,4 +1,7 @@
 "use strict";
+/*********************
+ * Utility functions *
+ *********************/
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// Utility function to toggle dark mode
+// Function to toggle dark mode
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
     // Optionally, you can store the user's preference in localStorage
@@ -22,6 +25,9 @@ function initDarkMode() {
         document.body.classList.add('dark-mode');
     }
 }
+/***************************
+ * Authorization functions *
+ ***************************/
 function handleRegistration(event) {
     return __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
@@ -29,29 +35,36 @@ function handleRegistration(event) {
         const emailInput = document.getElementById('email').value;
         const passwordInput = document.getElementById('password').value;
         const passwordConfirmInput = document.getElementById('confirmPassword').value;
-        if (passwordInput == passwordConfirmInput) {
-            // The `fetch` function is asynchronous and returns a Promise
-            const response = yield fetch('/auth/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: nameInput,
-                    email: emailInput,
-                    password: passwordInput
-                }),
-            });
-            // Await the parsing of the response as JSON
-            const result = yield response.json();
-            if (response.ok) {
-                alert('Registration successful!');
-                window.location.href = result.redirect; // Redirect to login page
+        try {
+            if (passwordInput == passwordConfirmInput) {
+                // The `fetch` function is asynchronous and returns a Promise
+                const response = yield fetch('/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: nameInput,
+                        email: emailInput,
+                        password: passwordInput
+                    }),
+                });
+                // Await the parsing of the response as JSON
+                const result = yield response.json();
+                if (response.ok) {
+                    alert('Registration successful!');
+                    window.location.href = result.redirect; // Redirect to login page
+                }
+                else {
+                    alert(`Error: ${result.error}`);
+                }
             }
             else {
-                alert(`Error: ${result.error}`);
+                alert('passwords do not match');
             }
         }
-        else {
-            alert('passwords do not match');
+        catch (error) {
+            // Handle potential network errors
+            console.error('Error during login:', error);
+            alert('An error occurred while logging in. Please try again.');
         }
     });
 }
@@ -86,6 +99,9 @@ function handleLogin(event) {
         }
     });
 }
+/*****************
+ * Init function *
+ *****************/
 // Function to initialize the page
 function init() {
     // Initialize dark mode based on user preference
@@ -102,4 +118,8 @@ function init() {
 }
 // Run the initialization function after DOM content is loaded
 document.addEventListener('DOMContentLoaded', init);
-// RUN -> tsc --project tsconfig.json
+/*******************************
+ * How to run                  *
+ *                             *
+ * tsc --project tsconfig.json *
+ *******************************/
