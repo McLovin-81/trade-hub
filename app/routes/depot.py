@@ -12,7 +12,7 @@ bp = Blueprint('depot', __name__, url_prefix='/user')
 def depot(username):
     # Ensure the logged-in user can only view their own depot
     if username != current_user.username:
-        return jsonify({'error': 'Unauthorized access'}), 403  # Unauthorized access
+        return jsonify({'error': 'Unauthorized access'}), 403  # Unauthorized access TODO: return a 'error' html page
     
     db = get_db()
 

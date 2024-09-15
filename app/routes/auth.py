@@ -128,6 +128,7 @@ def login():
         login_user(user_obj)
 
         print(f"User {user['username']} logged in")
+        
         return jsonify({'message': 'Login successful', 'redirect': f'/user/{username}/depot'}), 200
 
     return render_template('auth/login.html')
