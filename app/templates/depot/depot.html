@@ -18,12 +18,8 @@
     <!-- Top Navigation -->
     <header class="top-nav">
         <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
-        <a href="{{ url_for('auth.login') }}" aria-label="Trade Hub Home">
-            <button class="btn" tabindex="1">Login</button>
-        </a>
-        <a href="{{ url_for('auth.register') }}" aria-label="Trade Hub Home">
-            <button class="btn">Register</button>
-        </a>
+        <button class="btn" tabindex="1">Logout</button>
+        <button class="btn">Settings</button>
     </header>
 
     <!-- Main Navigation -->
@@ -42,27 +38,36 @@
     <h2>Account Balance</h2>
     <p>Balance: {{ depot['balance'] }}</p>
 
-    <h2>Your Stocks</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Symbol</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for stock in depot['stocks'] %}
-            <tr>
-                <td>{{ stock['symbol'] }}</td>
-                <td>{{ stock['name'] }}</td>
-                <td>{{ stock['quantity'] }}</td>
-                <td>{{ stock['price'] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+    <!-- Display the user's stocks -->
+    <div class="stocks">
+        <h2>Your Stocks</h2>
+
+        {% if depot.stocks %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stock Symbol</th>
+                        <th>Company Name</th>
+                        <th>Quantity</th>
+                        <th>Price per Unit (€)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stock in depot.stocks %}
+                    <tr>
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.name }}</td>
+                        <td>{{ stock.quantity }}</td>
+                        <td>{{ stock.price | round(2) }}</td> <!-- Round price to 2 decimal places -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>You don't own any stocks yet.</p>
+        {% endif %}
+    </div>
 
     <!-- scripts -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
