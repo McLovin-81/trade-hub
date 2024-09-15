@@ -2,7 +2,7 @@
 from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
 from flask_login import login_required, current_user
 from ..database.db import get_db
-from ..database.user_db_requests import get_user_transactions, process_transactions, buy_stock
+from ..database.user_db_requests import get_user_transactions, process_transactions, buy_sell_stock
 from ..graph_utilities.graph_utils import get_stock_info
 
 
@@ -45,7 +45,5 @@ def depot(username):
         'stocks': [{'symbol': row['symbol'], 'name': row['name'], 'quantity': row['total_quantity'], 'price': row['price']} for row in transactions]
     }
     depot_data = process_transactions(get_user_transactions(username, db))
-    #username, stock_symbol, quantity, price_per_stock, db
-    print(get_stock_info("AAPL")["currentPrice"])
-    buy_stock(current_user.username, "AAPL", 2, db)
+    buy_sell_stock(current_user.username, "AAPL", 2,"sell", db)
     return render_template('depot/depot.html', depot=user_depot, depot_data = depot_data)

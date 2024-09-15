@@ -74,7 +74,7 @@ def process_transactions(transactions):
         current_price = stock_info["currentPrice"]
 
         # Berechne den Gesamtwert und den Profit
-        total_value = total_quantity * current_price
+        total_value = round(total_quantity * current_price, 2)
         profit = calculate_profit(current_price, average_price)
 
         # Erstelle das Dictionary für diese Aktie
@@ -103,8 +103,14 @@ def calculate_profit(current_price, average_price):
     
     # Subtrahiere 1, um den Prozentsatz über oder unter dem Durchschnitt zu erhalten
     profit_percentage = (profit_ratio - 1) * 100
-    print(profit_percentage)
     return round(profit_percentage, 2)
+
+def get_symbol_transactions(username, symbol, db):
+    transactions = process_transactions(get_user_transactions(username, db))
+    for stock_dict in transactions:
+        if stock_dict["symbol"] == symbol:
+            return stock_dict
+    return None  
 
 def check_balance(balance, cost):
     if balance - cost > 0:
@@ -129,21 +135,33 @@ def insert_transaction(username,stock_symbol, quantity,total_cost, price_per_sto
             )
     db.commit()
 
-def buy_stock(username, stock_symbol, quantity, db):
-        """Führt eine Bestellung aus, bei der der Benutzer eine Aktie kauft."""
+def buy_sell_stock(username, stock_symbol, quantity,ordertype, db):
+        
         stock_info = get_stock_info(stock_symbol)
         current_price = stock_info["currentPrice"]
         total_cost = quantity * current_price  
         balance = float(get_user_balance(username, db))
-        if check_balance(balance, total_cost):
+        if ordertype != "sell":
+            if check_balance(balance, total_cost):
 
-            # Guthaben aktualisieren
-            new_balance = balance - total_cost
-            update_balance(username, balance, db)
+                
+                new_balance = balance - total_cost
+                update_balance(username, new_balance, db)
 
-            # Transaktion in die Historie einfügen
-            insert_transaction(username,stock_symbol, quantity, total_cost, current_price, db)
-            
-            return True
+                # Transaktion in die Historie einfügen
+                insert_transaction(username,stock_symbol, quantity, total_cost, current_price, db)
+                
+                return True
+            else:
+                return False
         else:
-            return False
+            user_quantity = get_symbol_transactions(username, stock_symbol, db)["amount"]
+            
+            if  user_quantity - quantity >= 0: 
+                quantity = quantity * -1
+                new_balance = balance + total_cost
+                update_balance(username, new_balance, db)
+                insert_transaction(username, stock_symbol, quantity, total_cost, current_price, db)
+                return True
+            else:
+                return False
