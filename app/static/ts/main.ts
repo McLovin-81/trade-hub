@@ -122,6 +122,16 @@ async function handleLogin(event: Event): Promise<void>
 }
 
 
+/*******************
+ * Depot functions *
+ *******************/
+
+
+
+
+
+
+
 
 
 

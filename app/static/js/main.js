@@ -99,6 +99,50 @@ function handleLogin(event) {
         }
     });
 }
+/*******************
+ * Depot functions *
+ *******************/
+function fetchDepot(username) {
+    return __awaiter(this, void 0, void 0, function* () {
+        alert("helloooooooo");
+        try {
+            const response = yield fetch(`/user/${username}/depot`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                credentials: 'include'
+            });
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            }
+            const depotData = yield response.json();
+            console.log('Depot Data:', depotData);
+            updateDepotUI(depotData.balance, depotData.stocks);
+        }
+        catch (error) {
+            console.error('Failed to fetch depot:', error);
+        }
+    });
+}
+// Update the UI with balance and stock data
+function updateDepotUI(balance, stocks) {
+    const balanceElement = document.getElementById('balance');
+    if (balanceElement) {
+        balanceElement.textContent = `Balance: €${balance.toFixed(2)}`;
+    }
+    const stocksElement = document.getElementById('stocks');
+    if (stocksElement) {
+        stocksElement.innerHTML = ''; // Clear existing content
+        stocks.forEach(stock => {
+            const stockItem = document.createElement('div');
+            stockItem.textContent = `${stock.name} (${stock.symbol}) - ${stock.quantity} units @ €${stock.price.toFixed(2)}`;
+            stocksElement.appendChild(stockItem);
+        });
+    }
+}
+// Call fetchDepot after successful login or page load
+function handleSuccessfulLogin(username) {
+    fetchDepot(username);
+}
 /*****************
  * Init function *
  *****************/
