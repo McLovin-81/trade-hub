@@ -7,7 +7,8 @@
     <title>{{ current_user.username }}'s Depot</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Global styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}"> <!-- Index-specific styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}"> <!-- Navigation-specific styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/depot.css') }}"> <!-- Depot page-specific styles -->
 
     <!-- Font Awesome CDN -->
     <link rel="stylesheet"
@@ -27,51 +28,55 @@
         <a href="{{ url_for('home_page.index') }}" aria-label="Trade Hub Home">
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
-            <a href="#" aria-label="View Team">Order Manager</a>
-            <a href="#" aria-label="View Wiki">Transactions</a>
-            <a href="#" aria-label="About Trade Hub">Depot</a>
+        <a href="#" aria-label="Order Manager">Order Manager</a>
+        <a href="#" aria-label="Transactions">Transactions</a>
+        <a href="{{ url_for('depot.depot', username=current_user.username) }}" aria-label="Depot">Depot</a> <!-- Updated link -->
     </nav>
 
+    <main>
+        <h1>{{ current_user.username }}'s Depot</h1>
+        
+        <section class="account-balance">
+            <h2>Account Balance</h2>
+            <p>{{ balance }} €</p>
+        </section>
 
-    <h1>{{ current_user.username }}'s Depot</h1>
-    
-    <h2>Account Balance</h2>
-    <p>Balance: {{ balance }}</p>
+        <!-- Display the user's stocks -->
+        <section class="stocks">
+            <h2>Your Stocks</h2>
 
-
-    <!-- Display the user's stocks -->
-    <div class="stocks">
-        <h2>Your Stocks</h2>
-
-        {% if depot %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Stock Symbol</th>
-                        <th>Company Name</th>
-                        <th>Quantity</th>
-                        <th>Price per Unit (€)</th>
-                        <th>Profit (€)</th>
-                        <th>Total (€)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for stock in depot %}
-                    <tr>
-                        <td>{{ stock.symbol }}</td>
-                        <td>{{ stock.name }}</td>
-                        <td>{{ stock.amount }}</td>
-                        <td>{{ stock.price | round(2) }}</td> <!-- Round price to 2 decimal places -->
-                        <td>{{ stock.profit | round(2) }} %</td>
-                        <td>{{ stock.total | round(2) }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>You don't own any stocks yet.</p>
-        {% endif %}
-    </div>
+            {% if depot %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Company Name</th>
+                            <th>Quantity</th>
+                            <th>Price per Unit (€)</th>
+                            <th>Profit (%)</th>
+                            <th>Total (€)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stock in depot %}
+                        <tr>
+                            <td>{{ stock.symbol }}</td>
+                            <td>{{ stock.name }}</td>
+                            <td>{{ stock.amount }}</td>
+                            <td>{{ stock.price | round(2) }}</td>
+                            <td class="{% if stock.profit >= 0 %} positive {% else %} negative {% endif %}">
+                                {{ stock.profit | round(2) }}
+                            </td>
+                            <td>{{ stock.total | round(2) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>You don't own any stocks yet.</p>
+            {% endif %}
+        </section>
+    </main>
 
     <!-- scripts -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>

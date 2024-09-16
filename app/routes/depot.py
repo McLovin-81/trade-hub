@@ -21,5 +21,5 @@ def depot(username):
     # Fetch user's account balance
     user_balance = get_user_balance(username, db)
     depot_data = process_transactions(get_user_transactions(username, db))
-    buy_sell_stock(current_user.username, "AIR.DE", 2,"buy", db)
+    buy_sell_stock(current_user.username, "AIR.DE", 2,"sell", db)
     return render_template('depot/depot.html', balance=user_balance, depot = depot_data)
