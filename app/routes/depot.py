@@ -19,32 +19,7 @@ def depot(username):
     db = get_db()
 
     # Fetch user's account balance
-    account = db.execute(
-        'SELECT balance FROM account WHERE user_id = ?',
-        (current_user.id,)
-    ).fetchone()
-
-    if account is None:
-        return jsonify({'error': 'Account not found'}), 404
-
-    # Fetch user's stocks/transaction history
-    transactions = db.execute(
-        '''
-        SELECT th.symbol, p.name, SUM(th.quantity) AS total_quantity, th.price
-        FROM transactionHistory th
-        JOIN product p ON th.symbol = p.symbol
-        WHERE th.user_id = ?
-        GROUP BY th.symbol, p.name, th.price
-        ''', 
-        (current_user.id,)
-    ).fetchall()
-
-    # Prepare response data
-    user_depot = {
-        'balance': account['balance'],
-        'stocks': [{'symbol': row['symbol'], 'name': row['name'], 'quantity': row['total_quantity'], 'price': row['price']} for row in transactions]
-    }
-    
+    user_balance = get_user_balance(username, db)
     depot_data = process_transactions(get_user_transactions(username, db))
     buy_sell_stock(current_user.username, "AIR.DE", 2,"buy", db)
-    return render_template('depot/depot.html', depot=user_depot, depot_data = depot_data)
+    return render_template('depot/depot.html', balance=user_balance, depot = depot_data)
