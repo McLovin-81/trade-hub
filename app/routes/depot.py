@@ -44,6 +44,7 @@ def depot(username):
         'balance': account['balance'],
         'stocks': [{'symbol': row['symbol'], 'name': row['name'], 'quantity': row['total_quantity'], 'price': row['price']} for row in transactions]
     }
+    
     depot_data = process_transactions(get_user_transactions(username, db))
-    buy_sell_stock(current_user.username, "AAPL", 2,"sell", db)
+    buy_sell_stock(current_user.username, "AIR.DE", 2,"buy", db)
     return render_template('depot/depot.html', depot=user_depot, depot_data = depot_data)
