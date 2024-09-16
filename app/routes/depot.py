@@ -25,7 +25,7 @@ def depot(username):
     if account is None:
         return jsonify({'error': 'Account not found'}), 404
 
-    # Fetch user's stocks/transaction history
+    # Fetch user's stocks
     transactions = db.execute(
         '''
         SELECT th.symbol, p.name, SUM(th.quantity) AS total_quantity, th.price
