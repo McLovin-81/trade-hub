@@ -12,6 +12,26 @@ def get_user_id(username, db):
      ) 
     return db.execute(query, (username,)).fetchone()[0] 
 
+def get_transaction_history(username,db):
+    query = ('''
+    SELECT id, symbol, quantity, amount, price, t_timestamp 
+    FROM transactionHistory t
+    JOIN user u on t.user_id = u.id
+    WHERE u.username = ?
+    HAVING quantity > 0        
+    ''')
+    transaction_history = db.execute(query, (username)).fetchall()
+    #START HERE FOR TRANSACTION AND RANKING
+    """user_profit = {
+            "username": username,
+            "profit": profit
+        }
+        
+        # Füge das Dictionary zur Bestenliste hinzu
+        ranking.append(user_profit)
+    
+    # Sortiere die Liste nach Profit in absteigender Reihenfolge
+    ranking = sorted(ranking, key=lambda x: x['profit'], reverse=True)"""
 
 def get_user_transactions(username, db):
     #db = get_db()
@@ -25,11 +45,7 @@ def get_user_transactions(username, db):
     )
     #print( db.execute(query, (username,)).fetchall()[1][0]  ) #ITERATION OVER [0][0] to[x][y] TO get the name in 0:0, number in 0:1 Oterwise only pointer.
 
-    ''' stocks{  symbol:,
-                amount:,
-                price:,
-                total:,
-        } 
+    ''' 
     stocks ={ [
                 {   "symbol": "",
                     "name"  : "",
@@ -165,3 +181,15 @@ def buy_sell_stock(username, stock_symbol, quantity,ordertype, db):
                 return True
             else:
                 return False
+def get_ranking(db):
+    '''get all users via query. for every user process_transactions(get_user_transaction(username,db))
+    the list with dictionaries is there as well as the profit.
+    for every dictionary get the profit and add it. last put the user as a value and the sum of profit
+    as a value.'''
+    user_query = '''SELECT username from user'''
+    userlist=[] 
+    usernames = db.execute(user_query).fetchall()
+    for user in usernames:
+        userlist.append(user[0])
+    
+    
