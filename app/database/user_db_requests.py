@@ -68,7 +68,7 @@ def get_user_balance(username, db):
         "FROM account "
         "WHERE user_id = (SELECT id FROM user WHERE username = ?) "
     )
-    result = str(db.execute(query_balance, (username,)).fetchone()[0] )   
+    result = str(db.execute(query_balance, (username,)).fetchone()[0])
     return result
 
 

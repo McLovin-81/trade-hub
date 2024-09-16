@@ -29,7 +29,7 @@
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
         <a href="#" aria-label="Order Manager">Order Manager</a>
-        <a href="#" aria-label="Transactions">Transactions</a>
+        <a href="{{ url_for('depot.user_transactions', username=current_user.username) }}" aria-label="Transactions">Transactions</a>
         <a href="{{ url_for('depot.depot', username=current_user.username) }}" aria-label="Depot">Depot</a>
     </nav>
 
