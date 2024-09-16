@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from decimal import Decimal
 import random
+from app.graph_utilities.search_validation import dax_aktien
+from app.graph_utilities.graph_utils import get_stock_info
 from werkzeug.security import generate_password_hash
 def create_dummy_data(db):
 
@@ -58,17 +60,17 @@ def create_dummy_data(db):
     
 
     # Einfügen von Dummy-Transaktionen
-    symbols = ['AAPL', 'GOOGL', 'AMZN']
+    symbols = list(dax_aktien.values())[:5] 
     transactions = []
 
     # Generiere Transaktionen für jeden Benutzer
     for user_id in [alice_id, bob_id, charlie_id, daisy_id]:
-        for _ in range(5):  # 5 Transaktionen pro Benutzer
-            symbol = random.choice(symbols)
+        for symbol in symbols:  # 5 Transaktionen pro Benutzer
+            symbol = symbol
             quantity = random.randint(1, 20)
-            price = Decimal(random.uniform(100, 2000)).quantize(Decimal('0.00')) # Zufälliger Preis
+            price = get_stock_info(symbol)['currentPrice']
             amount = price * quantity
-            timestamp = datetime.now() - timedelta(days=random.randint(1, 100)) # Zufällige vergangene Tage
+            timestamp = datetime.now()
             transactions.append((user_id, symbol, quantity, amount, price, timestamp))
     
     for transaction in transactions:
