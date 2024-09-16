@@ -2,8 +2,7 @@
 from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
 from flask_login import login_required, current_user
 from ..database.db import get_db
-from ..database.user_db_requests import get_user_transactions, process_transactions, buy_sell_stock, get_user_balance, get_ranking
-from ..graph_utilities.graph_utils import get_stock_info
+from ..database.user_db_requests import get_user_transactions, process_transactions,get_user_balance
 
 
 bp = Blueprint('depot', __name__, url_prefix='/user')
@@ -21,6 +20,4 @@ def depot(username):
     # Fetch user's account balance
     user_balance = get_user_balance(username, db)
     depot_data = process_transactions(get_user_transactions(username, db))
-    get_ranking(db)
-    #buy_sell_stock(current_user.username, "AIR.DE", 2,"buy", db)
     return render_template('depot/depot.html', balance=user_balance, depot = depot_data)

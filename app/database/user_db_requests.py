@@ -14,56 +14,49 @@ def get_user_id(username, db):
 
 def get_transaction_history(username,db):
     query = ('''
-    SELECT id, symbol, quantity, amount, price, t_timestamp 
+    SELECT t.id, t.symbol, t.quantity, t.amount, t.price, t.t_timestamp 
     FROM transactionHistory t
     JOIN user u on t.user_id = u.id
-    WHERE u.username = ?
-    HAVING quantity > 0        
+    WHERE u.username = ?       
     ''')
-    transaction_history = db.execute(query, (username)).fetchall()
-    #START HERE FOR TRANSACTION AND RANKING
-    """user_profit = {
-            "username": username,
-            "profit": profit
-        }
+    transaction_history = {} 
+    transactions_db = db.execute(query, (username,)).fetchall()
+    for transaction in transactions_db:
+        transaction_id = transaction[0]
+        symbol = transaction[1]
+        quantity = transaction[2]
+        amount = transaction[3]
+        price = transaction[4]
+        timestamp = transaction[5]
         
-        # Füge das Dictionary zur Bestenliste hinzu
-        ranking.append(user_profit)
+        
+        if symbol not in transaction_history:
+            transaction_history[symbol] = []
+        
+        transaction_history[symbol].append({
+            'id': transaction_id,
+            'quantity': quantity,
+            'amount': amount,
+            'price': price,
+            'timestamp': timestamp.strftime('%Y-%m-%d %H:%M:%S')
+        })
     
-    # Sortiere die Liste nach Profit in absteigender Reihenfolge
-    ranking = sorted(ranking, key=lambda x: x['profit'], reverse=True)"""
+    return transaction_history
+        
+    
 
 def get_user_transactions(username, db):
     #db = get_db()
     query = (
-        "SELECT t.symbol, SUM(t.quantity) AS total_quantity, AVG(t.price) AS average_price "
-        "FROM transactionHistory t "
-        "JOIN user u ON t.user_id = u.id "
-        "WHERE u.username = ? "
-        "GROUP BY t.symbol "
-        "HAVING total_quantity > 0"
+        """SELECT t.symbol, SUM(t.quantity) AS total_quantity, AVG(t.price) AS average_price 
+        FROM transactionHistory t 
+        JOIN user u ON t.user_id = u.id 
+        WHERE u.username = ? 
+        GROUP BY t.symbol 
+        HAVING total_quantity > 0"""
     )
-    #print( db.execute(query, (username,)).fetchall()[1][0]  ) #ITERATION OVER [0][0] to[x][y] TO get the name in 0:0, number in 0:1 Oterwise only pointer.
-
-    ''' 
-    stocks ={ [
-                {   "symbol": "",
-                    "name"  : "",
-                    "amount": "",
-                    "price" : "",
-                    "total" : "",
-                    "profit": ""
-                },
-            ]}   
-        loop über symbole aus dem query result ( db.execute(query, (username,)).fetchall()[i][j]).
-        i ist hierbei das symbol
-        und wende get_stock_info(symbol) an.
-        nehme aus dem dictionary aus dem return den key:currentPrice und daraus den value.Füge ihn
-        dem stocks an der stelle price hinzu.
-        aus der datenbank nehme amount heraus
-        Nutze price und amount, um den gesamtwert (akkurat) zu kalkulieren und füge ihn dann stocks
-        an der Stelle total hinzu.
-    '''
+    #print( db.execute(query, (username,)).fetchall()[1][0]  ) 
+    #ITERATION OVER [0][0] to[x][y] TO get the name in 0:0, number in 0:1 Oterwise only pointer.
     return db.execute(query, (username,)).fetchall()
 
 def get_user_balance(username, db):
@@ -112,12 +105,10 @@ def process_transactions(transactions):
 # Berechnung des Profits (Helferfunktion)
 def calculate_profit(current_price, average_price):
     if average_price == 0:
-        return 0  # Kein Durchschnittspreis vorhanden, daher kein Profit berechenbar.
+        return 0  
     
-    # Berechne das Verhältnis von current_price zu average_price
     profit_ratio = current_price / average_price
     
-    # Subtrahiere 1, um den Prozentsatz über oder unter dem Durchschnitt zu erhalten
     profit_percentage = (profit_ratio - 1) * 100
     return round(profit_percentage, 2)
 
@@ -181,15 +172,50 @@ def buy_sell_stock(username, stock_symbol, quantity,ordertype, db):
                 return True
             else:
                 return False
+            
+
 def get_ranking(db):
     '''get all users via query. for every user process_transactions(get_user_transaction(username,db))
     the list with dictionaries is there as well as the profit.
     for every dictionary get the profit and add it. last put the user as a value and the sum of profit
     as a value.'''
-    user_query = '''SELECT username from user'''
     userlist=[] 
+    ranking = []
+    user_query = '''SELECT username from user'''
     usernames = db.execute(user_query).fetchall()
     for user in usernames:
         userlist.append(user[0])
+
+    for user in userlist:
+        profit = calculate_total_profit(user, db)
+        user_profit = {
+                "username": user,
+                "profit": profit
+            }
+        ranking.append(user_profit)
     
+    # Sort the ranking list
+    ranking = sorted(ranking, key=lambda x: x['profit'], reverse=True)
+
+    current_rank = 1
+    for i in range(len(ranking)):
+        if i > 0 and ranking[i]['profit'] == ranking[i-1]['profit']:
+            # same rank when profit is equal
+            ranking[i]['rank'] = ranking[i-1]['rank']
+        else:
+            ranking[i]['rank'] = current_rank
+        
+        current_rank += 1 
+    print(ranking)
+    return ranking
+
+def calculate_total_profit(username, db):
+    # Hole die Transaktionen des Benutzers
+    transactions = process_transactions(get_user_transactions(username, db))    
     
+    total_profit = 0
+    
+    # Summiere den Profit über alle Aktien hinweg
+    for stock in transactions:
+        total_profit += stock["profit"]
+    return round(total_profit, 2)  

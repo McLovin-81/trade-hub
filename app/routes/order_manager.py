@@ -20,6 +20,6 @@ def ordermanagement(username):
     if account is None:
         return jsonify({'error': 'Account not found'}), 404
 
-    get_ranking(db)
     
-    return render_template('depot/depot.html', balance = account)
+    #RENDER TEMPLATE NEEDED
+    return render_template('', )
