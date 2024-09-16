@@ -1,9 +1,7 @@
 from app.graph_utilities.graph_utils import get_stock_info
 from flask import jsonify
-#from app.database.db import get_db AS LONG AS USED IN DB.PY
-
-#from ..database.db import get_db
-
+# Get the user_id from the username.
+# This function takes a username and a database connection, and returns the user's ID.
 def get_user_id(username, db):
     query = (
         '''
@@ -12,7 +10,11 @@ def get_user_id(username, db):
      ) 
     return db.execute(query, (username,)).fetchone()[0] 
 
-def get_transaction_history(username,db):
+
+# Get the full transaction history for a user.
+# This function retrieves all transactions for a given user from the database, organizing them by stock symbol.
+# It returns a dictionary where the keys are stock symbols, and the values are lists of transaction details.
+def get_transaction_history(username, db):
     query = ('''
     SELECT t.id, t.symbol, t.quantity, t.amount, t.price, t.t_timestamp 
     FROM transactionHistory t
@@ -29,7 +31,6 @@ def get_transaction_history(username,db):
         price = transaction[4]
         timestamp = transaction[5]
         
-        
         if symbol not in transaction_history:
             transaction_history[symbol] = []
         
@@ -40,13 +41,13 @@ def get_transaction_history(username,db):
             'price': price,
             'timestamp': timestamp.strftime('%Y-%m-%d %H:%M:%S')
         })
-    
     return transaction_history
-        
-    
 
+
+# Get the user's stock transactions grouped by stock symbol.
+# This function retrieves the total quantity and average price of each stock that the user has purchased.
+# It returns a list of pointer tuples where each tuple contains a stock symbol, total quantity, and average price.
 def get_user_transactions(username, db):
-    #db = get_db()
     query = (
         """SELECT t.symbol, SUM(t.quantity) AS total_quantity, AVG(t.price) AS average_price 
         FROM transactionHistory t 
@@ -55,21 +56,25 @@ def get_user_transactions(username, db):
         GROUP BY t.symbol 
         HAVING total_quantity > 0"""
     )
-    #print( db.execute(query, (username,)).fetchall()[1][0]  ) 
-    #ITERATION OVER [0][0] to[x][y] TO get the name in 0:0, number in 0:1 Oterwise only pointer.
     return db.execute(query, (username,)).fetchall()
 
+
+# Get the balance of the user.
+# This function retrieves the current balance of a user's account based on their username.
+# It returns the balance as a string.
 def get_user_balance(username, db):
-    #db = get_db()
     query_balance = (
         "SELECT balance " 
         "FROM account "
         "WHERE user_id = (SELECT id FROM user WHERE username = ?) "
     )
-    result = str(db.execute(query_balance, (username,)).fetchone()[0] ) #NEEDS TO BE A STRING TO GET IT RETURNED PROPERLY
-    
+    result = str(db.execute(query_balance, (username,)).fetchone()[0] )   
     return result
 
+
+# Process the user's transactions to calculate the stock value and profit.
+# This function takes a list of transaction pointer (that need to get the values first), retrieves current stock information, and calculates the profit.
+# It returns a list of dictionaries containing stock details, total value, and profit.
 def process_transactions(transactions):
     stocks = [] 
 
@@ -78,15 +83,12 @@ def process_transactions(transactions):
         total_quantity = row[1]
         average_price = row[2]
 
-        # Hole aktuelle Infos zum Symbol
         stock_info = get_stock_info(symbol)
         current_price = stock_info["currentPrice"]
 
-        # Berechne den Gesamtwert und den Profit
         total_value = round(total_quantity * current_price, 2)
         profit = calculate_profit(current_price, average_price)
 
-        # Erstelle das Dictionary für diese Aktie
         stock_dict = {
             "symbol": symbol,
             "name"  : stock_info["name"], 
@@ -96,22 +98,25 @@ def process_transactions(transactions):
             "profit": profit
         }
 
-        # Füge das Dictionary der Liste hinzu
         stocks.append(stock_dict)
-        jsonify(stocks)
-    
     return stocks
 
-# Berechnung des Profits (Helferfunktion)
+
+# Calculate the profit percentage of a stock.
+# This function calculates the percentage profit for a stock based on its current price and the average price paid.
+# It returns the profit as a percentage rounded to two decimal places.
 def calculate_profit(current_price, average_price):
     if average_price == 0:
         return 0  
     
     profit_ratio = current_price / average_price
-    
     profit_percentage = (profit_ratio - 1) * 100
     return round(profit_percentage, 2)
 
+
+# Get the transaction details for a specific stock symbol.
+# This function retrieves the processed transaction data for a specific stock symbol owned by the user.
+# It returns a dictionary with stock details or None if the stock is not found.
 def get_symbol_transactions(username, symbol, db):
     transactions = process_transactions(get_user_transactions(username, db))
     for stock_dict in transactions:
@@ -119,21 +124,31 @@ def get_symbol_transactions(username, symbol, db):
             return stock_dict
     return None  
 
+
+# Check if the user has enough balance to make a purchase.
+# This function compares the user's balance with the cost of a transaction.
+# It returns True if the balance is sufficient, otherwise False.
 def check_balance(balance, cost):
     if balance - cost > 0:
         return True
     else:
         return False
 
+
+# Update the user's balance in the database.
+# This function updates the account balance for a user in the database.
 def update_balance(username, balance, db):
     user_id = get_user_id(username, db)
     db.execute(
                 "UPDATE account SET balance = ? WHERE user_id = ?",
-                (balance, user_id)
+                (round(balance, 2), user_id)
             )
     db.commit()
-    
-def insert_transaction(username,stock_symbol, quantity,total_cost, price_per_stock, db):
+
+
+# Insert a new transaction into the transaction history.
+# This function adds a record to the transactionHistory table with the details of the stock purchase/sale.
+def insert_transaction(username, stock_symbol, quantity, total_cost, price_per_stock, db):
     user_id = get_user_id(username, db)
 
     db.execute(
@@ -142,43 +157,40 @@ def insert_transaction(username,stock_symbol, quantity,total_cost, price_per_sto
             )
     db.commit()
 
-def buy_sell_stock(username, stock_symbol, quantity,ordertype, db):
-        
-        stock_info = get_stock_info(stock_symbol)
-        current_price = stock_info["currentPrice"]
-        total_cost = quantity * current_price  
-        balance = float(get_user_balance(username, db))
-        if ordertype != "sell":
-            if check_balance(balance, total_cost):
 
-                
-                new_balance = balance - total_cost
-                update_balance(username, new_balance, db)
-
-                # Transaktion in die Historie einfügen
-                insert_transaction(username,stock_symbol, quantity, total_cost, current_price, db)
-                
-                return True
-            else:
-                return False
+# Buy or sell a stock for the user.
+# This function processes a buy or sell order based on the order type and updates the user's balance and transaction history.
+# It returns True if the order was successful, otherwise False.
+def buy_sell_stock(username, stock_symbol, quantity, ordertype, db):
+    stock_info = get_stock_info(stock_symbol)
+    current_price = stock_info["currentPrice"]
+    total_cost = quantity * current_price  
+    balance = float(get_user_balance(username, db))
+    
+    if ordertype != "sell":
+        if check_balance(balance, total_cost):
+            new_balance = balance - total_cost
+            update_balance(username, new_balance, db)
+            insert_transaction(username, stock_symbol, quantity, total_cost, current_price, db)
+            return True
         else:
-            user_quantity = get_symbol_transactions(username, stock_symbol, db)["amount"]
-            
-            if  user_quantity - quantity >= 0: 
-                quantity = quantity * -1
-                new_balance = balance + total_cost
-                update_balance(username, new_balance, db)
-                insert_transaction(username, stock_symbol, quantity, total_cost, current_price, db)
-                return True
-            else:
-                return False
-            
+            return False
+    else:
+        user_quantity = get_symbol_transactions(username, stock_symbol, db)["amount"]
+        if user_quantity - quantity >= 0: 
+            quantity = quantity * -1
+            new_balance = balance + total_cost
+            update_balance(username, new_balance, db)
+            insert_transaction(username, stock_symbol, quantity, total_cost, current_price, db)
+            return True
+        else:
+            return False
 
+
+# Get the profit ranking of all users.
+# This function retrieves the profit ranking of all users by calculating the total profit for each user.
+# It returns a sorted list of dictionaries with each user's username, profit, and rank.
 def get_ranking(db):
-    '''get all users via query. for every user process_transactions(get_user_transaction(username,db))
-    the list with dictionaries is there as well as the profit.
-    for every dictionary get the profit and add it. last put the user as a value and the sum of profit
-    as a value.'''
     userlist=[] 
     ranking = []
     user_query = '''SELECT username from user'''
@@ -194,28 +206,25 @@ def get_ranking(db):
             }
         ranking.append(user_profit)
     
-    # Sort the ranking list
     ranking = sorted(ranking, key=lambda x: x['profit'], reverse=True)
 
     current_rank = 1
     for i in range(len(ranking)):
         if i > 0 and ranking[i]['profit'] == ranking[i-1]['profit']:
-            # same rank when profit is equal
             ranking[i]['rank'] = ranking[i-1]['rank']
         else:
             ranking[i]['rank'] = current_rank
-        
         current_rank += 1 
-    print(ranking)
     return ranking
 
+
+# Calculate the total profit for a user.
+# This function sums the profit of all stocks held by the user.
+# It returns the total profit rounded to two decimal places.
 def calculate_total_profit(username, db):
-    # Hole die Transaktionen des Benutzers
     transactions = process_transactions(get_user_transactions(username, db))    
-    
     total_profit = 0
     
-    # Summiere den Profit über alle Aktien hinweg
     for stock in transactions:
         total_profit += stock["profit"]
     return round(total_profit, 2)  

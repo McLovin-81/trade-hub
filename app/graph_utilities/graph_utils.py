@@ -65,7 +65,7 @@ def get_stock_info(symbol):
             "name": name,
             "sector": sector,
             "currency": currency,
-            "currentPrice": currentPrice,
+            "currentPrice": round(currentPrice, 2),
             "previousClose": previousClose
         }
 
