@@ -134,7 +134,6 @@ async function handleLogin(event: Event): Promise<void>
 
 
 
-
 /*****************
  * Init function *
  *****************/
