@@ -32,7 +32,8 @@ def depot(username):
         FROM transactionHistory th
         JOIN product p ON th.symbol = p.symbol
         WHERE th.user_id = ?
-        GROUP BY th.symbol, p.name, th.price
+        GROUP BY th.symbol
+        HAVING total_quantity > 0
         ''', 
         (current_user.id,)
     ).fetchall()
