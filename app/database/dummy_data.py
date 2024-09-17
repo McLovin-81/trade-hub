@@ -52,7 +52,7 @@ def create_dummy_data(db):
             symbol = symbol
             quantity = random.randint(1, 20)
             price = get_stock_info(symbol)['currentPrice']
-            amount = price * quantity
+            amount = round(price * quantity,2)
             timestamp = datetime.now()
             transactions.append((user_id, symbol, quantity, amount, price, timestamp))
     

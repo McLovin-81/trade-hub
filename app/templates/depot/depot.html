@@ -63,11 +63,11 @@
                             <td>{{ stock.symbol }}</td>
                             <td>{{ stock.name }}</td>
                             <td>{{ stock.amount }}</td>
-                            <td>{{ stock.price | round(2) }}</td>
+                            <td>{{ stock.price }}</td>
                             <td class="{% if stock.profit >= 0 %} positive {% else %} negative {% endif %}">
-                                {{ stock.profit | round(2) }}
+                                {{ stock.profit }} %
                             </td>
-                            <td>{{ stock.total | round(2) }}</td>
+                            <td>{{ stock.total }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

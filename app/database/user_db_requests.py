@@ -38,8 +38,8 @@ def get_transaction_history(username, db):
         transaction_history[symbol].append({
             'id': transaction_id,
             'quantity': quantity,
-            'amount': amount,
-            'price': price,
+            'amount': "{:.2f}".format(amount),
+            'price': "{:.2f}".format(price),
             'timestamp': timestamp.strftime('%Y-%m-%d %H:%M:%S')
         })
     return transaction_history
@@ -94,8 +94,8 @@ def process_transactions(transactions):
             "symbol": symbol,
             "name"  : stock_info["name"], 
             "amount": total_quantity,
-            "price" : current_price,
-            "total" : total_value,
+            "price" : "{:.2f}".format(current_price),
+            "total" : "{:.2f}".format(total_value),
             "profit": profit
         }
 
@@ -151,7 +151,7 @@ def update_balance(username, balance, db):
 # This function adds a record to the transactionHistory table with the details of the stock purchase/sale.
 def insert_transaction(username, stock_symbol, quantity, total_cost, price_per_stock, db):
     user_id = get_user_id(username, db)
-    timestamp = datetime.now().strftime('%y-%m-%d %H:%M:%S')
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     db.execute(
                 "INSERT INTO transactionHistory (user_id, symbol, quantity, amount, price, t_timestamp) VALUES (?, ?, ?, ?, ?, ?)",
                 (user_id, stock_symbol, quantity, total_cost, price_per_stock, timestamp)
@@ -165,7 +165,7 @@ def insert_transaction(username, stock_symbol, quantity, total_cost, price_per_s
 def buy_sell_stock(username, stock_symbol, quantity, ordertype, db):
     stock_info = get_stock_info(stock_symbol)
     current_price = stock_info["currentPrice"]
-    total_cost = quantity * current_price  
+    total_cost = round(quantity * current_price, 2)
     balance = float(get_user_balance(username, db))
     
     if ordertype != "sell":
@@ -227,5 +227,5 @@ def calculate_total_profit(username, db):
     total_profit = 0
     
     for stock in transactions:
-        total_profit += stock["profit"]
+        total_profit += float(stock["profit"])
     return round(total_profit, 2)  
