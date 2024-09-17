@@ -1,5 +1,5 @@
 from app.graph_utilities.graph_utils import get_stock_info
-from flask import jsonify
+from datetime import datetime
 # Get the user_id from the username.
 # This function takes a username and a database connection, and returns the user's ID.
 def get_user_id(username, db):
@@ -19,7 +19,8 @@ def get_transaction_history(username, db):
     SELECT t.id, t.symbol, t.quantity, t.amount, t.price, t.t_timestamp 
     FROM transactionHistory t
     JOIN user u on t.user_id = u.id
-    WHERE u.username = ?       
+    WHERE u.username = ?
+    ORDER BY t.t_timestamp DESC    
     ''')
     transaction_history = {} 
     transactions_db = db.execute(query, (username,)).fetchall()
@@ -150,10 +151,10 @@ def update_balance(username, balance, db):
 # This function adds a record to the transactionHistory table with the details of the stock purchase/sale.
 def insert_transaction(username, stock_symbol, quantity, total_cost, price_per_stock, db):
     user_id = get_user_id(username, db)
-
+    timestamp = datetime.now().strftime('%y-%m-%d %H:%M:%S')
     db.execute(
-                "INSERT INTO transactionHistory (user_id, symbol, quantity, amount, price) VALUES (?, ?, ?, ?, ?)",
-                (user_id, stock_symbol, quantity, total_cost, price_per_stock)
+                "INSERT INTO transactionHistory (user_id, symbol, quantity, amount, price, t_timestamp) VALUES (?, ?, ?, ?, ?, ?)",
+                (user_id, stock_symbol, quantity, total_cost, price_per_stock, timestamp)
             )
     db.commit()
 
