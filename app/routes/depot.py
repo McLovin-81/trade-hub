@@ -21,7 +21,7 @@ def depot(username):
     # Fetch user's account balance
     user_balance = get_user_balance(username, db).format('%.2f')
     depot_data = process_transactions(get_user_transactions(username, db))
-    #buy_sell_stock(current_user.username, "AIR.DE", 2,"buy", db)
+    buy_sell_stock(current_user.username, "AIR.DE", 2,"sell", db)
     return render_template('depot/depot.html', balance=user_balance, depot = depot_data)
 
 
@@ -36,3 +36,23 @@ def user_transactions(username):
 
     transaction_history = get_transaction_history(username, db)
     return render_template('depot/transactions.html', transaction_history = transaction_history)
+
+
+@bp.route('/<username>/ordermanagement')
+@login_required
+def ordermanagement(username):
+    # Ensure the logged-in user can only view their own depot
+    if username != current_user.username:
+        return jsonify({'error': 'Unauthorized access'}), 403  # Unauthorized access
+    
+    #db = get_db()
+
+    # Fetch user's account balance
+    #account = get_user_balance(current_user.username, db)
+
+    #if account is None:
+    #    return jsonify({'error': 'Account not found'}), 404
+
+    
+    #RENDER TEMPLATE NEEDED
+    return render_template('depot/order-manager.html', )
