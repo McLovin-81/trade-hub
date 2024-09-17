@@ -14,7 +14,7 @@ import click
 from flask import current_app, g
 from app.database.product_init import populate_products
 from app.database.dummy_data import create_dummy_data
-from app.database.user_db_requests import get_user_balance, get_user_transactions
+from app.database.user_db_requests import get_user_balance, get_user_transactions, process_transactions
 
 
 def get_db():
@@ -75,6 +75,7 @@ def init_db():
         
     populate_products(db) #NEEDED IN PROD AS WELL
     create_dummy_data(db) #ONLY FOR DEV
+    #process_transactions(get_user_transactions("alice_wonder",db))
     #get_user_transactions("alice_wonder", db) #TESTING STATEMENTS
     #get_user_balance("alice_wonder", db)
     

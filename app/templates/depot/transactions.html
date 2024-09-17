@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ current_user.username }}'s Depot</title>
+    <title>{{ current_user.username }}'s Transaction History</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Global styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}"> <!-- Navigation-specific styles -->
@@ -34,46 +34,39 @@
     </nav>
 
     <main>
-        <h1>{{ current_user.username }}'s Depot</h1>
-        
-        <section class="account-balance">
-            <h2>Account Balance</h2>
-            <p>{{ balance }} €</p>
-        </section>
+        <h1>{{ current_user.username }}'s Transaction History</h1>
 
-        <!-- Display the user's stocks -->
-        <section class="stocks">
-            <h2>Your Stocks</h2>
+        <!-- Display the user's history -->
+        <section class="transaction-history">
+            <h2>Your Transactions</h2>
 
-            {% if depot %}
+            {% if transaction_history %}
                 <table>
                     <thead>
                         <tr>
                             <th>Symbol</th>
-                            <th>Company Name</th>
                             <th>Quantity</th>
+                            <th>Amount (€)</th>
                             <th>Price per Unit (€)</th>
-                            <th>Profit (%)</th>
-                            <th>Total (€)</th>
+                            <th>Timestamp</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for stock in depot %}
-                        <tr>
-                            <td>{{ stock.symbol }}</td>
-                            <td>{{ stock.name }}</td>
-                            <td>{{ stock.amount }}</td>
-                            <td>{{ stock.price }}</td>
-                            <td class="{% if stock.profit >= 0 %} positive {% else %} negative {% endif %}">
-                                {{ stock.profit }} %
-                            </td>
-                            <td>{{ stock.total }}</td>
-                        </tr>
+                        {% for symbol, transactions in transaction_history.items() %}
+                            {% for transaction in transactions %}
+                                <tr>
+                                    <td>{{ symbol }}</td>
+                                    <td>{{ transaction.quantity }}</td>
+                                    <td>{{ transaction.amount }}</td>
+                                    <td>{{ transaction.price }}</td>
+                                    <td>{{ transaction.timestamp }}</td>
+                                </tr>
+                            {% endfor %}
                         {% endfor %}
                     </tbody>
                 </table>
             {% else %}
-                <p>You don't own any stocks yet.</p>
+                <p>No transactions found.</p>
             {% endif %}
         </section>
     </main>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Manager - {{ current_user.username }}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Global styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}"> <!-- Navigation-specific styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/orderManager.css') }}"> <!-- Order Manager-specific styles -->
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
+        <button class="btn" tabindex="1">Logout</button>
+        <button class="btn">Settings</button>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <a href="{{ url_for('depot.depot', username=current_user.username) }}" aria-label="Trade Hub Home">
+            <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
+        </a>
+        <a href="{{ url_for('depot.ordermanagement', username=current_user.username) }}" aria-label="Order Manager">Order Manager</a>
+        <a href="{{ url_for('depot.user_transactions', username=current_user.username) }}" aria-label="Transactions">Transactions</a>
+        <a href="{{ url_for('depot.depot', username=current_user.username) }}" aria-label="Depot">Depot</a>
+    </nav>
+
+    <main>
+        <h1>Order Manager</h1>
+
+        <section class="order-section">
+            <h2>Buy or Sell Stocks</h2>
+            <form action="{{ url_for('depot.ordermanagement', username=current_user.username) }}" method="POST">
+            <div class="form-group">
+                    <label for="symbol">Stock Symbol</label>
+                    <input type="text" id="symbol" name="symbol" placeholder="Enter stock symbol" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" min="1" placeholder="Enter quantity" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="order-type">Order Type</label>
+                    <select id="order-type" name="order_type" required>
+                        <option value="buy">Buy</option>
+                        <option value="sell">Sell</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price per Unit (€)</label>
+                    <input type="number" id="price" name="price" step="0.01" placeholder="Enter price per unit" required>
+                </div>
+
+                <button type="submit" class="btn submit-btn">Submit Order</button>
+            </form>
+        </section>
+
+        <!-- Add an Order Summary section -->
+        <section class="order-summary">
+            <h2>Order Summary</h2>
+            <div id="order-summary-container">
+                <!-- Order details will be dynamically injected here via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- scripts -->
+    <script src="{{ url_for('static', filename='js/orderManager.js') }}"></script>
+</body>
+</html>

@@ -65,7 +65,7 @@ def get_stock_info(symbol):
             "name": name,
             "sector": sector,
             "currency": currency,
-            "currentPrice": currentPrice,
+            "currentPrice": round(currentPrice, 2),
             "previousClose": previousClose
         }
 
@@ -78,6 +78,7 @@ def calculate_stock_changes(stock_info):
         percentage_change = (change / stock_info['previousClose']) * 100
         stock_info['change'] = f"{change:.2f}"
         stock_info['percentage_change'] = f"{percentage_change:.2f}"
+        print(stock_info)
         return stock_info
 
 

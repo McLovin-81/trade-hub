@@ -16,7 +16,7 @@ from flask_login import LoginManager
 from .models import User
 from .database import db
 from .database.db import get_db
-from .routes import auth, index, stock_details, depot
+from .routes import auth, index, stock_details, depot, ranking
 
 
 def create_app(test_config=None):
@@ -92,7 +92,8 @@ def create_app(test_config=None):
     app.register_blueprint(auth.bp)
     app.register_blueprint(stock_details.bp)
     app.register_blueprint(depot.bp)
-
+    app.register_blueprint(ranking.bp)
+    
     
     """ Call the registration from db.py """
     db.init_app(app)

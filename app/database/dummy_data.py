@@ -1,14 +1,18 @@
 from datetime import datetime, timedelta
+from decimal import Decimal
 import random
+from app.graph_utilities.search_validation import dax_aktien
+from app.graph_utilities.graph_utils import get_stock_info
+from werkzeug.security import generate_password_hash
 def create_dummy_data(db):
 
 
     # Einfügen von mehr Dummy-Benutzern
     users = [
-        ('alice_wonder', 'alice.wonder@example.com', 'alicepass123', False),
-        ('bob_builder', 'bob.builder@example.com', 'bobpass123', False),
-        ('charlie_brown', 'charlie.brown@example.com', 'charliepass123', False),
-        ('daisy_duke', 'daisy.duke@example.com', 'daisypass123', False)
+        ('pipe', 'alice.wonder@example.com', generate_password_hash('12345678'), False), #alicepass123
+        ('bob_builder', 'bob.builder@example.com', generate_password_hash('bobpass123'), False), #bobpass123
+        ('charlie_brown', 'charlie.brown@example.com', generate_password_hash('charliepass123'), False), #charliepass123
+        ('daisy_duke', 'daisy.duke@example.com', generate_password_hash('daisypass123'), False) #daisypass123
     ]
 
     for user in users:
@@ -20,7 +24,7 @@ def create_dummy_data(db):
     
 
     # .fetchone gets the Tuple from the db. (id,) to get only the value of the first Tuple [0] is needed 
-    alice_id = db.execute("SELECT id FROM user WHERE username = 'alice_wonder'").fetchone()[0] 
+    pipe_id = db.execute("SELECT id FROM user WHERE username = 'pipe'").fetchone()[0] 
      
     bob_id = db.execute("SELECT id FROM user WHERE username = 'bob_builder'").fetchone()[0]
      
@@ -28,7 +32,7 @@ def create_dummy_data(db):
     
     daisy_id = db.execute("SELECT id FROM user WHERE username = 'daisy_duke'").fetchone()[0]
 
-    newAccounts = [alice_id, bob_id, charlie_id, daisy_id]
+    newAccounts = [pipe_id, bob_id, charlie_id, daisy_id]
     for account in newAccounts:
         db.execute('''
         INSERT INTO account (user_id)
@@ -37,36 +41,19 @@ def create_dummy_data(db):
         )
     db.commit()
 
-    
-    # Aktualisieren von Dummy-Kontoständen
-    updated_accounts = [
-        (25000, alice_id),
-        (30000, bob_id),
-        (18000, charlie_id),
-        (12000, daisy_id)
-    ]
-    
-    for balance, user_id in updated_accounts:
-        db.execute('''
-        UPDATE account 
-        SET balance = ?
-        WHERE user_id = ?
-        ''', (balance, user_id))
-    db.commit()
-    
 
     # Einfügen von Dummy-Transaktionen
-    symbols = ['AAPL', 'GOOGL', 'AMZN']
+    symbols = list(dax_aktien.values())[:5] 
     transactions = []
 
     # Generiere Transaktionen für jeden Benutzer
-    for user_id in [alice_id, bob_id, charlie_id, daisy_id]:
-        for _ in range(5):  # 5 Transaktionen pro Benutzer
-            symbol = random.choice(symbols)
+    for user_id in [pipe_id, bob_id, charlie_id, daisy_id]:
+        for symbol in symbols:  # 5 Transaktionen pro Benutzer
+            symbol = symbol
             quantity = random.randint(1, 20)
-            price = random.uniform(100, 2000)  # Zufälliger Preis
-            amount = price * quantity
-            timestamp = datetime.now() - timedelta(days=random.randint(1, 100)) # Zufällige vergangene Tage
+            price = get_stock_info(symbol)['currentPrice']
+            amount = round(price * quantity,2)
+            timestamp = datetime.now()
             transactions.append((user_id, symbol, quantity, amount, price, timestamp))
     
     for transaction in transactions:
@@ -76,9 +63,5 @@ def create_dummy_data(db):
         )
     db.commit()
 
-    
-   
 
-        
-
-    print("Zusätzliche Dummy-Daten für Benutzer und aktualisierte Kontostände erfolgreich eingefügt!")
+    print("Test data created!")
