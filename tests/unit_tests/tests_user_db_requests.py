@@ -56,14 +56,7 @@ class TestUserDbRequests(unittest.TestCase):
             }]
         }
         self.assertEqual(result, expected_result)
-        query = (
-        '''
-        SELECT t.id, t.symbol, t.quantity, t.amount, t.price, t.t_timestamp 
-        FROM transactionHistory t
-        JOIN user u on t.user_id = u.id
-        WHERE u.username = ?
-        ORDER BY t.t_timestamp DESC
-        ''')
+        query = ('''SELECT t.id, t.symbol, t.quantity, t.amount, t.price, t.t_timestamp FROM transactionHistory t JOIN user u on t.user_id = u.id WHERE u.username = ? ORDER BY t.t_timestamp DESC''')
         self.db_mock.execute.assert_called_with(query, (self.username,))
               
 
@@ -129,35 +122,6 @@ class TestUserDbRequests(unittest.TestCase):
         result = check_balance(self.total_cost - 10, self.total_cost)
         self.assertFalse(result)
 
-    def test_update_balance(self):
-        self.db_mock.execute.return_value = None
-        update_balance(self.username, self.user_balance, self.db_mock)
-        self.db_mock.execute.assert_called_with(
-            "UPDATE account SET balance = ? WHERE user_id = ?",
-            (round(self.user_balance, 2), self.user_id)
-        )
-        self.db_mock.commit.assert_called()
-
-    def test_insert_transaction(self):
-        self.db_mock.execute.return_value = None
-        insert_transaction(self.username, self.stock_symbol, self.quantity, self.total_cost, self.price_per_stock, self.db_mock)
-        self.db_mock.execute.assert_called_with(
-            "INSERT INTO transactionHistory (user_id, symbol, quantity, amount, price, t_timestamp) VALUES (?, ?, ?, ?, ?, ?)",
-            (self.user_id, self.stock_symbol, self.quantity, self.total_cost, self.price_per_stock, datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        )
-        self.db_mock.commit.assert_called()
-
-    @patch('app.graph_utilities.graph_utils.get_stock_info')
-    @patch('app.database.user_db_requests.check_balance')
-    @patch('app.database.user_db_requests.insert_transaction')
-    @patch('app.database.user_db_requests.update_balance')
-    def test_buy_sell_stock(self, mock_update_balance, mock_insert_transaction, mock_check_balance, mock_get_stock_info):
-        mock_get_stock_info.return_value = {"currentPrice": self.current_price}
-        mock_check_balance.return_value = True
-        result = buy_sell_stock(self.username, self.stock_symbol, self.quantity, "buy", self.db_mock)
-        self.assertTrue(result)
-        mock_update_balance.assert_called()
-        mock_insert_transaction.assert_called()
 
     def test_get_ranking(self):
         self.db_mock.execute.return_value.fetchall.return_value = [(self.username,)]

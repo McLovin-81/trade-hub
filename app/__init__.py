@@ -57,8 +57,13 @@ def create_app(test_config=None):
         except FileNotFoundError:
             print("Warning: 'config.py' not found. Using default settings.")
     else:
-        # Load the test config if passed in
-        app.config.from_mapping(test_config)
+        # making sure to get test_config as dictionary
+        if isinstance(test_config, dict):
+            app.config.from_mapping(test_config)
+        else:
+            # if not dictionary convert it into one.
+            app.config.from_mapping(vars(test_config))
+
     
     # Ensure the instance folder exists
     try:

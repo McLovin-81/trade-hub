@@ -53,7 +53,7 @@ def register():
             # Create an account with an initial balance
             db.execute(
                 "INSERT INTO account (user_id, balance) VALUES (?, ?)",
-                (user_id, 1000.0)  # You can set an initial balance of 0 or any other value
+                (user_id, 10000.0)  # You can set an initial balance of 0 or any other value
             )
             db.commit()
 

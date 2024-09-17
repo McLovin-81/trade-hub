@@ -15,14 +15,7 @@ def get_user_id(username, db):
 # This function retrieves all transactions for a given user from the database, organizing them by stock symbol.
 # It returns a dictionary where the keys are stock symbols, and the values are lists of transaction details.
 def get_transaction_history(username, db):
-    query = (
-    '''
-    SELECT t.id, t.symbol, t.quantity, t.amount, t.price, t.t_timestamp 
-    FROM transactionHistory t
-    JOIN user u on t.user_id = u.id
-    WHERE u.username = ?
-    ORDER BY t.t_timestamp DESC
-    ''')
+    query = ('''SELECT t.id, t.symbol, t.quantity, t.amount, t.price, t.t_timestamp FROM transactionHistory t JOIN user u on t.user_id = u.id WHERE u.username = ? ORDER BY t.t_timestamp DESC''')
 
     transaction_history = {} 
     transactions_db = db.execute(query, (username,)).fetchall()

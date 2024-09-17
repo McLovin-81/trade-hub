@@ -25,3 +25,6 @@ in trade-hub
 
 How the certificates was created:
     openssl req -x509 -newkey rsa:4096 -keyout instance/certs/key.pem -out instance/certs/cert.pem -days 365
+
+How to run the unit tests in ~:
+    python3 -m unittest discover -s tests/unit_tests
