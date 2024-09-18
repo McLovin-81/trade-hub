@@ -2,7 +2,7 @@
 from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
 from flask_login import login_required, current_user
 from ..database.db import get_db
-from ..database.user_db_requests import get_user_transactions, process_transactions,buy_sell_stock, get_user_balance, get_ranking, calculate_total_profit, get_transaction_history, get_stock_symbols
+from ..database.user_db_requests import get_user_transactions, process_transactions, buy_sell_stock, get_user_balance, get_ranking, calculate_total_profit, get_transaction_history, get_stock_symbols
 from ..graph_utilities.graph_utils import get_stock_info
 
 
@@ -23,7 +23,7 @@ def depot(username):
 
     # Process user's transactions to get depot data
     depot_data = process_transactions(get_user_transactions(username, db))
-    buy_sell_stock(current_user.username, "AIR.DE", 2,"buy", db)
+    #buy_sell_stock(current_user.username, "AIR.DE", 2,"buy", db)
     #print(get_ranking(db))
     return render_template('depot/depot.html', balance=user_balance, depot = depot_data)
 
@@ -74,3 +74,21 @@ def get_stock_price():
         stock_info = get_stock_info(symbol)
         return jsonify(stock_info)
     return jsonify({'error': 'Invalid symbol'}), 400
+
+
+@bp.route('/api/buy-stock', methods=['POST'])  # Ensure 'POST' is included here
+@login_required
+def api_buy_stock():
+    data = request.get_json()
+    stock_symbol = data.get("symbol")
+    quantity = data.get("quantity")
+    order_type = data.get("orderType")
+
+    db = get_db()
+
+    success = buy_sell_stock(current_user.username, stock_symbol, quantity, order_type, db)
+
+    if success:
+        return jsonify({'success': True}), 200
+    else:
+        return jsonify({'success': False, 'message': 'Insufficient balance or stock not available'}), 400

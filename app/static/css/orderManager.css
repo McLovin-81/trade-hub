@@ -60,11 +60,15 @@ h1 {
   cursor: pointer;
   margin-top: 20px;
   transition: background-color 0.2s ease;
+  
+  /* Flexbox for vertical and horizontal centering */
+  display: flex;
+  align-items: center; /* Vertically center text */
+  justify-content: center; /* Horizontally center text */
+  text-align: center; /* Ensure text is centered if it wraps */
 }
 
-.submit-btn:hover {
-  background-color: #17d5a5; /* Darker button background on hover */
-}
+
 
 /* Order Summary Section */
 .order-summary {

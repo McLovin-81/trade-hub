@@ -26,6 +26,10 @@ function initDarkMode(): void
 
 
 
+
+
+
+
 // Function to show stock symbol suggestions and allow selection
 function showSuggestions(suggestions: { symbol: string, name: string }[]): void {
   const container = document.getElementById('suggestions-container');
@@ -102,6 +106,54 @@ function displayStockInfo(stockInfo: { name: string, currentPrice: number }): vo
     stockInfoDiv.style.display = 'block'; // Show the stock information div
   }
 }
+
+
+// Function to handle order submission
+async function submitOrder() {
+  const stockSymbol = (document.getElementById("symbol") as HTMLInputElement).value;
+  const orderType = (document.getElementById("orderType") as HTMLSelectElement).value;
+  const quantity = parseInt((document.getElementById("quantity") as HTMLInputElement).value);
+  const responseMessage = document.getElementById("responseMessage") as HTMLParagraphElement;
+
+  if (stockSymbol && quantity > 0 && orderType) {
+      try {
+          const response = await fetch(`/user/api/buy-stock`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ symbol: stockSymbol, quantity: quantity, orderType: orderType })
+          });
+
+          const data = await response.json();
+
+          if (response.ok && data.success) {
+              responseMessage.textContent = "Order placed successfully!";
+              responseMessage.style.color = "green";
+          } else {
+              responseMessage.textContent = "Failed to place the order. Insufficient balance or stock unavailable.";
+              responseMessage.style.color = "red";
+          }
+      } catch (error) {
+          console.error('Error submitting order:', error);
+          responseMessage.textContent = "An error occurred. Please try again.";
+          responseMessage.style.color = "red";
+      }
+  } else {
+      responseMessage.textContent = "Please fill out all fields correctly.";
+      responseMessage.style.color = "red";
+  }
+}
+
+// Add event listener to the Submit button
+document.getElementById("submitOrder")?.addEventListener("click", submitOrder);
+
+
+
+
+
+
+
 
 
 

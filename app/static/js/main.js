@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var _a;
 // Utility function to toggle dark mode
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
@@ -96,6 +97,46 @@ function displayStockInfo(stockInfo) {
         stockInfoDiv.style.display = 'block'; // Show the stock information div
     }
 }
+// Function to handle order submission
+function submitOrder() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const stockSymbol = document.getElementById("symbol").value;
+        const orderType = document.getElementById("orderType").value;
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const responseMessage = document.getElementById("responseMessage");
+        if (stockSymbol && quantity > 0 && orderType) {
+            try {
+                const response = yield fetch(`/user/api/buy-stock`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ symbol: stockSymbol, quantity: quantity, orderType: orderType })
+                });
+                const data = yield response.json();
+                if (response.ok && data.success) {
+                    responseMessage.textContent = "Order placed successfully!";
+                    responseMessage.style.color = "green";
+                }
+                else {
+                    responseMessage.textContent = "Failed to place the order. Insufficient balance or stock unavailable.";
+                    responseMessage.style.color = "red";
+                }
+            }
+            catch (error) {
+                console.error('Error submitting order:', error);
+                responseMessage.textContent = "An error occurred. Please try again.";
+                responseMessage.style.color = "red";
+            }
+        }
+        else {
+            responseMessage.textContent = "Please fill out all fields correctly.";
+            responseMessage.style.color = "red";
+        }
+    });
+}
+// Add event listener to the Submit button
+(_a = document.getElementById("submitOrder")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", submitOrder);
 function handleRegistration(event) {
     return __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();

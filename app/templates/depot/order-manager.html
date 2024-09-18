@@ -39,7 +39,7 @@
             <!-- Buy/Sell Form -->
             <section class="order-section">
                 <h2>Buy or Sell Stocks</h2>
-                <form action="{{ url_for('depot.ordermanagement', username=current_user.username) }}" method="POST" class="order-form">
+                <form id="orderForm" class="order-form">
                     <div class="form-group" style="position: relative;">
                         <label for="symbol">Stock Symbol</label>
                         <input type="text" id="symbol" name="symbol" placeholder="AAPL, TSLA, etc." required>
@@ -59,14 +59,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="order-type">Order Type</label>
-                        <select id="order-type" name="order_type" required>
+                        <label for="orderType">Order Type</label>
+                        <select id="orderType" name="order_type" required>
                             <option value="buy">Buy</option>
                             <option value="sell">Sell</option>
                         </select>
                     </div>
 
-                    <button type="submit" class="btn submit-btn">Submit Order</button>
+                    <button type="button" id="submitOrder" class="btn submit-btn">Submit Order</button>
+                    <p id="responseMessage"></p>
                 </form>
             </section>
 
