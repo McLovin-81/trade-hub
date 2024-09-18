@@ -29,7 +29,7 @@ function showSuggestions(suggestions) {
         container.innerHTML = ''; // Clear existing suggestions
         suggestions.forEach(suggestion => {
             const div = document.createElement('div');
-            div.textContent = suggestion;
+            div.textContent = `${suggestion.symbol} - ${suggestion.name}`;
             container.appendChild(div);
         });
     }

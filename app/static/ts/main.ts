@@ -27,15 +27,15 @@ function initDarkMode(): void
 
 
 // Function to show stock symbol suggestions
-function showSuggestions(suggestions: string[]): void {
+function showSuggestions(suggestions: { symbol: string, name: string }[]): void {
   const container = document.getElementById('suggestions-container');
   if (container) {
-    container.innerHTML = ''; // Clear existing suggestions
-    suggestions.forEach(suggestion => {
-      const div = document.createElement('div');
-      div.textContent = suggestion;
-      container.appendChild(div);
-    });
+      container.innerHTML = ''; // Clear existing suggestions
+      suggestions.forEach(suggestion => {
+          const div = document.createElement('div');
+          div.textContent = `${suggestion.symbol} - ${suggestion.name}`;
+          container.appendChild(div);
+      });
   }
 }
 
