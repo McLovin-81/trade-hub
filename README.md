@@ -28,3 +28,6 @@ How the certificates was created:
 
 How to run the unit tests in ~:
     python3 -m unittest discover -s tests/unit_tests
+
+How to run integration tests in ~:
+    python3 -m unittest discover -s tests/integration_tests
