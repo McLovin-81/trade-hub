@@ -22,14 +22,21 @@ function initDarkMode() {
         document.body.classList.add('dark-mode');
     }
 }
-// Function to show stock symbol suggestions
+// Function to show stock symbol suggestions and allow selection
 function showSuggestions(suggestions) {
     const container = document.getElementById('suggestions-container');
+    const symbolInput = document.getElementById('symbol');
     if (container) {
         container.innerHTML = ''; // Clear existing suggestions
         suggestions.forEach(suggestion => {
             const div = document.createElement('div');
             div.textContent = `${suggestion.symbol} - ${suggestion.name}`;
+            // Add click event to select the suggestion
+            div.addEventListener('click', () => {
+                symbolInput.value = suggestion.symbol; // Fill input with the selected symbol
+                container.innerHTML = ''; // Clear suggestions after selection
+                handleStockSelection(suggestion.symbol); // Fetch and display stock price
+            });
             container.appendChild(div);
         });
     }
@@ -59,6 +66,35 @@ function handleStockInput(event) {
             showSuggestions([]);
         }
     });
+}
+// Function to handle stock selection and fetch price from backend
+function handleStockSelection(symbol) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(`/user/api/stock-price?symbol=${encodeURIComponent(symbol)}`);
+            const stockInfo = yield response.json();
+            if (response.ok) {
+                displayStockInfo(stockInfo); // Display stock price and name
+            }
+            else {
+                console.error('Error fetching stock information:', stockInfo);
+            }
+        }
+        catch (error) {
+            console.error('Error fetching stock price:', error);
+        }
+    });
+}
+// Function to display stock information
+function displayStockInfo(stockInfo) {
+    const stockInfoDiv = document.getElementById('stockInfo');
+    const stockNameSpan = document.getElementById('stockName');
+    const stockPriceSpan = document.getElementById('stockPrice');
+    if (stockInfoDiv && stockNameSpan && stockPriceSpan) {
+        stockNameSpan.textContent = stockInfo.name;
+        stockPriceSpan.textContent = stockInfo.currentPrice.toFixed(2);
+        stockInfoDiv.style.display = 'block'; // Show the stock information div
+    }
 }
 function handleRegistration(event) {
     return __awaiter(this, void 0, void 0, function* () {

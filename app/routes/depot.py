@@ -20,9 +20,11 @@ def depot(username):
 
     # Fetch user's account balance
     user_balance = get_user_balance(username, db).format('%.2f')
+
+    # Process user's transactions to get depot data
     depot_data = process_transactions(get_user_transactions(username, db))
-    buy_sell_stock(current_user.username, "AIR.DE", 2,"sell", db)
-    print(get_ranking(db))
+    buy_sell_stock(current_user.username, "AIR.DE", 2,"buy", db)
+    #print(get_ranking(db))
     return render_template('depot/depot.html', balance=user_balance, depot = depot_data)
 
 
@@ -62,3 +64,13 @@ def api_get_stocks():
         symbols = get_stock_symbols(query, db)
         return jsonify({'symbols': symbols})
     return jsonify({'symbols': []})
+
+
+
+@bp.route('/api/stock-price', methods=['GET'])
+def get_stock_price():
+    symbol = request.args.get('symbol')
+    if symbol:
+        stock_info = get_stock_info(symbol)
+        return jsonify(stock_info)
+    return jsonify({'error': 'Invalid symbol'}), 400

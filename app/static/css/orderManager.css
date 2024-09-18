@@ -80,3 +80,25 @@ h1 {
   text-align: left;
   font-size: 16px;
 }
+
+/* Update suggestions container to be relative to the input field */
+#suggestions-container {
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: white;
+  position: absolute; /* Ensure it's positioned relative to the input field */
+  width: 100%; /* Ensure the suggestions container is as wide as the input field */
+  z-index: 1000; /* Ensure it sits on top of other elements */
+  left: 0; /* Align with the input field */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+#suggestions-container div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+#suggestions-container div:hover {
+  background-color: #f0f0f0;
+}

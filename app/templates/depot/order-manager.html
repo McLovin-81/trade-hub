@@ -40,10 +40,17 @@
             <section class="order-section">
                 <h2>Buy or Sell Stocks</h2>
                 <form action="{{ url_for('depot.ordermanagement', username=current_user.username) }}" method="POST" class="order-form">
-                    <div class="form-group">
+                    <div class="form-group" style="position: relative;">
                         <label for="symbol">Stock Symbol</label>
                         <input type="text" id="symbol" name="symbol" placeholder="AAPL, TSLA, etc." required>
                         <div class="suggestions-container" id="suggestions-container"></div>
+                    </div>
+
+                    <!-- New area to display the fetched stock price -->
+                    <div id="stockInfo" style="display: none;">
+                        <h3>Stock Information:</h3>
+                        <p><strong>Stock Name:</strong> <span id="stockName"></span></p>
+                        <p><strong>Current Price:</strong> $<span id="stockPrice"></span></p>
                     </div>
 
                     <div class="form-group">
