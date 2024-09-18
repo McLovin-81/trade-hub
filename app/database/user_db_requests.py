@@ -224,3 +224,77 @@ def calculate_total_profit(username, db):
     for stock in transactions:
         total_profit += float(stock["profit"])
     return round(total_profit, 2)  
+
+
+def set_useraccount_to_reset(username, db):
+    query = ("""UPDATE account SET status = 1 WHERE user_id = (SELECT id FROM user WHERE username = ?)""")
+    db.execute(query, (username,))
+    db.commit()
+
+
+def set_useraccount_to_delete(username, db):
+    query = ("""UPDATE account SET status = 2 WHERE user_id = (SELECT id FROM user WHERE username = ?)""")
+    db.execute(query, (username,))
+    db.commit()
+
+
+def delete_transaction_history_on_user_id(user_id, db):
+    query_transaction = (
+    '''
+        DELETE FROM transactionHistory 
+        WHERE user_id = ?
+    ''')
+    db.execute(query_transaction, (user_id,))
+    db.commit()
+
+def reset_account(username, db):
+    user_id = get_user_id(username, db)
+    delete_transaction_history_on_user_id(user_id, db)
+    query_account = (
+    '''
+        UPDATE account 
+        SET balance = 10000, status_id = 0
+        WHERE user_id = ?
+    ''')
+    db.execute(query_account, (user_id,))
+    db.commit()
+    
+
+
+def delete_account(username, db):
+    user_id = get_user_id(username, db)
+    query_delete_user = (
+    '''
+        DELETE FROM user 
+        WHERE id = ?
+    ''')
+    db.execute(query_delete_user, (user_id,))
+    
+    db.commit()
+
+def admin_worklist(db):
+    """Returns:
+    [{'user_id': user_id, 'username': username, 'status_description': description},
+    {'user_id': 2, 'username': 'bob_builder', 'status_description': 'Reset'},
+    ]"""
+    query = '''
+        SELECT u.id, u.username, s.description
+        FROM user u
+        JOIN account a ON u.id = a.user_id
+        JOIN status s ON a.status_id = s.id
+        ORDER BY u.id ASC
+    '''
+    
+    result = db.execute(query).fetchall()
+
+    
+    user_status_list = [
+        {
+            "user_id": row[0],
+            "username": row[1],
+            "status_description": row[2]
+        }
+        for row in result
+    ]
+    print(user_status_list)
+    return user_status_list

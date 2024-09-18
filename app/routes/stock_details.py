@@ -7,6 +7,7 @@ from app.graph_utilities.graph_utils import *
 from app.graph_utilities.search_validation import *
 
 
+
 bp = Blueprint('stock_page', __name__)
 
 

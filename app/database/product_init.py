@@ -37,3 +37,13 @@ def populate_products(db):
     for name, symbol in dax_aktien.items():
         db.execute("INSERT INTO product (symbol, name) VALUES (?, ?)", (symbol, name))
     db.commit()
+
+def populate_status(db):
+    stati ={
+        0   : 'Ok',
+        1   : 'Reset',
+        2   : 'Delete'
+    } 
+    for id, description in stati.items():
+        db.execute("INSERT INTO status (id, description) VALUES (?, ?)", (id, description))
+    db.commit()

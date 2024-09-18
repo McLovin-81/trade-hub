@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS transactionHistory;
+DROP TABLE IF EXISTS status;
+
 
 
 CREATE TABLE user
@@ -13,13 +15,20 @@ CREATE TABLE user
   isAdmin BOOLEAN DEFAULT 0
 );
 
+CREATE TABLE status
+(
+  id INTEGER PRIMARY KEY,
+  description TEXT NOT NULL
+);
 
 CREATE TABLE account
 (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER NOT NULL,
   balance DECIMAL NOT NULL DEFAULT 10000,
-  FOREIGN KEY (user_id) REFERENCES user (id)
+  status_id INTEGER NOT NULL DEFAULT 0,
+  FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE,
+  FOREIGN KEY (status_id) REFERENCES status (id)
 );
 
 
@@ -39,6 +48,6 @@ CREATE TABLE transactionHistory
   amount DECIMAL NOT NULL,
   price DECIMAL NOT NULL,
   t_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES user(id),
+  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
   FOREIGN KEY (symbol) REFERENCES product(symbol)
 );

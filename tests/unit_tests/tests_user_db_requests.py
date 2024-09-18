@@ -6,15 +6,13 @@ from app.database.user_db_requests import (
     get_transaction_history,
     get_user_transactions,
     get_user_balance,
-    process_transactions,
     calculate_profit,
     get_symbol_transactions,
     check_balance,
-    update_balance,
-    insert_transaction,
-    buy_sell_stock,
     get_ranking,
-    calculate_total_profit
+    calculate_total_profit,
+    delete_account,
+    reset_account
 )
 
 class TestUserDbRequests(unittest.TestCase):
@@ -144,6 +142,54 @@ class TestUserDbRequests(unittest.TestCase):
         result = calculate_total_profit(self.username, self.db_mock)
         self.assertEqual(result, 100.00)
         mock_process_transactions.assert_called_with(get_user_transactions(self.username, self.db_mock))
+
+
+    def test_reset_account(self):
+
+        with patch('app.database.user_db_requests.get_user_id') as mock_get_user_id:
+            mock_get_user_id.return_value = self.user_id
+
+            reset_account(self.username, self.db_mock)
+            
+            mock_get_user_id.assert_called_with(self.username, self.db_mock)
+
+            self.db_mock.execute.assert_any_callquery_transaction = (
+    '''
+        DELETE FROM transactionHistory 
+        WHERE user_id = ?
+    ''')
+            self.db_mock.execute.assert_any_call(
+    '''
+        UPDATE account 
+        SET balance = 10000, status_id = 0
+        WHERE user_id = ?
+    ''', (self.user_id,))
+            self.db_mock.commit.assert_called()
+
+
+    def test_delete_account(self):
+        
+        with patch('app.database.user_db_requests.get_user_id') as mock_get_user_id:
+            mock_get_user_id.return_value = self.user_id
+
+        
+            delete_account(self.username, self.db_mock)
+
+        
+            mock_get_user_id.assert_called_with(self.username, self.db_mock)
+
+        
+            self.db_mock.execute.assert_called_with(
+    '''
+        DELETE FROM user 
+        WHERE id = ?
+    ''', (self.user_id,))
+            
+
+        
+            self.db_mock.commit.assert_called()
+
+
 
 if __name__ == '__main__':
     unittest.main()
