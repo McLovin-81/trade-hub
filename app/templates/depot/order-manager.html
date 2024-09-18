@@ -38,10 +38,11 @@
             <!-- Buy/Sell Form -->
             <section class="order-section">
                 <h2>Buy or Sell Stocks</h2>
+                <p>{{ balance }} €</p>
                 <form id="orderForm" class="order-form">
                     <div class="form-group" style="position: relative;">
                         <label for="symbol">Stock Symbol</label>
-                        <input type="text" id="symbol" name="symbol" placeholder="AAPL, TSLA, etc." required>
+                        <input type="text" id="symbol" name="symbol" placeholder="DB1.DE, SIE.DE, etc." required>
                         <div class="suggestions-container" id="suggestions-container"></div>
                     </div>
 
@@ -68,14 +69,6 @@
                     <button type="button" id="submitOrder" class="btn submit-btn">Submit Order</button>
                     <p id="responseMessage"></p>
                 </form>
-            </section>
-
-            <!-- Order Summary Section -->
-            <section class="order-summary">
-                <h2>Order Summary</h2>
-                <div id="order-summary-container">
-                    <!-- Order details will be dynamically injected here via JavaScript -->
-                </div>
             </section>
         </section>
     </main>

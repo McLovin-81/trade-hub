@@ -117,6 +117,10 @@ function submitOrder() {
                 if (response.ok && data.success) {
                     responseMessage.textContent = "Order placed successfully!";
                     responseMessage.style.color = "green";
+                    // Reload the page after 1 second to show updated balance/depot data
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
                 }
                 else {
                     responseMessage.textContent = "Failed to place the order. Insufficient balance or stock unavailable.";

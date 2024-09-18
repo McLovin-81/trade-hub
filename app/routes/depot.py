@@ -48,7 +48,14 @@ def ordermanagement(username):
     if username != current_user.username:
         return jsonify({'error': 'Unauthorized access'}), 403  # Unauthorized access
     
-    return render_template('depot/order-manager.html', )
+
+    db = get_db()
+    # Fetch user's account balance
+    user_balance = get_user_balance(username, db).format('%.2f')
+    # Process user's transactions to get depot data
+    depot_data = process_transactions(get_user_transactions(username, db))
+    
+    return render_template('depot/order-manager.html', balance=user_balance, depot = depot_data)
 
 
 
