@@ -26,16 +26,27 @@ function initDarkMode(): void
 
 
 
-// Function to show stock symbol suggestions
+// Function to show stock symbol suggestions and allow selection
 function showSuggestions(suggestions: { symbol: string, name: string }[]): void {
   const container = document.getElementById('suggestions-container');
+  const symbolInput = document.getElementById('symbol') as HTMLInputElement;
+
   if (container) {
-      container.innerHTML = ''; // Clear existing suggestions
-      suggestions.forEach(suggestion => {
-          const div = document.createElement('div');
-          div.textContent = `${suggestion.symbol} - ${suggestion.name}`;
-          container.appendChild(div);
+    container.innerHTML = ''; // Clear existing suggestions
+
+    suggestions.forEach(suggestion => {
+      const div = document.createElement('div');
+      div.textContent = `${suggestion.symbol} - ${suggestion.name}`;
+      
+      // Add click event to select the suggestion
+      div.addEventListener('click', () => {
+        symbolInput.value = suggestion.symbol; // Fill input with the selected symbol
+        container.innerHTML = ''; // Clear suggestions after selection
+        handleStockSelection(suggestion.symbol); // Fetch and display stock price
       });
+
+      container.appendChild(div);
+    });
   }
 }
 
@@ -63,6 +74,34 @@ async function handleStockInput(event: Event): Promise<void> {
   }
 }
 
+// Function to handle stock selection and fetch price from backend
+async function handleStockSelection(symbol: string): Promise<void> {
+  try {
+    const response = await fetch(`/user/api/stock-price?symbol=${encodeURIComponent(symbol)}`);
+    const stockInfo = await response.json();
+
+    if (response.ok) {
+      displayStockInfo(stockInfo); // Display stock price and name
+    } else {
+      console.error('Error fetching stock information:', stockInfo);
+    }
+  } catch (error) {
+    console.error('Error fetching stock price:', error);
+  }
+}
+
+// Function to display stock information
+function displayStockInfo(stockInfo: { name: string, currentPrice: number }): void {
+  const stockInfoDiv = document.getElementById('stockInfo') as HTMLDivElement;
+  const stockNameSpan = document.getElementById('stockName') as HTMLSpanElement;
+  const stockPriceSpan = document.getElementById('stockPrice') as HTMLSpanElement;
+
+  if (stockInfoDiv && stockNameSpan && stockPriceSpan) {
+    stockNameSpan.textContent = stockInfo.name;
+    stockPriceSpan.textContent = stockInfo.currentPrice.toFixed(2);
+    stockInfoDiv.style.display = 'block'; // Show the stock information div
+  }
+}
 
 
 
@@ -161,6 +200,10 @@ function init(): void
   // Attach event listener to the login form
   const LoginForm = document.getElementById('loginForm') as HTMLFormElement;
   LoginForm?.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
+
+
+
+
 
 
 
