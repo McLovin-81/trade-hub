@@ -19,7 +19,7 @@
     <!-- Top Navigation -->
     <header class="top-nav">
         <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
-        <button class="btn" tabindex="1">Logout</button>
+        <button class="btn" onclick="window.location.href='{{ url_for('auth.logout') }}'">Logout</button>
         <button class="btn">Settings</button>
     </header>
 

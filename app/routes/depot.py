@@ -2,7 +2,7 @@
 from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
 from flask_login import login_required, current_user
 from ..database.db import get_db
-from ..database.user_db_requests import get_user_transactions, process_transactions,buy_sell_stock, get_user_balance, get_ranking, calculate_total_profit, get_transaction_history
+from ..database.user_db_requests import get_user_transactions, process_transactions,buy_sell_stock, get_user_balance, get_ranking, calculate_total_profit, get_transaction_history, get_stock_symbols
 from ..graph_utilities.graph_utils import get_stock_info
 
 
@@ -46,14 +46,19 @@ def ordermanagement(username):
     if username != current_user.username:
         return jsonify({'error': 'Unauthorized access'}), 403  # Unauthorized access
     
-    #db = get_db()
-
-    # Fetch user's account balance
-    #account = get_user_balance(current_user.username, db)
-
-    #if account is None:
-    #    return jsonify({'error': 'Account not found'}), 404
-
-    
-    
     return render_template('depot/order-manager.html', )
+
+
+
+
+
+
+
+@bp.route('/api/stocks', methods=['GET'])
+def api_get_stocks():
+    query = request.args.get('query', '')
+    if query:
+        db = get_db()
+        symbols = get_stock_symbols(query, db)
+        return jsonify({'symbols': symbols})
+    return jsonify({'symbols': []})

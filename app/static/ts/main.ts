@@ -21,6 +21,53 @@ function initDarkMode(): void
 }
 
 
+
+
+
+
+
+// Function to show stock symbol suggestions
+function showSuggestions(suggestions: string[]): void {
+  const container = document.getElementById('suggestions-container');
+  if (container) {
+    container.innerHTML = ''; // Clear existing suggestions
+    suggestions.forEach(suggestion => {
+      const div = document.createElement('div');
+      div.textContent = suggestion;
+      container.appendChild(div);
+    });
+  }
+}
+
+// Function to handle stock symbol input
+async function handleStockInput(event: Event): Promise<void> {
+  const input = (event.target as HTMLInputElement).value;
+
+  if (input.length > 1) {
+    try {
+      const response = await fetch(`/user/api/stocks?query=${encodeURIComponent(input)}`);
+      const data = await response.json();
+
+      if (Array.isArray(data.symbols)) {
+        showSuggestions(data.symbols);
+      } else {
+        console.error('Unexpected response format:', data);
+        showSuggestions([]);
+      }
+    } catch (error) {
+      console.error('Error fetching stock symbols:', error);
+      showSuggestions([]);
+    }
+  } else {
+    showSuggestions([]);
+  }
+}
+
+
+
+
+
+
 async function handleRegistration(event: Event): Promise<void>
 {
   event.preventDefault();
@@ -104,16 +151,24 @@ function init(): void
   initDarkMode();
 
   // Attach event listener to dark mode toggle
-  const darkModeToggle = document.querySelector('.dark-mode-toggle');
-  darkModeToggle?.addEventListener('click', toggleDarkMode); // <?> checks whether darkModeToggle is not null or undefined before attempting to call the addEventListener method on it.
+  const DarkModeToggle = document.querySelector('.dark-mode-toggle');
+  DarkModeToggle?.addEventListener('click', toggleDarkMode); // <?> checks whether darkModeToggle is not null or undefined before attempting to call the addEventListener method on it.
 
   // Attach event listener to the registration form
-  const form = document.getElementById('registrationForm') as HTMLFormElement;
-  form?.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
+  const RegistrationForm = document.getElementById('registrationForm') as HTMLFormElement;
+  RegistrationForm?.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
 
-  // Attach event listener to the registration form
+  // Attach event listener to the login form
   const LoginForm = document.getElementById('loginForm') as HTMLFormElement;
   LoginForm?.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
+
+
+
+
+  
+  // Attach event listener to the stock symbol input for autocomplete
+  const symbolInput = document.getElementById('symbol') as HTMLInputElement;
+  symbolInput?.addEventListener('input', handleStockInput);
 }
 
 // Run the initialization function after DOM content is loaded

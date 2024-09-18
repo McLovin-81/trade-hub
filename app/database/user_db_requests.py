@@ -229,3 +229,29 @@ def calculate_total_profit(username, db):
     for stock in transactions:
         total_profit += float(stock["profit"])
     return round(total_profit, 2)  
+
+
+
+
+
+
+# In user_db_requests.py
+def get_stock_symbols(query, db):
+    """
+    Retrieve stock symbols from the database that match the given query.
+
+    :param query: The search query for stock symbols.
+    :param db: The database connection object.
+    :return: A list of stock symbols that match the query.
+    """
+    # Using LIKE operator for partial matching
+    query = f"%{query}%"
+    sql = """
+    SELECT symbol
+    FROM product
+    WHERE symbol LIKE ? OR name LIKE ?
+    """
+    
+    result = db.execute(sql, (query, query)).fetchall()
+    return [row[0] for row in result]
+

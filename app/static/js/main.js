@@ -22,6 +22,44 @@ function initDarkMode() {
         document.body.classList.add('dark-mode');
     }
 }
+// Function to show stock symbol suggestions
+function showSuggestions(suggestions) {
+    const container = document.getElementById('suggestions-container');
+    if (container) {
+        container.innerHTML = ''; // Clear existing suggestions
+        suggestions.forEach(suggestion => {
+            const div = document.createElement('div');
+            div.textContent = suggestion;
+            container.appendChild(div);
+        });
+    }
+}
+// Function to handle stock symbol input
+function handleStockInput(event) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const input = event.target.value;
+        if (input.length > 1) {
+            try {
+                const response = yield fetch(`/user/api/stocks?query=${encodeURIComponent(input)}`);
+                const data = yield response.json();
+                if (Array.isArray(data.symbols)) {
+                    showSuggestions(data.symbols);
+                }
+                else {
+                    console.error('Unexpected response format:', data);
+                    showSuggestions([]);
+                }
+            }
+            catch (error) {
+                console.error('Error fetching stock symbols:', error);
+                showSuggestions([]);
+            }
+        }
+        else {
+            showSuggestions([]);
+        }
+    });
+}
 function handleRegistration(event) {
     return __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
@@ -91,14 +129,17 @@ function init() {
     // Initialize dark mode based on user preference
     initDarkMode();
     // Attach event listener to dark mode toggle
-    const darkModeToggle = document.querySelector('.dark-mode-toggle');
-    darkModeToggle === null || darkModeToggle === void 0 ? void 0 : darkModeToggle.addEventListener('click', toggleDarkMode); // <?> checks whether darkModeToggle is not null or undefined before attempting to call the addEventListener method on it.
+    const DarkModeToggle = document.querySelector('.dark-mode-toggle');
+    DarkModeToggle === null || DarkModeToggle === void 0 ? void 0 : DarkModeToggle.addEventListener('click', toggleDarkMode); // <?> checks whether darkModeToggle is not null or undefined before attempting to call the addEventListener method on it.
     // Attach event listener to the registration form
-    const form = document.getElementById('registrationForm');
-    form === null || form === void 0 ? void 0 : form.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
-    // Attach event listener to the registration form
+    const RegistrationForm = document.getElementById('registrationForm');
+    RegistrationForm === null || RegistrationForm === void 0 ? void 0 : RegistrationForm.addEventListener('submit', handleRegistration); // Attach registration handler to the form submission
+    // Attach event listener to the login form
     const LoginForm = document.getElementById('loginForm');
     LoginForm === null || LoginForm === void 0 ? void 0 : LoginForm.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
+    // Attach event listener to the stock symbol input for autocomplete
+    const symbolInput = document.getElementById('symbol');
+    symbolInput === null || symbolInput === void 0 ? void 0 : symbolInput.addEventListener('input', handleStockInput);
 }
 // Run the initialization function after DOM content is loaded
 document.addEventListener('DOMContentLoaded', init);
