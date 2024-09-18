@@ -12,7 +12,7 @@ def create_dummy_data(db):
         ('pipe', 'alice.wonder@example.com', generate_password_hash('12345678'), False), #alicepass123
         ('bob_builder', 'bob.builder@example.com', generate_password_hash('bobpass123'), False), #bobpass123
         ('charlie_brown', 'charlie.brown@example.com', generate_password_hash('charliepass123'), False), #charliepass123
-        ('daisy_duke', 'daisy.duke@example.com', generate_password_hash('daisypass123'), False) #daisypass123
+        ('jackson', 'daisy.duke@example.com', generate_password_hash('12345678'), True) #daisypass123
     ]
 
     for user in users:
@@ -30,9 +30,9 @@ def create_dummy_data(db):
      
     charlie_id = db.execute("SELECT id FROM user WHERE username = 'charlie_brown'").fetchone()[0]
     
-    daisy_id = db.execute("SELECT id FROM user WHERE username = 'daisy_duke'").fetchone()[0]
+    jackson_id = db.execute("SELECT id FROM user WHERE username = 'jackson'").fetchone()[0]
 
-    newAccounts = [pipe_id, bob_id, charlie_id, daisy_id]
+    newAccounts = [pipe_id, bob_id, charlie_id, jackson_id]
     for account in newAccounts:
         db.execute('''
         INSERT INTO account (user_id)
@@ -47,7 +47,7 @@ def create_dummy_data(db):
     transactions = []
 
     # Generiere Transaktionen für jeden Benutzer
-    for user_id in [pipe_id, bob_id, charlie_id, daisy_id]:
+    for user_id in [pipe_id, bob_id, charlie_id, jackson_id]:
         for symbol in symbols:  # 5 Transaktionen pro Benutzer
             symbol = symbol
             quantity = random.randint(1, 20)

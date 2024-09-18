@@ -64,13 +64,13 @@ body
 */
 body.dark-mode
 {
-    --primary-bg-color: #121212; /* Dark background color */
-    --primary-text-color: #e0e0e0; /* Light text color for dark mode */
-    --secondary-bg-color: #333; /* Dark background for secondary elements in dark mode */
-    --button-bg-color: #333; /* Dark background color for buttons in dark mode */
-    --button-text-color: #e0e0e0; /* Light text color for buttons in dark mode */
-    --form-bg-color: #333; /* Dark background for forms */
-    --form-text-color: #e0e0e0; /* Light text color for form elements */
+  --primary-bg-color: #121212; /* Dark background color */
+  --primary-text-color: #e0e0e0; /* Light text color for dark mode */
+  --secondary-bg-color: #333; /* Dark background for secondary elements in dark mode */
+  --button-bg-color: #333; /* Dark background color for buttons in dark mode */
+  --button-text-color: #e0e0e0; /* Light text color for buttons in dark mode */
+  --form-bg-color: #333; /* Dark background for forms */
+  --form-text-color: #e0e0e0; /* Light text color for form elements */
 }
 
 
@@ -80,10 +80,10 @@ body.dark-mode
 */
 .dark-mode-toggle
 {
-    color: var(--primary-text-color); /* Sets the color of the icon */
-    font-size: 35px; /* Sets the size of the icon */
-    cursor: pointer; /* Changes cursor to pointer on hover */
-    transition: color 0.3s ease; /* Adds a smooth transition for color change on hover */
+  color: var(--primary-text-color); /* Sets the color of the icon */
+  font-size: 35px; /* Sets the size of the icon */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  transition: color 0.3s ease; /* Adds a smooth transition for color change on hover */
 }
 
 
@@ -93,52 +93,5 @@ body.dark-mode
 */
 .dark-mode-toggle:hover
 {
-    color: var(--link-hover-color); /* Changes the icon color on hover */
-}
-
-.graph-value-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.value-change {
-  font-size: 1.2em;
-}
-
-.value-change.positive {
-  color: green;
-}
-
-.value-change.negative {
-  color: red;
-}
-
-#searchInput {
-  width: 300px;
-  padding: 8px;
-  font-size: 16px;
-}
-
-
-#suggestions {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  width: 300px;
-  background-color: white;
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-#suggestions li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-#suggestions li:hover {
-  background-color: #f0f0f0;
+  color: var(--link-hover-color); /* Changes the icon color on hover */
 }

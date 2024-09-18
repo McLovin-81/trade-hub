@@ -103,6 +103,9 @@ def login():
         user_obj = User(user['id'], user['username'])
         login_user(user_obj)
 
+        if user['isAdmin'] == True:
+            return jsonify({'message': 'Login successful', 'redirect': f'/user/{username}/admin'}), 200
+
         print(f"User {user['username']} logged in")
         return jsonify({'message': 'Login successful', 'redirect': f'/user/{username}/depot'}), 200
 
