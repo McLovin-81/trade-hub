@@ -298,3 +298,14 @@ def admin_worklist(db):
     ]
     print(user_status_list)
     return user_status_list
+
+def get_stock_symbols(query, db):
+    # Example implementation
+    query = f"%{query}%"
+    cursor = db.cursor()
+    cursor.execute("""
+        SELECT symbol, name FROM product
+        WHERE symbol LIKE ? OR name LIKE ?
+    """, (query, query))
+    results = cursor.fetchall()
+    return [{"symbol": row[0], "name": row[1]} for row in results]
