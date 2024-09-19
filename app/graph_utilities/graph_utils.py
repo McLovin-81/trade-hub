@@ -21,8 +21,6 @@ def get_start_date(date):
         start_date = datetime.today() - timedelta(days=365)
     elif date == '1m':  
         start_date = datetime.today() - timedelta(days=30)
-    elif date == '1d': 
-        start_date = datetime.today() - timedelta(days=1)
     else:  # Standard: 1 Year
         start_date = datetime.today() - timedelta(days=365)
     
@@ -40,13 +38,20 @@ def get_graph_info(symbol, startTime):
 
 
 def create_stock_graph(symbol, start_date, end_date):
-    symbol = get_symbol_localStorage()
+    symbol = symbol
     start_date = start_date
     end_date = end_date
     stock_data = yf.download(symbol, start=start_date, end=end_date)
     
     fig = go.Figure(data=[go.Scatter(x=stock_data.index, y=stock_data['Close'], mode='lines', name=symbol)])
-    return fig.to_html(full_html=False)
+    
+    config = {
+    'displayModeBar': False,  # Entfernt die gesamte Toolbar
+    # 'displaylogo': False,   # Entfernt das Plotly-Logo
+    # 'modeBarButtonsToRemove': ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d'],  # Entfernt spezifische Buttons
+    # 'showTips': False       # Zeigt keine Tooltips an
+    }
+    return fig.to_html(full_html=False, config = config)
 
 def get_stock_info(symbol):
     if symbol == None:
