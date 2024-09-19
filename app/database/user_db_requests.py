@@ -192,7 +192,8 @@ def get_ranking(db):
     user_query = '''SELECT username from user'''
     usernames = db.execute(user_query).fetchall()
     for user in usernames:
-        userlist.append(user[0])
+        if user[0]  != 'admin':
+            userlist.append(user[0])
 
     for user in userlist:
         profit = calculate_total_profit(user, db)
@@ -286,18 +287,17 @@ def admin_worklist(db):
     '''
     
     result = db.execute(query).fetchall()
-
+    result_list =[] 
+    for row in result:
+        if row[2] != 'Ok' and row[1] != 'admin':
+            user_status = {
+                    "user_id": row[0],
+                    "username": row[1],
+                    "status_description": row[2]
+                } 
+            result_list.append(user_status)
     
-    user_status_list = [
-        {
-            "user_id": row[0],
-            "username": row[1],
-            "status_description": row[2]
-        }
-        for row in result
-    ]
-    print(user_status_list)
-    return user_status_list
+    return result_list
 
 def get_stock_symbols(query, db):
     # Example implementation
@@ -312,13 +312,3 @@ def get_stock_symbols(query, db):
 
 
 
-def delete_account(username, db):
-    user_id = get_user_id(username, db)
-    query_delete_user = (
-    '''
-        DELETE FROM user 
-        WHERE id = ?
-    ''')
-    db.execute(query_delete_user, (user_id,))
-    
-    db.commit()

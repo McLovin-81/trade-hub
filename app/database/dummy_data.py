@@ -40,7 +40,7 @@ def create_dummy_data(db):
         db.execute('''
         INSERT INTO account (user_id, status_id)
         VALUES (?, ?)
-        ''', (account, random.randint(1, 2))
+        ''', (account, random.randint(0, 1))
         )
     db.commit()
 

@@ -66,25 +66,25 @@
         }
         </script>
     </div>
-    <h1>Profit Ranking List</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Username</th>
-                <th>Profit (%)</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in ranking_list %}
-            <tr>
-                <td>{{ user.rank }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ "%.2f" % user.profit }}%</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h1 class="ranking-title">Profit Ranking List</h1>
+<table class="ranking-table">
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Profit (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in ranking_list %}
+        <tr>
+            <td>{{ user.rank }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ "%.2f" % user.profit }}%</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
     <!-- TradingView Widget END -->
 
     <!-- Footer Section -->
