@@ -2,7 +2,7 @@
 from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
 from flask_login import login_required, current_user
 from ..database.db import get_db
-from ..database.user_db_requests import get_user_transactions, process_transactions, buy_sell_stock, get_user_balance, get_ranking, calculate_total_profit, get_transaction_history, get_stock_symbols
+from ..database.user_db_requests import get_user_transactions, process_transactions, buy_sell_stock, get_user_balance, get_transaction_history
 from ..graph_utilities.graph_utils import get_stock_info
 from app.database.user_db_requests import admin_worklist
 
