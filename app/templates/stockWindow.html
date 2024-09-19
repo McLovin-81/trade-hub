@@ -50,23 +50,22 @@
         </div>
         <div class="graph-value-block">
             <h2 id="last-value">Letzter Preis: {{ stock_info.currentPrice }} {{ stock_info.currency }}</h2>
-            <p id="value-change" class="value-change">
+            <p id="value-change" class="value-change {{ 'positive' if stock_info.change| float  > 0 else 'negative' }}">
                 {{ stock_info.change }} {{ stock_info.currency }} ({{ stock_info.percentage_change }}%)
             </p>
+            <form action="" method="POST">
+                <input type="hidden" name="symbol" value="{{ symbol }}">
+                <button type="submit" name="startTime" value="1y">1 Jahr</button>
+            
+                <input type="hidden" name="symbol" value="{{ symbol }}">
+                <button type="submit" name="startTime" value="1m">1 Monat</button>
+            </form>
+    
+            <div id="graph">{{ graph_html|safe }}</div>
         </div>
     </div>
-    <div class="graph-container">
-        <form action="" method="POST">
-            <input type="hidden" name="symbol" value="{{ symbol }}">
-            <button type="submit" name="startTime" value="1y">1 Jahr</button>
-        </form>
+    <div class="container">
         
-        <form action="" method="POST">
-            <input type="hidden" name="symbol" value="{{ symbol }}">
-            <button type="submit" name="startTime" value="1m">1 Monat</button>
-        </form>
-
-        <div id="graph">{{ graph_html|safe }}</div>
     </div>
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
