@@ -8,6 +8,8 @@ from flask import (
     request, url_for
 )
 from app.utilities.news_utils import get_products, get_stock_news
+from app.database.db import get_db
+from app.database.user_db_requests import get_ranking
 
 
 bp = Blueprint('home_page', __name__)
@@ -21,8 +23,10 @@ def index():
     Returns:
         Response: Rendered HTML template for the index page.
     """
+    db = get_db()
+    ranking_list = get_ranking(db)
     
-    return render_template('index.html')
+    return render_template('index.html', ranking_list=ranking_list)
 
 
 
