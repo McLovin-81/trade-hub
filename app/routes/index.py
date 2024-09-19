@@ -41,3 +41,9 @@ def news():
     news_data = get_stock_news(get_products())
     
     return render_template('news.html', news_data=news_data)
+
+@bp.route('/wiki', endpoint='wiki')
+def wiki():
+    
+    
+    return render_template('wiki.html')
