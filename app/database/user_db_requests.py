@@ -309,3 +309,16 @@ def get_stock_symbols(query, db):
     """, (query, query))
     results = cursor.fetchall()
     return [{"symbol": row[0], "name": row[1]} for row in results]
+
+
+
+def delete_account(username, db):
+    user_id = get_user_id(username, db)
+    query_delete_user = (
+    '''
+        DELETE FROM user 
+        WHERE id = ?
+    ''')
+    db.execute(query_delete_user, (user_id,))
+    
+    db.commit()
