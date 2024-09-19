@@ -246,3 +246,9 @@ def get_stock_symbols(query, db):
     results = cursor.fetchall()
     return [{"symbol": row[0], "name": row[1]} for row in results]
 
+
+
+def set_useraccount_to_reset(username, db):
+    query = ("""UPDATE account SET status = 1 WHERE user_id = (SELECT id FROM user WHERE username = ?)""")
+    db.execute(query, (username,))
+    db.commit()

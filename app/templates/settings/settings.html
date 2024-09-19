@@ -36,22 +36,12 @@
         <h1>Settings</h1>
 
         <div class="settings-options">
-            <button class="btn reset-btn" onclick="resetAccount()">Reset Account</button>
+            <button id="resetAccountButton">Reset Account</button>
             <button class="btn delete-btn" onclick="deleteAccount()">Delete Account</button>
         </div>
     </main>
 
     <!-- Scripts -->
-    <script>
-        function resetAccount() {
-            // Logic for resetting the account
-            alert("Account reset functionality goes here.");
-        }
-
-        function deleteAccount() {
-            // Logic for deleting the account
-            alert("Account deletion functionality goes here.");
-        }
-    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
