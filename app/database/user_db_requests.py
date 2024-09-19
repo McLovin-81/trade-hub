@@ -227,13 +227,13 @@ def calculate_total_profit(username, db):
 
 
 def set_useraccount_to_reset(username, db):
-    query = ("""UPDATE account SET status = 1 WHERE user_id = (SELECT id FROM user WHERE username = ?)""")
+    query = ("""UPDATE account SET status_id = 1 WHERE user_id = (SELECT id FROM user WHERE username = ?)""")
     db.execute(query, (username,))
     db.commit()
 
 
 def set_useraccount_to_delete(username, db):
-    query = ("""UPDATE account SET status = 2 WHERE user_id = (SELECT id FROM user WHERE username = ?)""")
+    query = ("""UPDATE account SET status_id = 2 WHERE user_id = (SELECT id FROM user WHERE username = ?)""")
     db.execute(query, (username,))
     db.commit()
 

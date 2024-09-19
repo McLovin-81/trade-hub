@@ -44,30 +44,22 @@
             <a href="#" aria-label="View Team">Team</a>
             <a href="#" aria-label="View Wiki">Wiki</a>
             <a href="{{ url_for('home_page.news') }}" aria-label="About Trade Hub">News</a>
-            
     </nav>
 
     <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container">
-        <div id="tradingview_ticker"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-        {
-            "symbols": [
-                { "proName": "NASDAQ:AAPL", "title": "Apple" },
-                { "proName": "NASDAQ:GOOGL", "title": "Google" },
-                { "proName": "NASDAQ:AMZN", "title": "Amazon" },
-                { "proName": "NASDAQ:NVDA", "title": "Nvidia" },
-                { "proName": "XETR:BMW", "title": "BMW" }
-            ],
-            "colorTheme": "dark",
-            "isTransparent": false,
-            "displayMode": "adaptive",
-            "locale": "en"
-        }
-        </script>
-    </div>
+    
     <!-- TradingView Widget END -->
-
+    <h1>DAX Stock News</h1>
+    {% for company, news_list in news_data.items() %}
+        <h2>{{ company }}</h2>
+        <ul>
+            {% for news in news_list %}
+                <li>
+                    <a href="{{ news['link'] }}" target="_blank">{{ news['title'] }}</a> - {{ news['publisher'] }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
     <!-- Footer Section -->
     <footer>
         <a href="{{ url_for('home_page.legend') }}" aria-label="Legend Page">Legend</a>

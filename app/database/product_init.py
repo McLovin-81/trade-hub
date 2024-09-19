@@ -13,7 +13,7 @@ def populate_products(db):
         "Siemens Healthineers AG": "SHL.DE",
         "BMW AG": "BMW.DE",
         "Volkswagen AG": "VOW3.DE",
-        "Deutsche Post AG": "DPW.DE",
+        "Deutsche Post AG": "DHL.DE",
         "Infineon Technologies AG": "IFX.DE",
         "BASF SE": "BAS.DE",
         "Adidas AG": "ADS.DE",

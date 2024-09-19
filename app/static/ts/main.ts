@@ -238,6 +238,21 @@ async function handleLogin(event: Event): Promise<void>
   }
 }
 
+// Function to set up the auto-submit form
+function setupAutoSubmitForm(): void {
+  const symbolSearch = document.getElementById("symbol_search") as HTMLInputElement | null;
+  const orderForm = document.getElementById("orderForm") as HTMLFormElement | null;
+
+  if (symbolSearch && orderForm) {
+    symbolSearch.addEventListener("change", () => {
+      // Optional: Überprüfe hier, ob das Eingabefeld nicht leer ist oder andere Validierungen.
+      if (symbolSearch.value) {
+        orderForm.submit();
+      }
+    });
+  }
+}
+
 
 // Function to initialize the page
 function init(): void
@@ -257,17 +272,18 @@ function init(): void
   const LoginForm = document.getElementById('loginForm') as HTMLFormElement;
   LoginForm?.addEventListener('submit', handleLogin); // Attach registration handler to the form submission
 
-
-
-
-
-
-
+  // Attach event listener to the stock symbol input for autocomplete
+  const symbol_searchInput = document.getElementById('symbol') as HTMLInputElement;
+  symbol_searchInput?.addEventListener('input', handleStockInput);
 
   
   // Attach event listener to the stock symbol input for autocomplete
   const symbolInput = document.getElementById('symbol') as HTMLInputElement;
   symbolInput?.addEventListener('input', handleStockInput);
+
+
+  // Setup auto-submit form functionality
+  setupAutoSubmitForm(); 
 }
 
 // Run the initialization function after DOM content is loaded
