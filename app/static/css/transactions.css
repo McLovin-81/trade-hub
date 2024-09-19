@@ -1,0 +1,63 @@
+/* Main Content Styling */
+main {
+    width: 90%; /* Same width as the table */
+    max-width: 1200px; /* Same max width as the table */
+    margin: 40px auto; /* Centering the main content with space at the top and bottom */
+}
+
+/* Transaction History Section */
+.transaction-history {
+    margin-top: 20px; /* Adds space above the transaction history section */
+}
+
+/* Modern Table Styling for Transactions */
+table {
+    width: 100%; /* Table will now take full width of its parent (which is main) */
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: var(--primary-bg-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 10px; /* Rounded corners for the table */
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.95em;
+}
+
+th {
+    background-color: var(--secondary-bg-color);
+    color: var(--primary-text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    border-bottom: 2px solid var(--link-hover-color); /* Strong bottom border */
+}
+
+td {
+    border-bottom: 1px solid #e0e0e0; /* Light border for separating rows */
+    background-color: var(--primary-bg-color);
+}
+
+tr:hover td {
+    background-color: var(--link-hover-color); /* Blue background on row hover, same as button hover */
+    color: white; /* White text color on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    main, table, th, td {
+        font-size: 0.85em;
+    }
+
+    td {
+        padding: 10px 8px;
+    }
+
+    main {
+        width: 100%; /* Full width on small screens */
+    }
+}

@@ -31,7 +31,7 @@ def create_dummy_data(db):
      
     charlie_id = db.execute("SELECT id FROM user WHERE username = 'charlie_brown'").fetchone()[0]
     
-    daisy_id = db.execute("SELECT id FROM user WHERE username = 'daisy_duke'").fetchone()[0]
+    jackson_id = db.execute("SELECT id FROM user WHERE username = 'jackson'").fetchone()[0]
 
     admin_id = db.execute("SELECT id FROM user WHERE username = 'admin'").fetchone()[0]
 
@@ -50,7 +50,7 @@ def create_dummy_data(db):
     transactions = []
 
     # Generiere Transaktionen für jeden Benutzer
-    for user_id in [pipe_id, bob_id, charlie_id, daisy_id]:
+    for user_id in [pipe_id, bob_id, charlie_id, jackson_id]:
         for symbol in symbols:  # 5 Transaktionen pro Benutzer
             symbol = symbol
             quantity = random.randint(1, 20)
