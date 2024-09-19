@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session, jsonify, flash
+from flask import Blueprint, render_template, request, session, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from app.database.db import get_db
 from app.database.user_db_requests import admin_worklist, reset_account
@@ -9,7 +9,7 @@ bp = Blueprint('admin', __name__, url_prefix='/user')
 
 @bp.route('/<username>/admin', methods=['GET', 'POST'] )
 @login_required
-def depot(username):
+def admin(username):
     db = get_db()
     admin_table = admin_worklist(db)
     # Ensure the logged-in user can only view their own depot
@@ -19,11 +19,12 @@ def depot(username):
     return render_template('admin/admin.html', admin_table=admin_table)
 
 
-@bp.route('/reset_account/<int:user_id>', methods=['POST'])
-def reset_account_route(user_id):
+@bp.route('/reset_account/', methods=['POST'])
+@login_required 
+def reset_account_route():
+    username = request.form.get('username')
+    print(username)
     db = get_db()
-    try:
-        reset_account(user_id, db)  # Aufruf der Funktion zum Zurücksetzen des Kontos
-        return jsonify({'success': True}), 200
-    except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+    reset_account(username, db)  # Aufruf der Funktion zum Zurücksetzen des Kontos
+    return redirect(url_for('admin.admin', username=current_user.username))
+        
