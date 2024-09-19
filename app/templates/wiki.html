@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Hub Wiki</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Global styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}"> <!-- Index-specific styles -->
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
+        <a href="{{ url_for('auth.login') }}" aria-label="Trade Hub Home">
+            <button class="btn" tabindex="1">Login</button>
+        </a>
+        <a href="{{ url_for('auth.register') }}" aria-label="Trade Hub Home">
+            <button class="btn">Register</button>
+        </a>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <a href="{{ url_for('home_page.index') }}" aria-label="Trade Hub Home">
+            <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
+        </a>
+        <a href="#" aria-label="View Team">Team</a>
+        <a href="{{ url_for('home_page.wiki') }}" aria-label="View Wiki">Wiki</a>
+        <a href="#" aria-label="About Trade Hub">About</a>
+    </nav>
+
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+        <div id="tradingview_ticker"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {
+            "symbols": [
+                { "proName": "NASDAQ:AAPL", "title": "Apple" },
+                { "proName": "NASDAQ:GOOGL", "title": "Google" },
+                { "proName": "NASDAQ:AMZN", "title": "Amazon" },
+                { "proName": "NASDAQ:NVDA", "title": "Nvidia" },
+                { "proName": "XETR:BMW", "title": "BMW" }
+            ],
+            "colorTheme": "dark",
+            "isTransparent": false,
+            "displayMode": "adaptive",
+            "locale": "en"
+        }
+        </script>
+    </div>
+    <!-- TradingView Widget END -->
+
+    <!-- Wiki Content for Registration -->
+    <section class="section" style="margin: 20px auto; max-width: 800px;">
+        <h2>Registration</h2>
+        <p>The registration page allows new users to create an account. There are specific requirements for the input fields to complete the registration process.</p>
+
+        <h3>Form Fields</h3>
+        <ul>
+            <li><strong>Username:</strong> The username must be unique and not already in use.</li>
+            <li><strong>Email Address:</strong> A valid email address that is not already registered.</li>
+            <li><strong>Password:</strong> Must be at least 8 characters long.</li>
+            <li><strong>Confirm Password:</strong> Must match the first password.</li>
+        </ul>
+
+        <h3>Validation Rules</h3>
+        <p>During registration, several rules must be met:</p>
+        <ul>
+            <li>The username must be unique.</li>
+            <li>The email address must be in the correct format (e.g., user@example.com).</li>
+            <li>The password must be at least 8 characters long.</li>
+            <li>The "Confirm Password" field must exactly match the first password.</li>
+        </ul>
+
+        <h3>After Successful Registration</h3>
+        <p>After successful registration, the user will be automatically redirected to the login page.</p>
+    </section>
+
+
+    <hr style="margin: 20px auto; max-width: 800px;">
+
+    <!-- Wiki Content for Login -->
+    <section class="section" style="margin: 20px auto; max-width: 800px;">
+        <h2>Login</h2>
+        <p>The login page allows users to access their accounts by entering their username and password. If the credentials are correct, the user will be granted access to their profile and other protected areas of the site.</p>
+
+        <h3>Login Fields</h3>
+        <ul>
+            <li><strong>Username:</strong> The username that was used during registration.</li>
+            <li><strong>Password:</strong> The password associated with the username.</li>
+        </ul>
+
+        <h3>Validation Rules</h3>
+        <p>During login, the following rules must be met:</p>
+        <ul>
+            <li>The username and password must match the credentials stored in the database.</li>
+        </ul>
+
+        <h3>After Successful Login</h3>
+        <p>After a successful login, the user will be directed to their depot.</p>
+    </section>
+    <hr style="margin: 20px auto; max-width: 800px;">
+    <!-- Wiki Content for Search -->
+    <section class="section" style="margin: 20px auto; max-width: 800px;">
+        <h2>Stock Search</h2>
+        <p>The stock search feature allows users to search for specific stocks and view their detailed information.</p>
+
+        <h3>Search Details</h3>
+        <p>Users can enter a stock symbol or name to retrieve information, including stock price, sector, and recent performance. A graph of stock prices over different time frames (e.g., 1 year, 1 month) can be displayed.</p>
+    </section>
+
+    <hr style="margin: 20px auto; max-width: 800px;">
+    <!-- Wiki Content for Depot -->
+    <section class="section" style="margin: 20px auto; max-width: 800px;">
+        <h2>Depot</h2>
+        <p>The depot section displays the stocks a user owns, along with relevant financial information.</p>
+
+        <h3>Depot Features</h3>
+        <ul>
+            <li><strong>Account Balance:</strong> Displays the user's current balance in euros (€).</li>
+            <li><strong>Your Stocks:</strong> A table showing the stocks owned, including symbol, company name, quantity, price per unit, profit percentage, and the total value in euros (€).</li>
+        </ul>
+
+        <h3>Depot Table Fields</h3>
+        <ul>
+            <li><strong>Symbol:</strong> The stock's trading symbol (e.g.,  DB1 for Deutsche Börse AG).</li>
+            <li><strong>Company Name:</strong> The full name of the company.</li>
+            <li><strong>Quantity:</strong> The number of stocks owned by the user.</li>
+            <li><strong>Price per Unit (€):</strong> The price of each stock unit in euros.</li>
+            <li><strong>Profit (%):</strong> The profit or loss as a percentage. Positive values indicate profit, while negative values indicate a loss.</li>
+            <li><strong>Total (€):</strong> The total value of the stock holdings, calculated by multiplying the quantity by the price per unit.</li>
+        </ul>
+
+        <h3>No Stocks Owned</h3>
+        <p>If the user does not own any stocks yet, a message will be displayed informing them that they do not own any stocks.</p>
+    </section>
+    <hr style="margin: 20px auto; max-width: 800px;">
+    <!-- Wiki Content for Order Manager -->
+    <section class="section" style="margin: 20px auto; max-width: 800px;">
+        <h2>Order Manager</h2>
+        <p>The Order Manager is a central tool that allows users to buy or sell stocks.</p>
+    
+        <h3>Order Management Features</h3>
+        <ul>
+            <li><strong>Stock Symbol:</strong> The stock code or name that identifies the stock to be bought or sold (e.g.,  DB1 or Deutsche Börse AG).</li>
+            <li><strong>Quantity:</strong> The amount of stocks to be bought or sold.</li>
+            <li><strong>Order Type:</strong> Users can select either <strong>Buy</strong> or <strong>Sell</strong> to place an appropriate order.</li>
+            <li><strong>Price per Unit (€):</strong> The current price per unit is displayed.</li>
+        </ul>
+    
+        <h3>Order Summary</h3>
+        <p>The purchase amount must not exceed the available balance.The user must own the number of shares they want to sell in their portfolio.Once an order is submitted the trade will be in transactions and depot.</p>
+    <hr style="margin: 20px auto; max-width: 800px;">
+    <!-- Wiki Content for Transactions -->
+    <section class="section" style="margin: 20px auto; max-width: 800px;">
+        <h2>Transactions</h2>
+        <p>The Transactions section provides users with a complete history of their stock market activities. Each transaction, whether a buy or sell, is recorded and can be reviewed here.</p>
+    
+        <h3>Transaction Details</h3>
+        <ul>
+            <li><strong>Symbol:</strong> The stock symbol that was traded (e.g., DB1 for Deutsche Börse AG).</li>
+            <li><strong>Quantity:</strong> The number of stocks involved in the transaction.</li>
+            <li><strong>Amount (€):</strong> The total amount spent or received for the transaction.</li>
+            <li><strong>Price per Unit (€):</strong> The price of a single stock at the time of the transaction.</li>
+            <li><strong>Timestamp:</strong> The exact date and time when the transaction was executed.</li>
+        </ul>
+    
+        <p>Users can view all their past transactions here, which helps in tracking investment.</p>
+    </section>
+    <hr style="margin: 20px auto; max-width: 800px;">
+    <!-- Wiki Content for Setting -->
+    <section class="section" style="margin: 20px auto; max-width: 800px;">
+        <h2>Settings</h2>
+        <p>The Settings section allows users to manage their account settings.</p>
+    
+        <h3>Options</h3>
+        <ul>
+            <li><strong>Reset Account:</strong> Allows users to reset their account settings to the default state. This option includes resetting all transactions.</li>
+            <li><strong>Delete Account:</strong> Permanently removes the user’s account from the platform. This is a final action, and all data will be erased from the system.</li>
+        </ul>
+    
+        <p>It is important for users to carefully review their decisions when managing these settings, especially when considering account deletion or reset options.</p>
+    </section>
+    
+    <!-- scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>
+
+
+
+
+
