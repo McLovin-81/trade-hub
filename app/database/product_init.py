@@ -13,7 +13,7 @@ def populate_products(db):
         "Siemens Healthineers AG": "SHL.DE",
         "BMW AG": "BMW.DE",
         "Volkswagen AG": "VOW3.DE",
-        "Deutsche Post AG": "DPW.DE",
+        "Deutsche Post AG": "DHL.DE",
         "Infineon Technologies AG": "IFX.DE",
         "BASF SE": "BAS.DE",
         "Adidas AG": "ADS.DE",
@@ -36,4 +36,14 @@ def populate_products(db):
     # Einträge in die Tabelle product einfügen
     for name, symbol in dax_aktien.items():
         db.execute("INSERT INTO product (symbol, name) VALUES (?, ?)", (symbol, name))
+    db.commit()
+
+def populate_status(db):
+    stati ={
+        0   : 'Ok',
+        1   : 'Reset',
+        2   : 'Delete'
+    } 
+    for id, description in stati.items():
+        db.execute("INSERT INTO status (id, description) VALUES (?, ?)", (id, description))
     db.commit()

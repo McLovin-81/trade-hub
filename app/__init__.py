@@ -16,7 +16,7 @@ from flask_login import LoginManager
 from .models import User
 from .database import db
 from .database.db import get_db
-from .routes import auth, index, stock_details, depot, ranking
+from .routes import auth, index, stock_details, depot, admin, settings, ranking
 
 
 def create_app(test_config=None):
@@ -57,8 +57,13 @@ def create_app(test_config=None):
         except FileNotFoundError:
             print("Warning: 'config.py' not found. Using default settings.")
     else:
-        # Load the test config if passed in
-        app.config.from_mapping(test_config)
+        # making sure to get test_config as dictionary
+        if isinstance(test_config, dict):
+            app.config.from_mapping(test_config)
+        else:
+            # if not dictionary convert it into one.
+            app.config.from_mapping(vars(test_config))
+
     
     # Ensure the instance folder exists
     try:
@@ -93,6 +98,8 @@ def create_app(test_config=None):
     app.register_blueprint(stock_details.bp)
     app.register_blueprint(depot.bp)
     app.register_blueprint(ranking.bp)
+    app.register_blueprint(admin.bp)
+    app.register_blueprint(settings.bp)
     
     
     """ Call the registration from db.py """

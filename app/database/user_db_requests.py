@@ -15,13 +15,8 @@ def get_user_id(username, db):
 # This function retrieves all transactions for a given user from the database, organizing them by stock symbol.
 # It returns a dictionary where the keys are stock symbols, and the values are lists of transaction details.
 def get_transaction_history(username, db):
-    query = ('''
-    SELECT t.id, t.symbol, t.quantity, t.amount, t.price, t.t_timestamp 
-    FROM transactionHistory t
-    JOIN user u on t.user_id = u.id
-    WHERE u.username = ?
-    ORDER BY t.t_timestamp DESC    
-    ''')
+    query = ('''SELECT t.id, t.symbol, t.quantity, t.amount, t.price, t.t_timestamp FROM transactionHistory t JOIN user u on t.user_id = u.id WHERE u.username = ? ORDER BY t.t_timestamp DESC''')
+
     transaction_history = {} 
     transactions_db = db.execute(query, (username,)).fetchall()
     for transaction in transactions_db:
@@ -197,7 +192,8 @@ def get_ranking(db):
     user_query = '''SELECT username from user'''
     usernames = db.execute(user_query).fetchall()
     for user in usernames:
-        userlist.append(user[0])
+        if user[0]  != 'admin':
+            userlist.append(user[0])
 
     for user in userlist:
         profit = calculate_total_profit(user, db)
@@ -229,3 +225,90 @@ def calculate_total_profit(username, db):
     for stock in transactions:
         total_profit += float(stock["profit"])
     return round(total_profit, 2)  
+
+
+def set_useraccount_to_reset(username, db):
+    query = ("""UPDATE account SET status_id = 1 WHERE user_id = (SELECT id FROM user WHERE username = ?)""")
+    db.execute(query, (username,))
+    db.commit()
+
+
+def set_useraccount_to_delete(username, db):
+    query = ("""UPDATE account SET status_id = 2 WHERE user_id = (SELECT id FROM user WHERE username = ?)""")
+    db.execute(query, (username,))
+    db.commit()
+
+
+def delete_transaction_history_on_user_id(user_id, db):
+    query_transaction = (
+    '''
+        DELETE FROM transactionHistory 
+        WHERE user_id = ?
+    ''')
+    db.execute(query_transaction, (user_id,))
+    db.commit()
+
+def reset_account(username, db):
+    user_id = get_user_id(username, db)
+    delete_transaction_history_on_user_id(user_id, db)
+    query_account = (
+    '''
+        UPDATE account 
+        SET balance = 10000, status_id = 0
+        WHERE user_id = ?
+    ''')
+    db.execute(query_account, (user_id,))
+    db.commit()
+    
+
+
+def delete_account(username, db):
+    user_id = get_user_id(username, db)
+    query_delete_user = (
+    '''
+        DELETE FROM user 
+        WHERE id = ?
+    ''')
+    db.execute(query_delete_user, (user_id,))
+    
+    db.commit()
+
+def admin_worklist(db):
+    """Returns:
+    [{'user_id': user_id, 'username': username, 'status_description': description},
+    {'user_id': 2, 'username': 'bob_builder', 'status_description': 'Reset'},
+    ]"""
+    query = '''
+        SELECT u.id, u.username, s.description
+        FROM user u
+        JOIN account a ON u.id = a.user_id
+        JOIN status s ON a.status_id = s.id
+        ORDER BY u.id ASC
+    '''
+    
+    result = db.execute(query).fetchall()
+    result_list =[] 
+    for row in result:
+        if row[2] != 'Ok' and row[1] != 'admin':
+            user_status = {
+                    "user_id": row[0],
+                    "username": row[1],
+                    "status_description": row[2]
+                } 
+            result_list.append(user_status)
+    
+    return result_list
+
+def get_stock_symbols(query, db):
+    # Example implementation
+    query = f"%{query}%"
+    cursor = db.cursor()
+    cursor.execute("""
+        SELECT symbol, name FROM product
+        WHERE symbol LIKE ? OR name LIKE ?
+    """, (query, query))
+    results = cursor.fetchall()
+    return [{"symbol": row[0], "name": row[1]} for row in results]
+
+
+

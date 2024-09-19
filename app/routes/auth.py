@@ -3,8 +3,8 @@
 # https://flask.palletsprojects.com/en/3.0.x/tutorial/views/
 
 from functools import wraps
-from flask import Blueprint, g, redirect, render_template, request, session, url_for, jsonify
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user, UserMixin
+from flask import Blueprint, g, redirect, render_template, request, url_for, jsonify, flash
+from flask_login import login_required, login_user, logout_user, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from ..database.db import get_db
 from ..models import User
@@ -53,7 +53,7 @@ def register():
             # Create an account with an initial balance
             db.execute(
                 "INSERT INTO account (user_id, balance) VALUES (?, ?)",
-                (user_id, 1000.0)  # You can set an initial balance of 0 or any other value
+                (user_id, 10000.0)  # You can set an initial balance of 0 or any other value
             )
             db.commit()
 
@@ -103,25 +103,26 @@ def login():
         user_obj = User(user['id'], user['username'])
         login_user(user_obj)
 
+        if user['isAdmin'] == True:
+            return jsonify({'message': 'Login successful', 'redirect': f'/user/{username}/admin'}), 200
+
         print(f"User {user['username']} logged in")
         return jsonify({'message': 'Login successful', 'redirect': f'/user/{username}/depot'}), 200
 
     return render_template('auth/login.html')
 
 
-
+@bp.route('/logout')
+@login_required
+def logout():
+    logout_user()  # Logs out the current user
+    return redirect(url_for('home_page.index'))
 
 
 @bp.route('/profile')
 @login_required
 def profile():
     return render_template('profile.html')
-
-
-@bp.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('auth.login'))
 
 
 @bp.before_app_request

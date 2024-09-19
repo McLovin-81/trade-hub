@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ current_user.username }}'s Transaction History</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Global styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}"> <!-- Navigation-specific styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/depot.css') }}"> <!-- Depot page-specific styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/transactions.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/orderManager.css') }}">
 
     <!-- Font Awesome CDN -->
     <link rel="stylesheet"
@@ -19,8 +20,8 @@
     <!-- Top Navigation -->
     <header class="top-nav">
         <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
-        <button class="btn" tabindex="1">Logout</button>
-        <button class="btn">Settings</button>
+        <button class="btn" onclick="window.location.href='{{ url_for('auth.logout') }}'">Logout</button>
+        <button class="btn" onclick="window.location.href='{{ url_for('settings.settings', username=current_user.username) }}'">Settings</button>
     </header>
 
     <!-- Main Navigation -->
@@ -28,6 +29,16 @@
         <a href="{{ url_for('depot.depot', username=current_user.username) }}" aria-label="Trade Hub Home">
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
+
+        <form id="orderForm" class="order-form" action="{{ url_for('stock_page.detailPage') }}" method="POST">
+            <div class="form-group" style="position: relative; ">
+                <input type="text" id="symbol" name="symbol" placeholder="DB1.DE, SIE.DE, etc." required >
+                <div class="suggestions-container" id="suggestions-container" style="border: none;"></div>
+            </div>
+        </form>
+        
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
         <a href="{{ url_for('depot.ordermanagement', username=current_user.username) }}" aria-label="Order Manager">Order Manager</a>
         <a href="{{ url_for('depot.user_transactions', username=current_user.username) }}" aria-label="Transactions">Transactions</a>
         <a href="{{ url_for('depot.depot', username=current_user.username) }}" aria-label="Depot">Depot</a>

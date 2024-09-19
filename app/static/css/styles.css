@@ -64,13 +64,13 @@ body
 */
 body.dark-mode
 {
-    --primary-bg-color: #121212; /* Dark background color */
-    --primary-text-color: #e0e0e0; /* Light text color for dark mode */
-    --secondary-bg-color: #333; /* Dark background for secondary elements in dark mode */
-    --button-bg-color: #333; /* Dark background color for buttons in dark mode */
-    --button-text-color: #e0e0e0; /* Light text color for buttons in dark mode */
-    --form-bg-color: #333; /* Dark background for forms */
-    --form-text-color: #e0e0e0; /* Light text color for form elements */
+  --primary-bg-color: #121212; /* Dark background color */
+  --primary-text-color: #e0e0e0; /* Light text color for dark mode */
+  --secondary-bg-color: #333; /* Dark background for secondary elements in dark mode */
+  --button-bg-color: #333; /* Dark background color for buttons in dark mode */
+  --button-text-color: #e0e0e0; /* Light text color for buttons in dark mode */
+  --form-bg-color: #333; /* Dark background for forms */
+  --form-text-color: #e0e0e0; /* Light text color for form elements */
 }
 
 
@@ -80,10 +80,10 @@ body.dark-mode
 */
 .dark-mode-toggle
 {
-    color: var(--primary-text-color); /* Sets the color of the icon */
-    font-size: 35px; /* Sets the size of the icon */
-    cursor: pointer; /* Changes cursor to pointer on hover */
-    transition: color 0.3s ease; /* Adds a smooth transition for color change on hover */
+  color: var(--primary-text-color); /* Sets the color of the icon */
+  font-size: 35px; /* Sets the size of the icon */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  transition: color 0.3s ease; /* Adds a smooth transition for color change on hover */
 }
 
 
@@ -93,52 +93,43 @@ body.dark-mode
 */
 .dark-mode-toggle:hover
 {
-    color: var(--link-hover-color); /* Changes the icon color on hover */
+  color: var(--link-hover-color); /* Changes the icon color on hover */
 }
 
-.graph-value-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Profit Ranking List Stile */
+.ranking-title {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+  color: #121212;
 }
 
-.value-change {
-  font-size: 1.2em;
+.ranking-table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.value-change.positive {
-  color: green;
+.ranking-table th, .ranking-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.value-change.negative {
-  color: red;
+.ranking-table th {
+  background-color: #121212;
+  color: #fff;
+  font-weight: bold;
 }
 
-#searchInput {
-  width: 300px;
-  padding: 8px;
-  font-size: 16px;
+.ranking-table tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
-
-#suggestions {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  width: 300px;
-  background-color: white;
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-#suggestions li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-#suggestions li:hover {
-  background-color: #f0f0f0;
+.ranking-table tr:hover {
+  background-color: #f1f1f1;
 }

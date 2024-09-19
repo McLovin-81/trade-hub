@@ -12,7 +12,7 @@ Functions:
 import sqlite3
 import click
 from flask import current_app, g
-from app.database.product_init import populate_products
+from app.database.product_init import populate_products, populate_status
 from app.database.dummy_data import create_dummy_data
 from app.database.user_db_requests import get_user_balance, get_user_transactions, process_transactions
 
@@ -73,7 +73,8 @@ def init_db():
         db.executescript(f.read().decode('utf8'))
 
         
-    populate_products(db) #NEEDED IN PROD AS WELL
+    populate_products(db) #FILLING PRODUCT TABLE WITH INITIALIZING DB
+    populate_status(db) # FILLING STATUS TABLE WITH INITIALIZING DB
     create_dummy_data(db) #ONLY FOR DEV
     #process_transactions(get_user_transactions("alice_wonder",db))
     #get_user_transactions("alice_wonder", db) #TESTING STATEMENTS

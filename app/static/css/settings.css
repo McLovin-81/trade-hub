@@ -1,0 +1,32 @@
+/* Settings Page Container */
+.settings-container {
+    padding: 40px;
+    width: 400px;
+    max-width: 100%;
+    text-align: center;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.settings-options .btn {
+    padding: 14px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+    /* Flexbox for vertical and horizontal centering */
+    display: flex;
+    align-items: center; /* Vertically center text */
+    justify-content: center; /* Horizontally center text */
+    text-align: center; /* Ensure text is centered if it wraps */
+}
+
+/* Hover Effects */
+.settings-options .btn:hover {
+    background-color: red;
+    color: #ffffff;
+}

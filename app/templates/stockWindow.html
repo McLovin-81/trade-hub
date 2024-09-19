@@ -7,6 +7,7 @@
     <title>Trade Hub</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/orderManager.css') }}">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -26,9 +27,14 @@
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
         <!-- Suchfeld -->
-        <form id="searchForm">
-            <input type="text" id="searchInput" name = "searchInput" placeholder="Suchbegriff eingeben...">
+        <form id="orderForm" class="order-form" action="{{ url_for('stock_page.detailPage') }}" method="POST">
+            <div class="form-group" style="position: relative; ">
+                <input type="text" id="symbol" name="symbol" placeholder="DB1.DE, SIE.DE, etc." required >
+                <div class="suggestions-container" id="suggestions-container" style="border: none;"></div>
+            </div>
         </form>
+        
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
         <a href="#">Team</a>
         <a href="#">Wiki</a>
         <a href="#">About</a>
@@ -60,10 +66,6 @@
             <button type="submit" name="startTime" value="1m">1 Monat</button>
         </form>
 
-        <form action="" method="POST">
-            <input type="hidden" name="symbol" value="{{ symbol }}">
-            <button type="submit" name="startTime" value="1d">Heute</button>
-        </form>
         <div id="graph">{{ graph_html|safe }}</div>
     </div>
 
