@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/orderManager.css') }}">
 
     <!-- Font Awesome CDN -->
     <link rel="stylesheet"
@@ -30,6 +31,16 @@
         <a href="{{ url_for('home_page.index') }}" aria-label="Trade Hub Home">
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
+
+        <form id="orderForm" class="order-form" action="{{ url_for('stock_page.detailPage') }}" method="POST">
+            <div class="form-group" style="position: relative; ">
+                <input type="text" id="symbol" name="symbol" placeholder="DB1.DE, SIE.DE, etc." required >
+                <div class="suggestions-container" id="suggestions-container" style="border: none;"></div>
+            </div>
+        </form>
+        
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
             <a href="#" aria-label="View Team">Team</a>
             <a href="#" aria-label="View Wiki">Wiki</a>
             <a href="#" aria-label="About Trade Hub">About</a>

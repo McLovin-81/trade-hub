@@ -27,6 +27,15 @@
         <a href="{{ url_for('depot.depot', username=current_user.username) }}" aria-label="Trade Hub Home">
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
+
+        <form id="orderForm" class="order-form" action="{{ url_for('stock_page.detailPage') }}" method="POST">
+            <div class="form-group" style="position: relative; ">
+                <input type="text" id="symbol" name="symbol" placeholder="DB1.DE, SIE.DE, etc." required >
+                <div class="suggestions-container" id="suggestions-container" style="border: none;"></div>
+            </div>
+        </form>
+        
+
         <a href="{{ url_for('depot.ordermanagement', username=current_user.username) }}" class="active" aria-label="Order Manager">Order Manager</a>
         <a href="{{ url_for('depot.user_transactions', username=current_user.username) }}" aria-label="Transactions">Transactions</a>
         <a href="{{ url_for('depot.depot', username=current_user.username) }}" aria-label="Depot">Depot</a>
@@ -43,7 +52,7 @@
                     <div class="form-group" style="position: relative;">
                         <label for="symbol">Stock Symbol</label>
                         <input type="text" id="symbol" name="symbol" placeholder="DB1.DE, SIE.DE, etc." required>
-                        <div class="suggestions-container" id="suggestions-container"></div>
+                        <div class="suggestions-container" id="suggestions-container" style="border: none;"></div>
                     </div>
 
                     <!-- New area to display the fetched stock price -->

@@ -21,6 +21,7 @@ def main():
 @bp.route('/detailPage', methods=['GET', 'POST'] )
 def detailPage(): 
     symbol = request.form.get('symbol')
+    
     set_symbol_localStorage(symbol)
     startTime = request.form.get('startTime', '1y')
     graph_info = get_graph_info(symbol, startTime) 
