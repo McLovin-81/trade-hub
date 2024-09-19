@@ -249,6 +249,20 @@ def get_stock_symbols(query, db):
 
 
 def set_useraccount_to_reset(username, db):
-    query = ("""UPDATE account SET status = 1 WHERE user_id = (SELECT id FROM user WHERE username = ?)""")
-    db.execute(query, (username,))
+    user_id = get_user_id(username, db)
+    query = ("""UPDATE account SET status_id = 1 WHERE user_id = ?""")
+    db.execute(query, (user_id,))
+    db.commit()
+
+
+
+def delete_account(username, db):
+    user_id = get_user_id(username, db)
+    query_delete_user = (
+    '''
+        DELETE FROM user 
+        WHERE id = ?
+    ''')
+    db.execute(query_delete_user, (user_id,))
+    
     db.commit()
