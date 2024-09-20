@@ -13,7 +13,7 @@ import sqlite3
 import click
 from flask import current_app, g
 from app.database.product_init import populate_products, populate_status
-from app.database.dummy_data import create_dummy_data
+from app.database.dummy_data import create_admin
 from app.database.user_db_requests import get_user_balance, get_user_transactions, process_transactions
 
 
