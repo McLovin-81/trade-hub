@@ -47,3 +47,10 @@ def wiki():
     
     
     return render_template('wiki.html')
+
+
+@bp.route('/team', endpoint='team')
+def wiki():
+    
+    
+    return render_template('team.html')
