@@ -75,7 +75,7 @@ def init_db():
         
     populate_products(db) #FILLING PRODUCT TABLE WITH INITIALIZING DB
     populate_status(db) # FILLING STATUS TABLE WITH INITIALIZING DB
-    create_dummy_data(db) #ONLY FOR DEV
+    create_admin(db) #ONLY FOR DEV
     #process_transactions(get_user_transactions("alice_wonder",db))
     #get_user_transactions("alice_wonder", db) #TESTING STATEMENTS
     #get_user_balance("alice_wonder", db)
