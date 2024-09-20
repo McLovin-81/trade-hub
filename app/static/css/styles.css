@@ -95,8 +95,9 @@ body.dark-mode
 {
   color: var(--link-hover-color); /* Changes the icon color on hover */
 }
+/* Standardmodus */
 
-/* Profit Ranking List Stile */
+/* Titelstil für die Ranking-Liste */
 .ranking-title {
   text-align: center;
   margin-top: 20px;
@@ -104,6 +105,7 @@ body.dark-mode
   color: #121212;
 }
 
+/* Tabellenstil für die Ranking-Liste */
 .ranking-table {
   width: 80%;
   margin: 20px auto;
@@ -114,24 +116,58 @@ body.dark-mode
   overflow: hidden;
 }
 
+/* Tabellenzellenstil */
 .ranking-table th, .ranking-table td {
   padding: 15px;
   text-align: center;
   border-bottom: 1px solid #e0e0e0;
 }
 
+/* Tabellenkopfstil */
 .ranking-table th {
   background-color: #121212;
   color: #fff;
   font-weight: bold;
 }
 
+/* Tabellenzeilenstil für gerade Zeilen */
 .ranking-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
+/* Hover-Effekt für Tabellenzeilen */
 .ranking-table tr:hover {
   background-color: #f1f1f1;
+}
+
+/* Dark Mode für die Seite */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Tabellenstile für den Dark Mode */
+body.dark-mode table {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode table thead tr {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+body.dark-mode table tbody tr {
+  border-bottom: 1px solid #444444;
+}
+
+body.dark-mode table tbody tr:nth-of-type(even) {
+  background-color: #2e2e2e;
+}
+
+body.dark-mode table tbody tr:last-of-type {
+  border-bottom: 2px solid #333333;
 }
 
 

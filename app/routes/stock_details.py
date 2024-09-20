@@ -20,6 +20,7 @@ def main():
 
 @bp.route('/detailPage', methods=['GET', 'POST'] )
 def detailPage(): 
+
     symbol = request.form.get('symbol')
     
     set_symbol_localStorage(symbol)
