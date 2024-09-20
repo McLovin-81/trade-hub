@@ -4,23 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade Hub</title>
+    <title>Sign in</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Global styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}"> <!-- Index-specific styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navBars.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/orderManager.css') }}">
+
     <!-- Font Awesome CDN -->
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <!-- Top Navigation -->
     <header class="top-nav">
         <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
-        <a href="{{ url_for('auth.login') }}" aria-label="Trade Hub Home">
-            <button class="btn" tabindex="1">Login</button>
-        </a>
+        <button class="btn">Login</button>
         <a href="{{ url_for('auth.register') }}" aria-label="Trade Hub Home">
             <button class="btn">Register</button>
         </a>
@@ -46,28 +46,7 @@
             <a href="{{ url_for('home_page.news') }}" aria-label="About Trade Hub">News</a>
     </nav>
 
-    <!-- TradingView Widget BEGIN -->
-    
-    <!-- TradingView Widget END -->
-    <h1>DAX Stock News</h1>
-    {% for company, news_list in news_data.items() %}
-        <h2>{{ company }}</h2>
-        <ul>
-            {% for news in news_list %}
-                <li>
-                    <a href="{{ news['link'] }}" target="_blank">{{ news['title'] }}</a> - {{ news['publisher'] }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endfor %}
-    <!-- Footer Section -->
-    <footer>
-        <a href="{{ url_for('home_page.legend') }}" aria-label="Legend Page">Legend</a>
-    </footer>
-
-    <!-- scripts -->
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
+    <img class="responsive-image" src="{{ url_for('static', filename='images/project.jpg') }}">
 
 </body>
 </html>

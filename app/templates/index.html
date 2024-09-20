@@ -41,7 +41,7 @@
         
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-            <a href="#" aria-label="View Team">Team</a>
+            <a href="{{ url_for('home_page.team') }}" aria-label="View Team">Team</a>
             <a href="{{ url_for('home_page.wiki') }}" aria-label="View Wiki">Wiki</a>
             <a href="{{ url_for('home_page.news') }}" aria-label="About Trade Hub">News</a>
             
@@ -53,12 +53,37 @@
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
         {
             "symbols": [
-                { "proName": "XETR:SAP", "title": "SAP" },
-                { "proName": "XETR:SIE", "title": "Siemens" },
-                { "proName": "XETR:DB1", "title": "Deutsche Börse" },
-                { "proName": "XETR:DBK", "title": "Deutsche Bank" },
-                { "proName": "XETR:DTE", "title": "Deutsche Telekom" }
-            ],
+    {"proName": "XETR:SAP", "title": "SAP SE"},
+    {"proName": "XETR:SIE", "title": "Siemens AG"},
+    {"proName": "XETR:DTE", "title": "Deutsche Telekom AG"},
+    {"proName": "XETR:ALV", "title": "Allianz SE"},
+    {"proName": "XETR:AIR", "title": "Airbus SE"},
+    {"proName": "XETR:MRK", "title": "Merck KGaA"},
+    {"proName": "XETR:MBG", "title": "Mercedes-Benz Group AG"},
+    {"proName": "XETR:P911", "title": "Porsche AG"},
+    {"proName": "XETR:MUV2", "title": "Münchener Rückversicherungs-Gesellschaft AG (Munich Re)"},
+    {"proName": "XETR:SHL", "title": "Siemens Healthineers AG"},
+    {"proName": "XETR:BMW", "title": "BMW AG"},
+    {"proName": "XETR:VOW3", "title": "Volkswagen AG"},
+    {"proName": "XETR:DHL", "title": "Deutsche Post AG"},
+    {"proName": "XETR:IFX", "title": "Infineon Technologies AG"},
+    {"proName": "XETR:BAS", "title": "BASF SE"},
+    {"proName": "XETR:ADS", "title": "Adidas AG"},
+    {"proName": "XETR:DB1", "title": "Deutsche Börse AG"},
+    {"proName": "XETR:EOAN", "title": "E.ON SE"},
+    {"proName": "XETR:HEN3", "title": "Henkel AG & Co. KGaA"},
+    {"proName": "XETR:DBK", "title": "Deutsche Bank AG"},
+    {"proName": "XETR:BEI", "title": "Beiersdorf AG"},
+    {"proName": "XETR:DTG", "title": "Delivery Hero SE"},
+    {"proName": "XETR:HNR1", "title": "Hannover Rück SE"},
+    {"proName": "XETR:BAYN", "title": "Bayer AG"},
+    {"proName": "XETR:VNA", "title": "Vonovia SE"},
+    {"proName": "XETR:RWE", "title": "RWE AG"},
+    {"proName": "XETR:RHM", "title": "Rheinmetall AG"},
+    {"proName": "XETR:ENR", "title": "Encavis AG"},
+    {"proName": "XETR:HEI", "title": "HeidelbergCement AG"},
+    {"proName": "XETR:SY1", "title": "Symrise AG"}
+],
             "colorTheme": "dark",
             "isTransparent": false,
             "displayMode": "adaptive",
@@ -88,9 +113,7 @@
     <!-- TradingView Widget END -->
 
     <!-- Footer Section -->
-    <footer>
-        <a href="{{ url_for('home_page.legend') }}" aria-label="Legend Page">Legend</a>
-    </footer>
+    
 
     <!-- scripts -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
