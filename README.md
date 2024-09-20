@@ -6,6 +6,7 @@ Trade Hub is a simulation platform designed to provide a hands-on, educational e
 
 1. [Project Overview](#project-overview)
 2. [Project Setup](#project-setup)
+3. [Project Run](#project-run)  
 
 ## Project Overview
 
@@ -60,4 +61,16 @@ Installiere die Abhängigkeiten aus der requirements.txt mit folgendem Befehl:
 ```bash
 
 pip install -r requirements.txt
+```
+
+## Project Run
+
+## 1. Initiieren der Datenbank
+```bash
+flask init-db
+```
+## 2. Starten der Anwendung
+Aus dem ~ Ordner 
+```bash
+python3 -m app.main
 ```
