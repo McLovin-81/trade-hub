@@ -42,8 +42,8 @@
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
             <a href="#" aria-label="View Team">Team</a>
-            <a href="#" aria-label="View Wiki">Wiki</a>
-            <a href="#" aria-label="About Trade Hub">About</a>
+            <a href="{{ url_for('home_page.wiki') }}" aria-label="View Wiki">Wiki</a>
+            <a href="{{ url_for('home_page.news') }}" aria-label="About Trade Hub">News</a>
     </nav>
 
     <!-- Login Form Section -->

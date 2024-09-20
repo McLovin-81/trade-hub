@@ -28,12 +28,7 @@
             <img class="logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Trade Hub Logo">
         </a>
 
-        <form id="orderForm" class="order-form" action="{{ url_for('stock_page.detailPage') }}" method="POST">
-            <div class="form-group" style="position: relative; ">
-                <input type="text" id="symbol_search" name="symbol" placeholder="DB1.DE, SIE.DE, etc." required >
-                
-            </div>
-        </form>
+        
         
 
         <a href="{{ url_for('depot.ordermanagement', username=current_user.username) }}" class="active" aria-label="Order Manager">Order Manager</a>

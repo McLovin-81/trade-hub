@@ -16,9 +16,13 @@
 <body>
     <!-- Top Navigation -->
     <header class="top-nav">
-        <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode"></i>
-        <button class="btn">Login</button>
-        <button class="btn">Register</button>
+        <i class="fa-solid fa-circle-half-stroke dark-mode-toggle" aria-label="Toggle Dark Mode" tabindex="0"></i>
+        <a href="{{ url_for('auth.login') }}" aria-label="Trade Hub Home">
+            <button class="btn" tabindex="1">Login</button>
+        </a>
+        <a href="{{ url_for('auth.register') }}" aria-label="Trade Hub Home">
+            <button class="btn">Register</button>
+        </a>
     </header>
 
     <!-- Main Navigation -->
@@ -36,8 +40,8 @@
         
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
         <a href="#">Team</a>
-        <a href="#">Wiki</a>
-        <a href="#">About</a>
+        <a href="{{ url_for('home_page.wiki') }}" aria-label="View Wiki">Wiki</a>
+            <a href="{{ url_for('home_page.news') }}" aria-label="About Trade Hub">News</a>
     </nav>
 
     
