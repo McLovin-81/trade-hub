@@ -247,3 +247,11 @@ button[type="submit"]:hover {
 .graph-container {
     margin-top: 20px;
 }
+
+/* styles.css */
+img.responsive-image {
+  width: 30%;  /* Setzt die Breite des Bildes auf 30% des Containers */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

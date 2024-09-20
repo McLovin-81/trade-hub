@@ -41,12 +41,12 @@
         
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-            <a href="#" aria-label="View Team">Team</a>
+            <a href="{{ url_for('home_page.team') }}" aria-label="View Team">Team</a>
             <a href="{{ url_for('home_page.wiki') }}" aria-label="View Wiki">Wiki</a>
             <a href="{{ url_for('home_page.news') }}" aria-label="About Trade Hub">News</a>
     </nav>
 
-    <img  src="{{ url_for('static', filename='images/project.jpg') }}">
+    <img class="responsive-image" src="{{ url_for('static', filename='images/project.jpg') }}">
 
 </body>
 </html>
