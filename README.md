@@ -62,15 +62,4 @@ Installiere die Abhängigkeiten aus der requirements.txt mit folgendem Befehl:
 
 pip install -r requirements.txt
 ```
-
-## Project Run
-
-## 1. Initiieren der Datenbank
-```bash
-flask init-db
-```
-## 2. Starten der Anwendung
-Aus dem ~ Ordner 
-```bash
-python3 -m app.main
-```
+PEM Phrase: pipe

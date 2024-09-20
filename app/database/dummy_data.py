@@ -20,7 +20,6 @@ def create_admin(db):
     db.commit()
     
 
-    # .fetchone gets the Tuple from the db. (id,) to get only the value of the first Tuple [0] is needed 
 
     admin_id = db.execute("SELECT id FROM user WHERE username = 'admin'").fetchone()[0]
 
@@ -32,3 +31,4 @@ def create_admin(db):
         ''', (account, random.randint(0, 1))
         )
     db.commit()
+
