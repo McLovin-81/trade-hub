@@ -33,19 +33,17 @@ How to run integration tests in ~:
     python3 -m unittest discover -s tests/integration_tests
 
 ## Project Setup
-# Installation von Abhängigkeiten aus `requirements.txt` in einer virtuellen Umgebung
+Installation von Abhängigkeiten aus `requirements.txt` in einer virtuellen Umgebung
 
 Um die Abhängigkeiten aus einer `requirements.txt`-Datei automatisch in eine virtuelle Umgebung zu installieren, folge diesen Schritten:
 
 ## 1. Erstelle eine virtuelle Umgebung
 
-1. Erstelle eine virtuelle Umgebung
 
 ```bash
 python -m venv env
 ```
-2. Aktiviere die virtuelle Umgebung
-Aktiviere die virtuelle Umgebung:
+## 2. Aktiviere die virtuelle Umgebung
 
 Windows:
 ```bash
@@ -56,7 +54,7 @@ Linux:
 source env/bin/activate
 ```
 
-3. Installiere die Abhängigkeiten
+## 3. Installiere die Abhängigkeiten
 Installiere die Abhängigkeiten aus der requirements.txt mit folgendem Befehl:
 
 ```bash
