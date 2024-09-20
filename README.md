@@ -31,3 +31,6 @@ How to run the unit tests in ~:
 
 How to run integration tests in ~:
     python3 -m unittest discover -s tests/integration_tests
+
+## Project Setup
+Install: flask, flask_login, yfinance, plotly, jsonify
